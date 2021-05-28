@@ -1,17 +1,16 @@
 import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react';
-import Hello from '../../Components/hello';
-import { Container, Header, Icon } from 'semantic-ui-react'
 import { IActivity } from '../models/activity';
-import { Navbar } from '../../Components/nav/Navbar';
+import Navbar from '../../Components/nav/Navbar';
+import Footer from '../../Components/footer/footer'
 import ActivityDashboard from '../../Components/activities/dashboard/ActivityDashboard';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
-import { Route } from 'react-router-dom';
-import HomePage from '../../Components/HomePage';
-import Explore from '../../Components/Explore';
-import ActivityPage from '../../Components/ActivityPage';
+import { Route, useLocation } from 'react-router-dom';
+import Router from '../../Components/router/router';
 
 const App = () => {
+  const location = useLocation();
+  const pathName = location.pathname;
   const [activities, setActivities] = useState<IActivity[]>([]);
   const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
   const [editMode, setEditMode] = useState(false);
@@ -71,39 +70,19 @@ const App = () => {
     return <LoadingComponent content='Loading...' />
   }
 
+  let notDashboard;
+  if (pathName.startsWith('/dashboard')) {
+    notDashboard = false;
+  } else {
+    notDashboard = true;
+  }
+
   return (
     <Fragment>
-      <Navbar openCreateForm={handleOpenCreateForm} />
-      <Container style={{ marginTop: '7em' }}>
-        <Route path='/home' exact render={() => (
-          <ActivityDashboard
-            activities={activities}
-            selectActivity={handleSelectActivity}
-            selectedActivity={selectedActivity}
-            editMode={editMode}
-            setEditMode={setEditMode}
-            setSelectedActivity={setSelectedActivity}
-            createActivity={handleCreateActivity}
-            editActivity={handleEditActivity}
-            deleteActivity={handleDeleteActivity}
-            submitting={submitting}
-            target={target}
-          />
-        )} />
-        <Route path='/' exact component={HomePage} />
-        <Route path='/explore' exact render={() => (
-          <Explore activities={activities} />
-        )} />
-        {activities.map((activity) => (
-          <Route path={`/explore/${activity.id}`} render={() => (
-            <ActivityPage activity={activity} />
-          )} />
-        ))}
-
-      </Container>
-      {/* <Icon name="users" />
-      <Header as='h2' icon='cart' content='Uptime Guarantee' />
-      <Hello /> */}
+      {/* divide the whole component in three pieces 1.navbar - 2.router - 3.footer*/}
+      {notDashboard && <Navbar openCreateForm={handleOpenCreateForm} />}
+      <Router />
+      {notDashboard && <Footer />}
     </Fragment>
   );
 }

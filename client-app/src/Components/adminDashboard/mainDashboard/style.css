@@ -1,0 +1,59 @@
+.mainDashboardTopbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mainDashboardSearchBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.mainDashboardTitle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 19px;
+  color: #334d6e;
+  font-family: "Poppins";
+  font-weight: 500;
+}
+.mainDashboardSearchInput {
+  padding: 0 20px;
+  border: none;
+  outline: none;
+  height: 40px;
+
+  width: 300px;
+  background: #fff;
+  color: #334d6e;
+  border-radius: 4px;
+  font-family: "Poppins";
+  font-weight: 400;
+  margin-right: 20px;
+  transition: all 0.25s ease-in !important;
+}
+.mainDashboardSearchInput::placeholder {
+  color: #90a0b7;
+}
+.mainDashboardSearchInput:focus {
+  border: 1.5px solid #0289d1;
+  box-shadow: 0 6px 18px 0 #0289d110;
+  transition: all 0.25s ease-in !important;
+}
+.mainDashboardSearchBar img {
+  margin-right: 25px;
+}
+.mainDashboardIcons:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.mainDashboardUser {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-left: 1px solid #dfe0eb;
+}
+.mainDashboardUsername {
+  margin-left: 60px;
+  margin-right: 10px;
+}

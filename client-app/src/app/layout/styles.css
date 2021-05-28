@@ -42,12 +42,19 @@ button.ui.positive.right.floated.button {
 button.ui.blue.basic.button {
   color: var(--blue1) !important;
 }
-.ui.inverted.top.fixed.menu {
-  background-color: var(--blue1);
-  background-image: var(--mainGradient) !important;
-}
+/* .ui.inverted.top.fixed.menu {
+  background-color: var(--white);
+  background-image: var(--white) !important;
+} */
 .ui .container {
+  /* width: 100% !important; */
   align-items: center !important;
+}
+.ui.container{
+  width: 90%;
+}
+.routerContainer{
+  min-height: 420px;  
 }
 .ui.cards {
   justify-content: center;
