@@ -1,0 +1,48 @@
+*{
+
+}
+.navContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.ui.container.navContainer{
+    max-width: 90% !important;
+}
+.navContainer div{
+    display: flex;
+}
+.ui.inverted.top.fixed.menu {
+    background-color: var(--white);
+    /* background-image: var(--white) !important; */
+}
+#navbar-logo{
+    width: 5em !important;
+  }
+.navItem{
+    font-family: 'Montserrat';
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 1rem;
+    color: #A2DEFF !important;
+    transition: color 0.1s ease-in !important;
+}
+.navItem:hover{
+    color: #0288D1 !important;
+    transition: color 0.1s ease-in !important;
+}
+.navItem:active{
+    color: #0288D1 !important;
+}
+.navItemLogin{
+    color: #199BE2 !important;
+}
+.navItemRegister{
+    color: #199BE2 !important;
+    border: 2px solid #199BE2;
+    transition: all 0.25s ease-in !important;
+}
+.navItemRegister:hover{
+    color: #fff !important;
+    background-color:#199BE2 !important;
+    transition: all 0.25s ease-in !important;
+}

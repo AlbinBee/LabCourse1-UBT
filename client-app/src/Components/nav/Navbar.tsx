@@ -1,48 +1,70 @@
 import React from 'react'
 import { Button, Container, Menu } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
+import './style/style.css';
 
 interface IProps {
     openCreateForm: () => void;
 }
 
-export const Navbar: React.FC<IProps> = ({ openCreateForm }) => {
+const Navbar: React.FC<IProps> = ({ openCreateForm }) => {
     const location = useLocation();
     const pathName = location.pathname;
-    let homeRoute;
-    if (pathName === '/home') {
-        homeRoute = true;
+    let canCreate;
+    if (pathName === '/activities') {
+        canCreate = true;
     } else {
-        homeRoute = false;
+        canCreate = false;
     }
     return (
         <Menu fixed='top' inverted>
-            <Container>
-                <Link to='/'>
-                    <Menu.Item header>
-                        <img src="/assets/logo-svg.svg" alt="logo" style={{ marginRight: '10px' }} />
-                    Posto-ks
-                </Menu.Item>
-                </Link>
-                <Link to='/'>
-                    <Menu.Item
-                        name='Home'
-                    />
-                </Link>
-                <Link to='/home'>
-                    <Menu.Item
-                        name='Activities'
-                    />
-                </Link>
-                <Link to='/explore'>
-                    <Menu.Item
-                        name='Explore'
-                    />
-                </Link>
-                <Menu.Item>
-                    {homeRoute && <Button onClick={openCreateForm} positive content='Create Activity' />}
-                </Menu.Item>
+            <Container className="navContainer">
+                <div>
+                    <Link to='/'>
+                        <Menu.Item
+                            className="navItem"
+                            name='Home'
+                        />
+                    </Link>
+                    <Link to='/activities'>
+                        <Menu.Item
+                            className="navItem"
+                            name='Activities'
+                        />
+                    </Link>
+                    <Link to='/explore'>
+                        <Menu.Item
+                            className="navItem"
+                            name='Explore'
+                        />
+                    </Link>
+                    <Menu.Item>
+                        {canCreate && <Button onClick={openCreateForm} positive content='Create Activity' />}
+                    </Menu.Item>
+                </div>
+                <div>
+                    <Link to='/'>
+                        <Menu.Item header>
+                            <img src="/assets/Logo_Text.svg" id="navbar-logo" alt="logo"/>
+                        </Menu.Item>
+                    </Link>
+                </div>
+                <div>
+                    <Link to='/login'>
+                        <Menu.Item
+                            className="navItem navItemLogin"
+                            name='Log In'
+                        />
+                    </Link>
+                    <Link to='/register'>
+                        <Menu.Item
+                            className="navItem navItemRegister"
+                            name='Sign Up'
+                        />
+                    </Link>
+                </div>
             </Container>
         </Menu>
     )
 }
+export default Navbar

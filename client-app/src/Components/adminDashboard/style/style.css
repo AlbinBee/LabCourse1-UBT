@@ -1,0 +1,98 @@
+* {
+  font-family: "Poppins";
+}
+.dashboardContainer {
+  display: flex;
+  width: 100% !important;
+}
+.dashboardSidebar {
+  width: 15%;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  
+}
+.dashboardContent {
+  width: 85%;
+  min-height: 100vh;
+  background-color: #F7F8FC;
+}
+.dashboardRouteContent {
+  margin: 30px;
+}
+.dashboardLogoContainer,
+.dashboardUserContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dashboardLogo {
+  width: 42px;
+  height: 50px;
+  margin-top: 10px;
+}
+.dashboardLogoContainer span {
+  font-size: 19px;
+  font-family: 700;
+  color: #0288d1;
+  margin-left: 10px;
+}
+.dashboardUserContainer {
+  margin-top: 50px;
+}
+.sidebarUsername {
+  margin-top: 0px;
+  margin-left: 10px;
+  color: #334d6e;
+}
+.sidebarUserEmail {
+  font-weight: 400;
+  font-size: 11px;
+  color: #90a0b7;
+  padding: 0;
+  margin: 0;
+  margin-top: -10px;
+  margin-left: 10px;
+}
+.dashboardLinks {
+  margin-top: 50px;
+}
+.dashboardLink {
+  padding: 10px 0;
+  padding-left: 10px;
+  display: flex;
+  justify-content: start;
+  margin-left: 24px;
+  margin-bottom: 10px;
+  align-items: center;
+  border-left: 4px solid #ffffff00;
+  transition: all 0.25s ease-in !important;
+}
+.dashboardLinkA {
+  display: flex;
+}
+.dashboardLink:hover {
+  border-left: 4px solid #0288d1;
+  transition: all 0.25s ease-in !important;
+  background-color: #0289d110;
+  cursor: pointer;
+}
+.dashboardLinkIcon {
+  max-width: 20px;
+  max-height: 20px;
+}
+.dashboardLinkName {
+  font-weight: 500;
+  color: #334d6e;
+  margin-left: 15px;
+}
+.dashboardLinkNameActive{
+  color: #0288D1;
+}
+.dashboardLinkNameActive:hover ~ .dashboardLink{
+  background-color: red;
+  border-left: 4px solid #0288d1;
+}
+.dashboardHr{
+  outline: none;
+  border-bottom: 1px solid #C2CFE0;
+}
