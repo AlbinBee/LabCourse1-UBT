@@ -6,14 +6,15 @@ export interface IEvent {
     dateCreated: string;
     dateOfEvent: string;
     city: string;
-    MainImage: string;
-    GalleryImages: string;
+    mainImage: string;
+    galleryImages: string;
     isBookable: string;
     hasTickets: string;
-    AvailableTickets: string;
-    Views: string;
-    Extra1: string;
-    Extra2: string;
-    Extra3: string;
-    Extra4: string;
+    availableTickets: string;
+    views: string;
+    extra1: string;
+    extra2: string;
+    extra3: string;
+    extra4: string;
+    status: string;
 }

@@ -35,10 +35,11 @@ const DashboardPosts = () => {
             <h1>DashboardPosts</h1>
             <h1>Total number of posts is: <span id="totalPosts">{totalPosts}</span></h1>
             {events.map((event) => (
-                <div>
+                <div key={event.id}>
                     <h1>{event.title}</h1>
                     <h5>{event.description}</h5>
                     <span><h6>{event.dateCreated}</h6></span>
+                    <span><h6>{event.status}</h6></span>
                     
                 </div>
             ))}
