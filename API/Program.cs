@@ -22,6 +22,7 @@ namespace API
                     Seed.SeedData(context);
                     SeedEvents.SeedEventData(context);
                     SeedUsers.SeedUserData(context);
+                    SeedAds.SeedAdData(context);
                 }catch(Exception e){
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(e, "An error occured during Migration");

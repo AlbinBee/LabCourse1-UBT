@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { IActivity } from '../models/activity';
 import { IEvent } from '../models/event';
 import { IUser } from '../models/user';
+import { IAd } from '../models/ad';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -23,6 +24,7 @@ const Activities = {
     update: (activity: IActivity) => requests.put(`/activities/${activity.id}`, activity),
     delete: (id: string) => requests.delete(`/activities/${id}`)
 }
+
 const Events = {
     list: (): Promise<IEvent[]> => requests.get('/events'),
     details: (id: string) => requests.get(`/events/${id}`),
@@ -30,6 +32,7 @@ const Events = {
     update: (event: IEvent) => requests.put(`/events/${event.id}`, event),
     delete: (id: string) => requests.delete(`/events/${id}`)
 }
+
 const Users = {
     list: (): Promise<IUser[]> => requests.get('/users'),
     details: (id: string) => requests.get(`/users/${id}`),
@@ -38,6 +41,14 @@ const Users = {
     delete: (id: string) => requests.delete(`/users/${id}`)
 }
 
+const Ads = {
+    list: (): Promise<IAd[]> => requests.get('/ads'),
+    details: (id: string) => requests.get(`/ads/${id}`),
+    create: (ad: IAd) => requests.post('/ads', ad),
+    update: (ad: IAd) => requests.put(`/ads/${ad.id}`, ad),
+    delete: (id: string) => requests.delete(`/ads/${id}`)
+}
+
 export default {
-    Activities, Events, Users
+    Activities, Events, Users, Ads
 }
