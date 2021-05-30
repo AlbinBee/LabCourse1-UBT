@@ -29,6 +29,7 @@ namespace Application.Events
             public string Extra2 { get; set; }
             public string Extra3 { get; set; }
             public string Extra4 { get; set; }
+            public string Status { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -59,6 +60,7 @@ namespace Application.Events
                         Extra2 = request.Extra2,
                         Extra3 = request.Extra3,
                         Extra4 = request.Extra4,
+                        Status = request.Status
                 };
                 _context.Events.Add(myEvent);
                 var success = await _context.SaveChangesAsync() > 0;

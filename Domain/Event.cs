@@ -22,5 +22,6 @@ namespace Domain
         public string Extra2 { get; set; }
         public string Extra3 { get; set; }
         public string Extra4 { get; set; }
+        public string Status { get; set; }
     }
 }
