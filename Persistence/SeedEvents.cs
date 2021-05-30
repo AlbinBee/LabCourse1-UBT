@@ -30,6 +30,7 @@ namespace Persistence
                         Extra2 = "Extra2",
                         Extra3 = "Extra3",
                         Extra4 = "Extra4",
+                        Status = "Active"
                     },
                     new Event{
                         Title = "Event 2",
@@ -48,6 +49,7 @@ namespace Persistence
                         Extra2 = "Extra2",
                         Extra3 = "Extra3",
                         Extra4 = "Extra4",
+                        Status = "Active"
                     },
                     new Event{
                         Title = "Event 3",
@@ -66,6 +68,7 @@ namespace Persistence
                         Extra2 = "Extra2",
                         Extra3 = "Extra3",
                         Extra4 = "Extra4",
+                        Status = "Active"
                     },
                     new Event{
                         Title = "Event 4",
@@ -84,6 +87,7 @@ namespace Persistence
                         Extra2 = "Extra2",
                         Extra3 = "Extra3",
                         Extra4 = "Extra4",
+                        Status = "Active"
                     },
                 };
 
