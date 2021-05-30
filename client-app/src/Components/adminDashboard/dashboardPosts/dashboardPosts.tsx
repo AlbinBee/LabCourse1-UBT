@@ -3,6 +3,9 @@ import axios from 'axios'
 import agent from '../../../app/api/agent';
 import { IEvent } from '../../../app/models/event';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import DashboardTopbar from '../dashboardTopbar/dashboardTopbar';
+import './style.css';
+import InfoCard from '../../infoCard/infoCard';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -32,8 +35,16 @@ const DashboardPosts = () => {
 
     return (
         <div >
-            <h1>DashboardPosts</h1>
-            <h1>Total number of posts is: <span id="totalPosts">{totalPosts}</span></h1>
+            <div>
+                <DashboardTopbar title="Posts"/>
+            </div>
+            <div className="dashboardPostsContent">
+                <InfoCard title="Total Posts" value={totalPosts}/>
+                <InfoCard title="Verified" value="0"/>
+                <InfoCard title="Pending" value="0"/>
+                <InfoCard title="Rejected" value="0"/>
+            </div>
+            <div className="dashboardPostsTable"></div>
             {events.map((event) => (
                 <div key={event.id}>
                     <h1>{event.title}</h1>

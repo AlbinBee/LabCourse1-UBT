@@ -3,6 +3,7 @@ import axios from "axios";
 import agent from "../../../app/api/agent";
 import { IAd } from "../../../app/models/ad";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import InfoCard from "../../infoCard/infoCard";
 
 const DashboardAds = () => {
   const [ads, setAds] = useState<IAd[]>([]);
@@ -33,7 +34,12 @@ const DashboardAds = () => {
     <div>
       <h1>DashboardAds</h1>
       <h1>
-        Total number of ads is: <span id="totalAds">{totalAds}</span>
+      <div className="dashboardPostsContent">
+                <InfoCard title="Total Ads" value={totalAds}/>
+                <InfoCard title="Verified" value="3"/>
+                <InfoCard title="Pending" value="0"/>
+                <InfoCard title="Rejected" value="0"/>
+            </div>
       </h1>
       {ads.map((ad) => (
         <div>

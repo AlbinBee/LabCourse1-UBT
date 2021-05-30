@@ -3,6 +3,7 @@ import axios from "axios";
 import agent from "../../../app/api/agent";
 import { IUser } from "../../../app/models/user";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import InfoCard from "../../infoCard/infoCard";
 
 const DashboardUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -31,17 +32,22 @@ const DashboardUsers = () => {
   }
   return (
     <div >
-    <h1>DashboardUsers</h1>
-    <h1>Total number of users is: <span id="totalUsers">{totalUsers}</span></h1>
-    {users.map((user) => (
+      <h1>DashboardUsers</h1>
+      <div className="dashboardPostsContent">
+        <InfoCard title="Total Users" value={totalUsers} />
+        <InfoCard title="Online" value="2" />
+        <InfoCard title="Offline" value="2" />
+        <InfoCard title="Blocked" value="0" />
+      </div>
+      {users.map((user) => (
         <div>
-            <h1>{user.username}</h1>
-            <h5>{user.email}</h5>
-            <span><h6>{user.dateRegistered}</h6></span>
-            
+          <h1>{user.username}</h1>
+          <h5>{user.email}</h5>
+          <span><h6>{user.dateRegistered}</h6></span>
+
         </div>
-    ))}
-</div>
+      ))}
+    </div>
   );
 };
 
