@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { IActivity } from '../models/activity';
 import { IEvent } from '../models/event';
+import { IUser } from '../models/user';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -29,7 +30,14 @@ const Events = {
     update: (event: IEvent) => requests.put(`/events/${event.id}`, event),
     delete: (id: string) => requests.delete(`/events/${id}`)
 }
+const Users = {
+    list: (): Promise<IUser[]> => requests.get('/users'),
+    details: (id: string) => requests.get(`/users/${id}`),
+    create: (user: IUser) => requests.post('/users', user),
+    update: (user: IUser) => requests.put(`/users/${user.id}`, user),
+    delete: (id: string) => requests.delete(`/users/${id}`)
+}
 
 export default {
-    Activities, Events
+    Activities, Events, Users
 }

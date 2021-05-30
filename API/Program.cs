@@ -21,6 +21,7 @@ namespace API
                     context.Database.Migrate();
                     Seed.SeedData(context);
                     SeedEvents.SeedEventData(context);
+                    SeedUsers.SeedUserData(context);
                 }catch(Exception e){
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(e, "An error occured during Migration");
