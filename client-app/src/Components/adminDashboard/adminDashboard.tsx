@@ -11,6 +11,7 @@ import DashboardSettings from './dashboardSettings/dashboardSettings';
 import DashboardCv from './dashboardCv/dashboardCv';
 import DashboardAds from './dashboardAds/dashboardAds';
 import MainDashboard from './mainDashboard/mainDashboard';
+import DashboardTasks from './dashboardTasks/dashboardTasks';
 
 const AdminDashboard = () => {
     return (
@@ -72,6 +73,15 @@ const AdminDashboard = () => {
                                 path="/dashboard/mails"
                                 render={() => (
                                     <DashboardMails />
+                                )}
+                            />
+                        </Switch>
+                        <Switch>
+                            <Route
+                                exact
+                                path="/dashboard/tasks"
+                                render={() => (
+                                    <DashboardTasks />
                                 )}
                             />
                         </Switch>

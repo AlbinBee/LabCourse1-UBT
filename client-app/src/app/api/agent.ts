@@ -4,6 +4,7 @@ import { IEvent } from '../models/event';
 import { IUser } from '../models/user';
 import { IAd } from '../models/ad';
 import { IEmail } from '../models/email';
+import { IMyTask } from '../models/myTask';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -58,6 +59,14 @@ const Emails = {
     delete: (id: string) => requests.delete(`/emails/${id}`)
 }
 
+const MyTasks = {
+    list: (): Promise<IMyTask[]> => requests.get('/mytasks'),
+    details: (id: string) => requests.get(`/mytasks/${id}`),
+    create: (myTask: IMyTask) => requests.post('/mytasks', myTask),
+    update: (myTask: IMyTask) => requests.put(`/mytasks/${myTask.id}`, myTask),
+    delete: (id: string) => requests.delete(`/mytasks/${id}`)
+}
+
 export default {
-    Activities, Events, Users, Ads, Emails
+    Activities, Events, Users, Ads, Emails, MyTasks
 }

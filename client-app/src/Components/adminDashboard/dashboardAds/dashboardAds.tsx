@@ -4,6 +4,7 @@ import agent from "../../../app/api/agent";
 import { IAd } from "../../../app/models/ad";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import InfoCard from "../../infoCard/infoCard";
+import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 
 const DashboardAds = () => {
   const [ads, setAds] = useState<IAd[]>([]);
@@ -32,15 +33,15 @@ const DashboardAds = () => {
   }
   return (
     <div>
-      <h1>DashboardAds</h1>
-      <h1>
+      <div>
+        <DashboardTopbar title="Ads"/>
+      </div>
       <div className="dashboardPostsContent">
                 <InfoCard title="Total Ads" value={totalAds}/>
                 <InfoCard title="Verified" value="3"/>
                 <InfoCard title="Pending" value="0"/>
                 <InfoCard title="Rejected" value="0"/>
             </div>
-      </h1>
       {ads.map((ad) => (
         <div>
           <h1>{ad.title}</h1>
