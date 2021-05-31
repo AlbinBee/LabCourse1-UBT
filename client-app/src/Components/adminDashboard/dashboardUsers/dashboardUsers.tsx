@@ -4,6 +4,7 @@ import agent from "../../../app/api/agent";
 import { IUser } from "../../../app/models/user";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import InfoCard from "../../infoCard/infoCard";
+import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 
 const DashboardUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);
@@ -32,7 +33,9 @@ const DashboardUsers = () => {
   }
   return (
     <div >
-      <h1>DashboardUsers</h1>
+      <div>
+        <DashboardTopbar title="Users"/>
+      </div>
       <div className="dashboardPostsContent">
         <InfoCard title="Total Users" value={totalUsers} />
         <InfoCard title="Online" value="2" />

@@ -18,6 +18,8 @@ import cvIcon from '../assets/Icons/cv.svg'
 import cvIconActive from '../assets/Icons/cv-active.svg'
 import adsIcon from '../assets/Icons/ads.svg'
 import adsIconActive from '../assets/Icons/ads-active.svg'
+import taskIcon from '../assets/Icons/task.svg'
+import taskIconActive from '../assets/Icons/task-active.svg'
 import homeIcon from '../assets/Icons/home.svg'
 
 const AdminSidebar = () => {
@@ -112,6 +114,18 @@ const AdminSidebar = () => {
                             </Fragment> :
                             <Fragment>
                                 <img src={mailIcon} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName'>Mails</span>
+                            </Fragment>
+                        }
+                    </div>
+                </Link>
+                <Link to='/dashboard/tasks' className='dashboardLink'>
+                    <div className='dashboardLinkA'>
+                        {(pathName == '/dashboard/tasks') ?
+                            <Fragment>
+                                <img src={taskIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Tasks</span>
+                            </Fragment> :
+                            <Fragment>
+                                <img src={taskIcon} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName'>Tasks</span>
                             </Fragment>
                         }
                     </div>
