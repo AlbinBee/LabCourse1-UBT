@@ -13,6 +13,7 @@ namespace Persistence
         public DbSet<Event> Events { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Ad> Ads { get; set; }
+        public DbSet<Email> Emails { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder){
             builder.Entity<Value>().HasData(
