@@ -3,6 +3,7 @@ import { IActivity } from '../models/activity';
 import { IEvent } from '../models/event';
 import { IUser } from '../models/user';
 import { IAd } from '../models/ad';
+import { IEmail } from '../models/email';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -49,6 +50,14 @@ const Ads = {
     delete: (id: string) => requests.delete(`/ads/${id}`)
 }
 
+const Emails = {
+    list: (): Promise<IEmail[]> => requests.get('/emails'),
+    details: (id: string) => requests.get(`/emails/${id}`),
+    create: (email: IEmail) => requests.post('/emails', email),
+    update: (email: IEmail) => requests.put(`/emails/${email.id}`, email),
+    delete: (id: string) => requests.delete(`/emails/${id}`)
+}
+
 export default {
-    Activities, Events, Users, Ads
+    Activities, Events, Users, Ads, Emails
 }
