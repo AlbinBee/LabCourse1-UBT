@@ -1,41 +1,58 @@
+*{
+  outline: none !important;
+}
 .dashboardPostsContent {
   font-family: "Poppins";
   display: flex;
   justify-content: space-evenly;
   margin-top: 30px;
 }
-.postsInfoCard {
-  background-color: #ffffff;
-  width: 258px;
-  height: 134px;
-  /* padding: 3% 9%; */
-  border-radius: 8px;
-  border: 2px solid #dfe0eb;
+.dashboardPostsStats{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.PostsTableTopbar{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.PostsTableTopbar span{
+  margin-left: 10px;
+  color: #0288D1;
   transition: all 0.25s ease-in !important;
 }
-.postsInfoCard:hover {
-  border: 2px solid #3751ff;
+.PostsTableTopbar span:hover{
+  cursor: pointer;
+  opacity: .6;
   transition: all 0.25s ease-in !important;
 }
-.postsInfoCard:hover .infoCardTitle, .postsInfoCard:hover .infoCardStat{
-    color: #3751ff;
-    transition: all 0.25s ease-in !important;
+.postsTopBarCategory{
+  font-size: 12px;
+  font-weight: 500;
 }
-.infoCardTitle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5%;
-    font-size: 19px;
-    font-weight: 600;
-    color: #9fa2b4;
-    transition: all 0.25s ease-in !important;
+.PostsTable{
+  display: flex;
+  justify-content: center;
 }
-.infoCardStat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
-    color: #334d6e;
-    transition: all 0.25s ease-in !important;
+.MuiDataGrid-root.MuiDataGrid-root{
+  background-color: #fff;
+}
+@media (max-width: 1200px) {
+  .postsInfoCard{
+    width: 180px !important;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 1025px) {
+  .dashboardPostsContent {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 80%;
+  }
+  .postsInfoCard{
+    width: 100% !important;
+    margin-bottom: 10px;
+  }
 }

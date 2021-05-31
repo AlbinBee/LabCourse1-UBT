@@ -22,6 +22,7 @@ namespace Application.Ads
         public string SlideshowImage { get; set; }
         public DateTime? dateCreated { get; set; }
         public DateTime? expirationDate { get; set; }
+        public string Status { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -48,6 +49,7 @@ namespace Application.Ads
                 ad.SlideshowImage = request.SlideshowImage ?? ad.SlideshowImage;
                 ad.dateCreated = request.dateCreated ?? ad.dateCreated;
                 ad.expirationDate = request.expirationDate ?? ad.expirationDate;
+                ad.Status = request.Status ?? ad.Status;
 
                 //handler logic
                 var success = await _context.SaveChangesAsync() > 0;

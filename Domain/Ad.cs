@@ -16,5 +16,6 @@ namespace Domain
         public string SlideshowImage { get; set; }
         public DateTime dateCreated { get; set; }
         public DateTime expirationDate { get; set; }
+        public string Status { get; set; }
     }
 }

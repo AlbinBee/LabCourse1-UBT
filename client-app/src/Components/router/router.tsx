@@ -12,6 +12,7 @@ import ActivityPage from '../ActivityPage';
 import Homepage from '../homepage/homepage';
 import { Container } from 'semantic-ui-react';
 import AdminDashboard from '../adminDashboard/adminDashboard';
+import { keys } from '@material-ui/core/styles/createBreakpoints';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
@@ -145,7 +146,7 @@ const Router = () => {
             {activities.map((activity) => (
                 <Route path={`/explore/${activity.id}`} render={() => (
                     <Container style={{ marginTop: '8em' }}>
-                        <ActivityPage activity={activity} />
+                        <ActivityPage activity={activity} key={activity.id}/>
                     </Container>
                 )} />
             ))}

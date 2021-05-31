@@ -18,5 +18,6 @@ namespace Domain
         public string City { get; set; }
         public string AvatarImage { get; set; }
         public string Extra1 { get; set; }
+        public string Status { get; set; }
     }
 }

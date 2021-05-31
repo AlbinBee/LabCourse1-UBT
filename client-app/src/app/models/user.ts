@@ -11,6 +11,7 @@ export interface IUser{
     dateRegistered : string;
     city : string;
     avatarImage : string;
-    extra1 : string
+    extra1 : string;
+    status : string;
 }
 

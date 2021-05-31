@@ -24,6 +24,7 @@ namespace Application.Users
         public string City { get; set; }
         public string AvatarImage { get; set; }
         public string Extra1 { get; set; }
+        public string Status { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -49,7 +50,8 @@ namespace Application.Users
                         DateRegistered = request.DateRegistered,
                         City = request.City,
                         AvatarImage = request.AvatarImage,
-                        Extra1 = request.Extra1
+                        Extra1 = request.Extra1,
+                        Status = request.Status
                 };
                 _context.Users.Add(user);
                 var success = await _context.SaveChangesAsync() > 0;

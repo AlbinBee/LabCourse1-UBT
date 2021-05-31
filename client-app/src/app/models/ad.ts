@@ -10,5 +10,5 @@ export interface IAd{
     slideshowImage : string;
     dateCreated : string;
     expirationDate : string;
+    status : string;
 }
-

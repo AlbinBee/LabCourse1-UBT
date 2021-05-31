@@ -24,7 +24,8 @@ namespace Persistence
                         DateRegistered = DateTime.Now,
                         City = "Ferizaj",
                         AvatarImage = "imagePath",
-                        Extra1 = "Text"
+                        Extra1 = "Text",
+                        Status = "active",
                     },
                     new User{
                         Username = "AlbinBee",
@@ -38,7 +39,7 @@ namespace Persistence
                         DateRegistered = DateTime.Now,
                         City = "Ferizaj",
                         AvatarImage = "imagePath",
-                        Extra1 = "Text"
+                        Status = "inactive"
                     },
                     new User{
                         Username = "kajtaziblinor",
@@ -52,7 +53,8 @@ namespace Persistence
                         DateRegistered = DateTime.Now,
                         City = "Ferizaj",
                         AvatarImage = "imagePath",
-                        Extra1 = "Text"
+                        Extra1 = "Text",
+                        Status = "blocked"
                     },
                 };
 

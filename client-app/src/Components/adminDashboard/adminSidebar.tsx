@@ -21,6 +21,7 @@ import adsIconActive from '../assets/Icons/ads-active.svg'
 import taskIcon from '../assets/Icons/task.svg'
 import taskIconActive from '../assets/Icons/task-active.svg'
 import homeIcon from '../assets/Icons/home.svg'
+import rightArrowIcon from '../assets/Icons/arrow-right.svg'
 
 const AdminSidebar = () => {
     const location = useLocation();

@@ -22,7 +22,8 @@ namespace Persistence
                         BannerImage = "imagePath",
                         SlideshowImage = "imagePath",
                         dateCreated = DateTime.Now,
-                        expirationDate = DateTime.Now.AddMonths(3)
+                        expirationDate = DateTime.Now.AddMonths(3),
+                        Status= "verified",
                     },
                     new Ad{
                         Title = "Ad 2",
@@ -34,7 +35,8 @@ namespace Persistence
                         BannerImage = "imagePath",
                         SlideshowImage = "imagePath",
                         dateCreated = DateTime.Now,
-                        expirationDate = DateTime.Now.AddMonths(2)
+                        expirationDate = DateTime.Now.AddMonths(2),
+                        Status= "pending"
                     },
                     new Ad{
                         Title = "Ad 3",
@@ -46,7 +48,8 @@ namespace Persistence
                         BannerImage = "imagePath",
                         SlideshowImage = "imagePath",
                         dateCreated = DateTime.Now,
-                        expirationDate = DateTime.Now.AddMonths(5)
+                        expirationDate = DateTime.Now.AddMonths(5),
+                        Status= "rejected"
                     },
                 };
                 context.Ads.AddRange(ads);

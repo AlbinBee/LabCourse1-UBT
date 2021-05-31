@@ -10,14 +10,13 @@
   overflow: hidden;
   width: 15%;
   min-height: 100vh;
-  background-color: #FFFFFF;
-  
+  background-color: #ffffff;
 }
 .dashboardContent {
   margin-left: 15%;
   width: 85%;
   min-height: 100vh;
-  background-color: #F7F8FC;
+  background-color: #f7f8fc;
 }
 .dashboardRouteContent {
   margin: 30px;
@@ -40,7 +39,7 @@
   margin-left: 10px;
 }
 .dashboardUserContainer {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 .sidebarUsername {
   margin-top: 0px;
@@ -57,7 +56,7 @@
   margin-left: 10px;
 }
 .dashboardLinks {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .dashboardLink {
   padding: 10px 0;
@@ -88,14 +87,19 @@
   color: #334d6e;
   margin-left: 15px;
 }
-.dashboardLinkNameActive{
-  color: #0288D1;
+.dashboardLinkNameActive {
+  color: #0288d1;
 }
-.dashboardLinkNameActive:hover ~ .dashboardLink{
-  background-color: red;
+.dashboardLinkNameActive:hover ~ .dashboardLink {
   border-left: 4px solid #0288d1;
 }
-.dashboardHr{
+.dashboardHr {
   outline: none;
-  border-bottom: 1px solid #C2CFE0;
+  border-bottom: 1px solid #c2cfe0;
+}
+.MuiDataGrid-row.Mui-selected{
+  background-color: #0289d110 !important;
+}
+.MuiCheckbox-colorPrimary.Mui-checked{
+  color: #0288d1 !important;
 }
