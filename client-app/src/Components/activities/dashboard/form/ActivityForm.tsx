@@ -54,7 +54,7 @@ const ActivityForm: React.FC<IProps> = ({
   };
 
   return (
-    <Container style={{ marginTop: '8em' }}>
+    <Container >
       <Segment clearing>
         <Form onSubmit={handleSubmit}>
           <label htmlFor="Title">Title</label>

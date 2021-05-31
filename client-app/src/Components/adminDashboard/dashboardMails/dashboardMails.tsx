@@ -6,25 +6,51 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 import "./style.css";
 import InfoCard from "../../infoCard/infoCard";
+import { DataGrid } from '@material-ui/data-grid';
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 100 },
+  { field: 'title', headerName: 'Title', width: 150 },
+  { field: 'description', headerName: 'Description', width: 160 },
+  { field: 'category', headerName: 'Category', width: 150 },
+  { field: 'userEmail', headerName: 'Email', width: 150 },
+  { field: 'dateCreated', headerName: 'Date Created', width: 160 },
+  { field: 'status', headerName: 'Status', width: 130 },
+];
 
 const DashboardMails = () => {
   const [emails, setEmails] = useState<IEmail[]>([]);
   const [totalEmails, setTotalEmails] = useState(0);
+  const [totalEmailsVerified, setTotalEmailsVerified] = useState(0);
+  const [totalEmailsPending, setTotalEmailsPending] = useState(0);
+  const [totalEmailsRejected, setTotalEmailsRejected] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  let count = 0;
+  let countVerified = 0;
+  let countPending = 0;
+  let countRejected = 0;
   useEffect(() => {
-    let count = 0;
     agent.Emails.list()
       .then((response) => {
-        // console.log(response);
         let emails: IEmail[] = [];
         response.forEach((email) => {
           count++;
           email.dateCreated = email.dateCreated.split(".")[0];
           emails.push(email);
+          if (email.status == 'verified') {
+            countVerified++;
+          } else if (email.status == 'pending') {
+            countPending++;
+          } else if (email.status == 'rejected') {
+            countRejected++;
+          }
         });
         setEmails(emails);
         setTotalEmails(count);
+        setTotalEmailsVerified(countVerified);
+        setTotalEmailsPending(countPending);
+        setTotalEmailsRejected(countRejected);
       })
       .then(() => setLoading(false));
   }, []);
@@ -32,26 +58,29 @@ const DashboardMails = () => {
     return <LoadingComponent content="Loading..." />;
   }
   return (
-     <div >
-            <div>
-                <DashboardTopbar title="Emails"/>
-            </div>
-            <div className="dashboardPostsContent">
-                <InfoCard title="Total Emails" value={totalEmails}/>
-                <InfoCard title="Verified" value="0"/>
-                <InfoCard title="Pending" value="0"/>
-                <InfoCard title="Rejected" value="0"/>
-            </div>
-            <div className="dashboardPostsTable"></div>
-            {emails.map((emails) => (
-                <div key={emails.id}>
-                    <h1>{emails.title}</h1>
-                    <h5>{emails.description}</h5>
-                    <span><h6>{emails.dateCreated}</h6></span>
-                    <span><h6>{emails.status}</h6></span>
-                </div>
-            ))}
+    <div >
+      <div>
+        <DashboardTopbar title="Emails" />
+      </div>
+      <div className="dashboardPostsContent">
+        <InfoCard title="Total Emails" value={totalEmails} />
+        <InfoCard title="Verified" value={totalEmailsVerified} />
+        <InfoCard title="Pending" value={totalEmailsPending} />
+        <InfoCard title="Rejected" value={totalEmailsRejected} />
+      </div>
+      <div className="dashboardPostsTable">
+        <div className="PostsTableTopbar">
+          <h6 className="postsTopBarCategory">Category: </h6>
+          <span>All</span>
         </div>
+        <div className="PostsTable">
+          <div style={{width: '95%' }}>
+            <DataGrid rows={emails} columns={columns} pageSize={4} checkboxSelection autoHeight/>
+          </div>
+        </div>
+
+      </div>
+    </div>
   );
 };
 
