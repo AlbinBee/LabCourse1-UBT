@@ -7,15 +7,33 @@ import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 import "./style.css";
 import InfoCard from "../../infoCard/infoCard";
 import { DataGrid } from '@material-ui/data-grid';
+import { Chip } from "@material-ui/core";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
   { field: 'title', headerName: 'Title', width: 150 },
   { field: 'description', headerName: 'Description', width: 160 },
-  { field: 'category', headerName: 'Category', width: 150 },
+  {
+    field: 'category', headerName: 'Category', width: 150, renderCell: (params: any) => (
+      <div>
+        <span className='categoryChip'>{params.row.category}</span>
+      </div>
+    )
+  },
   { field: 'userEmail', headerName: 'Email', width: 150 },
-  { field: 'dateCreated', headerName: 'Date Created', width: 160 },
-  { field: 'status', headerName: 'Status', width: 130 },
+  {
+    field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
+      <div>
+        {params.row.status === 'verified'
+          ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
+          : params.row.status === 'pending'
+            ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
+            : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
+        }
+      </div>
+    )
+  },
+  { field: 'dateCreated', headerName: 'Date Created', width: 160 }, 
 ];
 
 const DashboardMails = () => {
@@ -74,8 +92,8 @@ const DashboardMails = () => {
           <span>All</span>
         </div>
         <div className="PostsTable">
-          <div style={{width: '95%' }}>
-            <DataGrid rows={emails} columns={columns} pageSize={4} checkboxSelection autoHeight/>
+          <div style={{ width: '95%' }}>
+            <DataGrid rows={emails} columns={columns} pageSize={4} checkboxSelection autoHeight />
           </div>
         </div>
 

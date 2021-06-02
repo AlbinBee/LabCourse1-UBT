@@ -1,4 +1,4 @@
-*{
+* {
   outline: none !important;
 }
 .dashboardPostsContent {
@@ -7,39 +7,90 @@
   justify-content: space-evenly;
   margin-top: 30px;
 }
-.dashboardPostsStats{
+.dashboardPostsStats {
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
 }
-.PostsTableTopbar{
+.PostsTableTopbar {
   display: flex;
   justify-content: left;
   align-items: center;
 }
-.PostsTableTopbar span{
+.PostsTableTopbar span {
   margin-left: 10px;
-  color: #0288D1;
+  color: #0288d1;
   transition: all 0.25s ease-in !important;
 }
-.PostsTableTopbar span:hover{
+.PostsTableTopbar span:hover {
   cursor: pointer;
-  opacity: .6;
+  opacity: 0.6;
   transition: all 0.25s ease-in !important;
 }
-.postsTopBarCategory{
+.postsTopBarCategory {
   font-size: 12px;
   font-weight: 500;
 }
-.PostsTable{
+.PostsTable {
   display: flex;
   justify-content: center;
 }
-.MuiDataGrid-root.MuiDataGrid-root{
+.actionIconsContainer {
+  display: flex;
+  justify-content: space-around !important;
+}
+.deleteIcon {
+  padding: 10px 15px !important;
+  background-color: #ffd6d6 !important;
+}
+.editIcon {
+  padding: 10px 15px !important;
+  background-color: #dcf9e6 !important;
+}
+.editBlueIcon {
+  background-color: #DAEFFB !important;
+}
+.categoryChip {
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 4px;
+  background-color: #334d6e;
+}
+.verifiedChipStatus {
+  background-color: #2ed47a !important;
+  text-transform: capitalize;
+}
+.verifiedChipStatus2 {
+  color: #23DC64 !important;
+  background-color: #DCF9E6 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.pendingChipStatus {
+  background-color: #ffb946 !important;
+  text-transform: capitalize;
+}
+.pendingChipStatus2 {
+  color: #FFB946 !important;
+  background-color: #FFF3E0 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.rejectedChipStatus {
+  background-color: #f7685b !important;
+  text-transform: capitalize;
+}
+.rejectedChipStatus2 {
+  color: #FF0000 !important;
+  background-color: #FFD6D6 !important;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.MuiDataGrid-root.MuiDataGrid-root {
   background-color: #fff;
 }
 @media (max-width: 1200px) {
-  .postsInfoCard{
+  .postsInfoCard {
     width: 180px !important;
     margin-bottom: 10px;
   }
@@ -51,7 +102,7 @@
     margin-top: 20px;
     width: 80%;
   }
-  .postsInfoCard{
+  .postsInfoCard {
     width: 100% !important;
     margin-bottom: 10px;
   }

@@ -13,9 +13,12 @@ import Homepage from '../homepage/homepage';
 import { Container } from 'semantic-ui-react';
 import AdminDashboard from '../adminDashboard/adminDashboard';
 import { keys } from '@material-ui/core/styles/createBreakpoints';
+import { IEvent } from '../../app/models/event';
+import EditPosts from '../adminDashboard/dashboardPosts/editPosts';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
+    const [events, setEvents] = useState<IEvent[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -68,6 +71,18 @@ const Router = () => {
                     activities.push(activity);
                 })
                 setActivities(activities)
+            }).then(() => setLoading(false));
+        agent.Events.list()
+            .then(response => {
+                // console.log(response);
+                let events: IEvent[] = [];
+                response.forEach((event) => {
+                    event.dateCreated = event.dateCreated.split('.')[0]
+                    event.dateOfEvent = event.dateOfEvent.split('.')[0]
+                    events.push(event);
+                })
+                setEvents(events)
+
             }).then(() => setLoading(false));
     }, []);
     if (loading) {
@@ -146,10 +161,16 @@ const Router = () => {
             {activities.map((activity) => (
                 <Route path={`/explore/${activity.id}`} render={() => (
                     <Container style={{ marginTop: '8em' }}>
-                        <ActivityPage activity={activity} key={activity.id}/>
+                        <ActivityPage activity={activity} key={activity.id} />
                     </Container>
                 )} />
             ))}
+
+            {/* {events.map((event) => (
+                <Route path={`/dashboard/edit/posts/${event.id}`} render={() => (
+                    <EditPosts event={event} key={event.id} />
+                )} />
+            ))} */}
         </div>
     );
 }

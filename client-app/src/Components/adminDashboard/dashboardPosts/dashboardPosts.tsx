@@ -7,17 +7,58 @@ import DashboardTopbar from '../dashboardTopbar/dashboardTopbar';
 import './style.css';
 import InfoCard from '../../infoCard/infoCard';
 import { DataGrid } from '@material-ui/data-grid';
+import { Button } from 'semantic-ui-react';
+import EditIcon from '../../assets/Icons/edit.svg';
+import DeleteIcon from '../../assets/Icons/delete.svg';
+import { Link } from 'react-router-dom';
+import Chip from '@material-ui/core/Chip';
+
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'mainImage', headerName: 'Image', width: 130   },
+    { field: 'mainImage', headerName: 'Image', width: 130 },
     { field: 'title', headerName: 'Title', width: 130 },
-    { field: 'category', headerName: 'Category', width: 150 },
-    { field: 'dateCreated', headerName: 'Date Created', width: 160 },
+    {
+        field: 'category', headerName: 'Category', width: 150, renderCell: (params: any) => (
+            <div>
+                <span className='categoryChip'>{params.row.category}</span>
+            </div>
+        )
+    },
+
     { field: 'isBookable', headerName: 'Bookable', width: 130, type: 'boolean' },
     { field: 'hasTickets', headerName: 'Tickets', width: 130, type: 'boolean' },
+    { field: 'status', headerName: 'Status', width: 110, hide: true },
+    {
+        field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
+            <div>
+                {params.row.status === 'verified'
+                    ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
+                    : params.row.status === 'pending'
+                        ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
+                        : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
+                }
+            </div>
+        )
+    },
     { field: 'views', headerName: 'Views', width: 110 },
-    { field: 'status', headerName: 'Status', width: 130 },
+    { field: 'dateCreated', headerName: 'Date Created', width: 160 },
+    {
+        field: 'edit', headerName: 'Action', width: 130, renderCell: (params: any) => (
+            <div className='actionIconsContainer'>
+                <Link to={`/dashboard/delete/posts/${params.id}`}>
+                    <Button className='deleteIcon'>
+                        <img src={DeleteIcon} alt="delete" className='actionIcon' />
+                    </Button>
+                </Link>
+                <Link to={`/dashboard/edit/posts/${params.id}`}>
+                    <Button className='editIcon'>
+                        <img src={EditIcon} alt="edit" className='actionIcon' />
+                    </Button>
+                </Link>
+            </div>
+        ),
+    },
 ];
 
 const DashboardPosts = () => {
@@ -84,7 +125,7 @@ const DashboardPosts = () => {
                 </div>
                 <div className="PostsTable">
                     <div style={{ width: '95%' }}>
-                        <DataGrid rows={events} columns={columns} pageSize={4} checkboxSelection autoHeight/>
+                        <DataGrid rows={events} columns={columns} pageSize={4} checkboxSelection autoHeight />
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@ const columns = [
   { field: 'email', headerName: 'Email', width: 150 },
   { field: 'role', headerName: 'Role', width: 120 },
   { field: 'isPremium', headerName: 'Premium', width: 130, type: 'boolean' },
-  { field: 'dateRegistered', headerName: 'Date Registerd', width: 160 },
   { field: 'status', headerName: 'Status', width: 130 },
+  { field: 'dateRegistered', headerName: 'Date Registerd', width: 160 },
 ];
 const DashboardUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);
