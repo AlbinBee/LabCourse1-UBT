@@ -6,16 +6,59 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import InfoCard from "../../infoCard/infoCard";
 import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 import { DataGrid } from '@material-ui/data-grid';
+import { Button, Chip } from "@material-ui/core";
+import EditIcon from '../../assets/Icons/edit.svg';
+import EditBlueIcon from '../../assets/Icons/edit-blue.svg';
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
   { field: 'title', headerName: 'Title', width: 130 },
+  {
+    field: 'category', headerName: 'Category', width: 150, renderCell: (params: any) => (
+        <div>
+            <span className='categoryChip'>{params.row.category}</span>
+        </div>
+    )
+},
+  {
+    field: 'priority', headerName: 'Priority', width: 130, renderCell: (params: any) => (
+        <div>
+            {params.row.priority === 'low'
+                ? <Chip label={params.row.priority} className='verifiedChipStatus2' />
+                : params.row.priority === 'medium'
+                    ? <Chip label={params.row.priority} className='pendingChipStatus2' />
+                    : <Chip label={params.row.priority} className='rejectedChipStatus2' />
+            }
+        </div>
+    )
+},
   { field: 'description', headerName: 'Description', width: 160 },
-  { field: 'category', headerName: 'Category', width: 150 },
-  { field: 'status', headerName: 'Status', width: 130 },
-  { field: 'priority', headerName: 'Priority', width: 130 },
+  {
+    field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
+        <div>
+            {params.row.status === 'completed'
+                ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
+                : params.row.status === 'in progress'
+                    ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
+                    : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
+            }
+        </div>
+    )
+},
   { field: 'dateCreated', headerName: 'Date Created', width: 160 },
-  { field: 'deadlineDate', headerName: 'Deadline Date', width: 160 },
+  { field: 'deadlineDate', headerName: 'Deadline Date', width: 180 },
+  {
+    field: 'edit', headerName: 'Action', width: 130, renderCell: (params: any) => (
+        <div className='actionIconsContainer'>
+            <Link to={`/dashboard/edit/tasks/${params.id}`}>
+                <Button className='editIcon editBlueIcon'>
+                    <img src={EditBlueIcon} alt="edit" className='actionIcon' />
+                </Button>
+            </Link>
+        </div>
+    ),
+},
 ];
 
 const DashboardTasks = () => {

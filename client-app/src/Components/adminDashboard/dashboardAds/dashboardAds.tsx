@@ -7,18 +7,56 @@ import InfoCard from "../../infoCard/infoCard";
 import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 import './style.css';
 import { DataGrid } from '@material-ui/data-grid';
+import EditIcon from '../../assets/Icons/edit.svg';
+import DeleteIcon from '../../assets/Icons/delete.svg';
+import { Button, Chip } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 100 },
   { field: 'mainImage', headerName: 'Image', width: 130 },
   { field: 'title', headerName: 'Title', width: 130 },
-  { field: 'type', headerName: 'Type', width: 130},
+  {
+    field: 'type', headerName: 'Type', width: 150, renderCell: (params: any) => (
+        <div>
+            <span className='categoryChip'>{params.row.type}</span>
+        </div>
+    )
+},
   { field: 'price', headerName: 'Price', width: 110},
   { field: 'isBanner', headerName: 'Banner', width: 120, type: 'boolean'},
   { field: 'isSlideshow', headerName: 'Slideshow', width: 135, type: 'boolean'},
-  { field: 'status', headerName: 'Status', width: 130 },
+  {
+    field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
+        <div>
+            {params.row.status === 'verified'
+                ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
+                : params.row.status === 'pending'
+                    ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
+                    : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
+            }
+        </div>
+    )
+},
+  { field: 'status', headerName: 'Status', width: 130, hide: true },
   { field: 'dateCreated', headerName: 'Date Created', width: 160 },
   { field: 'expirationDate', headerName: 'Expiration Date', width: 180},
+  {
+    field: 'action', headerName: 'Action', width: 160, renderCell: (params: any) => (
+        <div className='actionIconsContainer'>
+            <Link to={`/dashboard/delete/ads/${params.id}`}>
+                <Button className='deleteIcon'>
+                    <img src={DeleteIcon} alt="delete" className='actionIcon' />
+                </Button>
+            </Link>
+            <Link to={`/dashboard/edit/ads/${params.id}`}>
+                <Button className='editIcon'>
+                    <img src={EditIcon} alt="edit" className='actionIcon' />
+                </Button>
+            </Link>
+        </div>
+    ),
+},
 ];
 
 const DashboardAds = () => {
