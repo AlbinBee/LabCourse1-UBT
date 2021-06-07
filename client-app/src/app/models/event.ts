@@ -8,10 +8,10 @@ export interface IEvent {
     city: string;
     mainImage: string;
     galleryImages: string;
-    isBookable: string;
-    hasTickets: string;
-    availableTickets: string;
-    views: string;
+    isBookable: boolean;
+    hasTickets: boolean;
+    availableTickets: number;
+    views: number;
     extra1: string;
     extra2: string;
     extra3: string;

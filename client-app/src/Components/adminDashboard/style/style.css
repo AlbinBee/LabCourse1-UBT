@@ -1,5 +1,8 @@
 * {
-  font-family: "Poppins";
+  font-family: "Poppins" !important;
+}
+h1,h2,h3{
+  color: #334d6e;
 }
 .dashboardContainer {
   display: flex;
@@ -62,7 +65,7 @@
   padding: 10px 0;
   padding-left: 10px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   margin-left: 24px;
   margin-bottom: 10px;
   align-items: center;
@@ -102,4 +105,16 @@
 }
 .MuiCheckbox-colorPrimary.Mui-checked{
   color: #0288d1 !important;
+}
+.MuiRadio-colorSecondary.Mui-checked {
+  color: #0288d1 !important;
+}
+.MuiRadio-colorSecondary:hover{
+  background-color: rgba(197, 220, 250, 0.2) !important;
+}
+.MuiRadio-colorSecondary.Mui-checked:hover{
+  background-color: rgba(197, 220, 250, 0.5) !important;
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
+  border-color: #0288d1 !important;
 }

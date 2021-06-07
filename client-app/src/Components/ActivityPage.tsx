@@ -1,6 +1,6 @@
 import React from 'react';
 import { IActivity } from '../app/models/activity';
-import { Button, Card, Container, Image, Label } from 'semantic-ui-react'
+import { Button, Container, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 interface IProps {

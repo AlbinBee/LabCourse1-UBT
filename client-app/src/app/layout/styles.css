@@ -20,9 +20,6 @@
   );
 }
 
-body {
-  background-color: rgb(234, 234, 234) !important;
-}
 button.ui.blue.right.floated.button {
   background-color: var(--blue4);
   color: var(--blue1);
@@ -42,12 +39,7 @@ button.ui.positive.right.floated.button {
 button.ui.blue.basic.button {
   color: var(--blue1) !important;
 }
-/* .ui.inverted.top.fixed.menu {
-  background-color: var(--white);
-  background-image: var(--white) !important;
-} */
 .ui .container {
-  /* width: 100% !important; */
   align-items: center !important;
 }
 .ui.container{

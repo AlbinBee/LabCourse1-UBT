@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect } from 'react'
-import { Link, Route, Switch } from 'react-router-dom';
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Card, Container, Image, Label } from 'semantic-ui-react'
-import agent from '../../app/api/agent';
 import { IActivity } from '../../app/models/activity'
 
 interface IProps {
@@ -19,7 +18,7 @@ const Explore: React.FC<IProps> = ({ activities }) => {
                 <Container style={{ marginTop: '7em' }} >
                     <Card.Group>
                         {activities.map((activity) => (
-                            <Card>
+                            <Card key={activity.id}>
                                 <Image src={`/assets/categoryImages/${activity.category}.jpg`} wrapped ui={false} label={{
                                     color: 'orange',
                                     content: 'PREMIUM',

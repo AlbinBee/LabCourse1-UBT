@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import agent from "../../../app/api/agent";
 import { IUser } from "../../../app/models/user";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -40,11 +39,11 @@ const DashboardUsers = () => {
           count++;
           user.dateRegistered = user.dateRegistered.split(".")[0];
           users.push(user);
-          if (user.status == 'active') {
+          if (user.status === 'active') {
             countActive++;
-          } else if (user.status == 'inactive') {
+          } else if (user.status === 'inactive') {
             countInActive++;
-          } else if (user.status == 'blocked') {
+          } else if (user.status === 'blocked') {
             countBlocked++;
           }
         });

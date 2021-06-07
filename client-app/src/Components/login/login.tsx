@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MainBg from '../assets/bg-posto-ks.png';
 import './style/style.css';
 
 const Login = () => {
-    return(
+    return (
         <div className='loginContainer'>
-            <img src={MainBg}alt="" />
+            <img src={MainBg} alt="mainbg" />
             <h1>This is Login Page</h1>
             <h1>This is Login Page</h1>
             <h1>This is Login Page</h1>

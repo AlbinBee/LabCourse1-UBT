@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { IMyTask } from '../../../app/models/myTask'
 
 interface IProps {
