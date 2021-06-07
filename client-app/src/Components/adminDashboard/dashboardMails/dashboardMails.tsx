@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import agent from "../../../app/api/agent";
 import { IEmail } from "../../../app/models/email";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -33,7 +32,7 @@ const columns = [
       </div>
     )
   },
-  { field: 'dateCreated', headerName: 'Date Created', width: 160 }, 
+  { field: 'dateCreated', headerName: 'Date Created', width: 160 },
 ];
 
 const DashboardMails = () => {
@@ -56,11 +55,11 @@ const DashboardMails = () => {
           count++;
           email.dateCreated = email.dateCreated.split(".")[0];
           emails.push(email);
-          if (email.status == 'verified') {
+          if (email.status === 'verified') {
             countVerified++;
-          } else if (email.status == 'pending') {
+          } else if (email.status === 'pending') {
             countPending++;
-          } else if (email.status == 'rejected') {
+          } else if (email.status === 'rejected') {
             countRejected++;
           }
         });
@@ -71,7 +70,7 @@ const DashboardMails = () => {
         setTotalEmailsRejected(countRejected);
       })
       .then(() => setLoading(false));
-  }, []);
+  });
   if (loading) {
     return <LoadingComponent content="Loading..." />;
   }

@@ -14,8 +14,10 @@
 }
 .PostsTableTopbar {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
+  width: 90%;
+  margin-left: 40px;
 }
 .PostsTableTopbar span {
   margin-left: 10px;
@@ -38,17 +40,20 @@
 .actionIconsContainer {
   display: flex;
   justify-content: space-around !important;
+  height: 80% !important;
 }
 .deleteIcon {
-  padding: 10px 15px !important;
   background-color: #ffd6d6 !important;
 }
+.editIconContainer {
+  display: flex;
+  align-items: center;
+}
 .editIcon {
-  padding: 10px 15px !important;
   background-color: #dcf9e6 !important;
 }
 .editBlueIcon {
-  background-color: #DAEFFB !important;
+  background-color: #daeffb !important;
 }
 .categoryChip {
   color: #fff;
@@ -61,8 +66,8 @@
   text-transform: capitalize;
 }
 .verifiedChipStatus2 {
-  color: #23DC64 !important;
-  background-color: #DCF9E6 !important;
+  color: #23dc64 !important;
+  background-color: #dcf9e6 !important;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -71,8 +76,8 @@
   text-transform: capitalize;
 }
 .pendingChipStatus2 {
-  color: #FFB946 !important;
-  background-color: #FFF3E0 !important;
+  color: #ffb946 !important;
+  background-color: #fff3e0 !important;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -81,10 +86,75 @@
   text-transform: capitalize;
 }
 .rejectedChipStatus2 {
-  color: #FF0000 !important;
-  background-color: #FFD6D6 !important;
+  color: #ff0000 !important;
+  background-color: #ffd6d6 !important;
   font-weight: 600;
   text-transform: uppercase;
+}
+.editingTopbar {
+  display: flex;
+  justify-content: center;
+}
+.editingFields {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 50px !important;
+}
+.primaryEditFields {
+  display: block !important;
+}
+.editPrimaryInputField {
+  display: block !important;
+  margin-top: 20px !important;
+  margin-top: 20px !important;
+}
+.secondaryEditFields {
+  display: block !important;
+  justify-content: center;
+}
+.editSecondaryInputField {
+  display: block !important;
+  margin-top: 20px !important;
+  margin-top: 20px !important;
+}
+.tertiaryEditFields {
+  display: block !important;
+  justify-content: center;
+}
+.editTertiaryInputField {
+  display: block !important;
+  margin-top: 20px !important;
+}
+.otherEditFields {
+  display: block !important;
+  justify-content: center;
+}
+.editOtherInputField {
+  display: block !important;
+  margin-top: 20px !important;
+  margin-top: 20px !important;
+}
+.chooseCategory {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+.chooseCategory h2 {
+  font-family: "Poppins";
+  font-weight: 500;
+}
+.submitEditBtnContainer {
+  display: flex;
+  justify-content: center !important;
+  margin-top: 20px;
+}
+.submitEditBtn {
+  display: flex;
+  justify-content: center;
+  border: none;
+  background: none;
+  outline: none;
 }
 .MuiDataGrid-root.MuiDataGrid-root {
   background-color: #fff;
@@ -105,5 +175,15 @@
   .postsInfoCard {
     width: 100% !important;
     margin-bottom: 10px;
+  }
+  .editingFields {
+    display: block !important;
+    margin-left: 40%;
+  }
+  .primaryEditFields,
+  .secondaryEditFields,
+  .tertiaryEditFields,
+  .otherEditFields {
+    margin-top: 20px;
   }
 }

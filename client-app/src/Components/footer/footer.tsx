@@ -3,10 +3,6 @@ import './style/style.css';
 import Logo from '../assets/Logo_Text.svg';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
-import mail from '../assets/Icons/mail.svg';
-import facebook from '../assets/Icons/facebook.svg';
-import linkedin from '../assets/Icons/linkedin.svg';
-import dashboardIcon from '../assets/Icons/dashboard.svg';
 import dashboardIconWhite from '../assets/Icons/dashboard-white.svg';
 
 const Footer = () => {
@@ -54,14 +50,12 @@ const Footer = () => {
                     </div>
                     <div className='footerSocial'>
                         <Link to='dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
-                        {/* <img src={mail} alt="mail" /> */}
-                        {/* <img src={facebook} alt="facebook" /> */}
                     </div>
                 </div>
             </div>
-                <div className='footerCopyright'>
-                    <p>All rights reserved Posto-ks | Copyright @2021 </p>
-                </div>
+            <div className='footerCopyright'>
+                <p>All rights reserved Posto-ks | Copyright @2021 </p>
+            </div>
         </div>
     )
 }

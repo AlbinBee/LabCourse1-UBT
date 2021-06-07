@@ -21,19 +21,10 @@ import adsIconActive from '../assets/Icons/ads-active.svg'
 import taskIcon from '../assets/Icons/task.svg'
 import taskIconActive from '../assets/Icons/task-active.svg'
 import homeIcon from '../assets/Icons/home.svg'
-import rightArrowIcon from '../assets/Icons/arrow-right.svg'
 
 const AdminSidebar = () => {
     const location = useLocation();
     const pathName = location.pathname;
-    console.log(pathName);
-    // let canCreate;
-    // if (pathName === '/activities') {
-    //     canCreate = true;
-    // } else {
-    //     canCreate = false;
-    // }
-    // console.log(object)
     return (
         <div className='sidebarContainer'>
             <div className='dashboardLogoContainer'>
@@ -49,7 +40,7 @@ const AdminSidebar = () => {
             <div className='dashboardLinks'>
                 <Link to='/dashboard' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard') ?
+                        {(pathName === '/dashboard') ?
                             <Fragment>
                                 <img src={dashboardIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Dashboard</span>
                             </Fragment> :
@@ -61,7 +52,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/posts' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/posts') ?
+                        {(pathName === '/dashboard/posts') ?
                             <Fragment>
                                 <img src={postsIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Posts</span>
                             </Fragment> :
@@ -73,7 +64,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/users' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/users') ?
+                        {(pathName === '/dashboard/users') ?
                             <Fragment>
                                 <img src={usersIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Users</span>
                             </Fragment> :
@@ -85,7 +76,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/sales' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/sales') ?
+                        {(pathName === '/dashboard/sales') ?
                             <Fragment>
                                 <img src={pieIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Sales</span>
                             </Fragment> :
@@ -97,7 +88,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/ads' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/ads') ?
+                        {(pathName === '/dashboard/ads') ?
                             <Fragment>
                                 <img src={adsIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Ads</span>
                             </Fragment> :
@@ -109,7 +100,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/mails' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/mails') ?
+                        {(pathName === '/dashboard/mails') ?
                             <Fragment>
                                 <img src={mailIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Mails</span>
                             </Fragment> :
@@ -121,7 +112,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/tasks' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/tasks') ?
+                        {(pathName === '/dashboard/tasks') ?
                             <Fragment>
                                 <img src={taskIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Tasks</span>
                             </Fragment> :
@@ -133,7 +124,7 @@ const AdminSidebar = () => {
                 </Link>
                 <Link to='/dashboard/cv' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/cv') ?
+                        {(pathName === '/dashboard/cv') ?
                             <Fragment>
                                 <img src={cvIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Cv Creator</span>
                             </Fragment> :
@@ -143,10 +134,10 @@ const AdminSidebar = () => {
                         }
                     </div>
                 </Link>
-                <div className='dashboardHr'/>
+                <div className='dashboardHr' />
                 <Link to='/dashboard/settings' className='dashboardLink'>
                     <div className='dashboardLinkA'>
-                        {(pathName == '/dashboard/settings') ?
+                        {(pathName === '/dashboard/settings') ?
                             <Fragment>
                                 <img src={settingsIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Settings</span>
                             </Fragment> :

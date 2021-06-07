@@ -19,49 +19,51 @@ const Navbar: React.FC<IProps> = ({ openCreateForm }) => {
     return (
         <Menu fixed='top' inverted>
             <Container className="navContainer">
-                <div>
-                    <Link to='/'>
-                        <Menu.Item
-                            className="navItem"
-                            name='Home'
-                        />
-                    </Link>
-                    <Link to='/activities'>
-                        <Menu.Item
-                            className="navItem"
-                            name='Activities'
-                        />
-                    </Link>
-                    <Link to='/explore'>
-                        <Menu.Item
-                            className="navItem"
-                            name='Explore'
-                        />
-                    </Link>
-                    <Menu.Item>
-                        {canCreate && <Button onClick={openCreateForm} positive content='Create Activity' />}
-                    </Menu.Item>
-                </div>
-                <div>
-                    <Link to='/'>
-                        <Menu.Item header>
-                            <img src="/assets/Logo_Text.svg" id="navbar-logo" alt="logo"/>
+                <div className="navContent">
+                    <div>
+                        <Link to='/'>
+                            <Menu.Item
+                                className="navItem"
+                                name='Home'
+                            />
+                        </Link>
+                        <Link to='/activities'>
+                            <Menu.Item
+                                className="navItem"
+                                name='Activities'
+                            />
+                        </Link>
+                        <Link to='/explore'>
+                            <Menu.Item
+                                className="navItem"
+                                name='Explore'
+                            />
+                        </Link>
+                        <Menu.Item>
+                            {canCreate && <Button onClick={openCreateForm} positive content='Create Activity' />}
                         </Menu.Item>
-                    </Link>
-                </div>
-                <div>
-                    <Link to='/login'>
-                        <Menu.Item
-                            className="navItem navItemLogin"
-                            name='Log In'
-                        />
-                    </Link>
-                    <Link to='/register'>
-                        <Menu.Item
-                            className="navItem navItemRegister"
-                            name='Sign Up'
-                        />
-                    </Link>
+                    </div>
+                    <div>
+                        <Link to='/'>
+                            <Menu.Item header>
+                                <img src="/assets/Logo_Text.svg" id="navbar-logo" alt="logo" />
+                            </Menu.Item>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to='/login'>
+                            <Menu.Item
+                                className="navItem navItemLogin"
+                                name='Log In'
+                            />
+                        </Link>
+                        <Link to='/register'>
+                            <Menu.Item
+                                className="navItem navItemRegister"
+                                name='Sign Up'
+                            />
+                        </Link>
+                    </div>
                 </div>
             </Container>
         </Menu>

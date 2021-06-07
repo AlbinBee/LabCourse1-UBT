@@ -1,0 +1,50 @@
+.hompageContainer{
+    margin-top: 8em;
+}
+.homepageSlider{
+    display: flex;
+    justify-content: center;
+    min-height: 20em;
+    margin-top: 50px !important;
+}
+.homepageSliderImg{
+    max-height: 40em;
+    border-radius: 10px;
+}
+.homepageSliderContent{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.homepageCategories, .homepagePremiumAds{
+    margin-top: 50px !important;
+}
+.homepageCategoriesTitle h2, .homepagePremiumAdsTitle h2{
+    font-family: 'Montserrat' !important;
+    color: #0288D1;
+    font-weight: 600;
+}
+.homepageCategoriesImg, .homepagePremiumAdsImg{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
+}
+.categoryImg{
+    max-width: 277px;
+    max-height: 188px;
+}
+.premiumAdsImg{
+    max-width: 250px;
+    max-height: 360px;
+    border-radius: 4px;
+}
+.homepageBanner{
+    margin-top: 50px !important;
+}
+.homepageBanner img{
+    width: 100%;
+    object-fit: cover;
+    max-height: 244px;
+}

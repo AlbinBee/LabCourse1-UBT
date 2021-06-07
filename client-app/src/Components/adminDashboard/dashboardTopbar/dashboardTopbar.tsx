@@ -1,14 +1,14 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import searchIcon from '../../assets/Icons/search.svg';
-import bellIcon from '../../assets/Icons/bell.svg';
+// import bellIcon from '../../assets/Icons/bell.svg';
 import bellAlertIcon from '../../assets/Icons/bell-alert.svg';
 import avatarIcon from '../../assets/Icons/avatar.svg';
 import '../style/style.css';
 
-const DashboardTopbar = (props:any) => {
+const DashboardTopbar = (props: any) => {
     const [openSearch, setOpenSearch] = useState(false)
 
-    return(
+    return (
         <div className='mainDashboardTopbar'>
             <div>
                 <h1 className='mainDashboardTitle'>{props.title}</h1>

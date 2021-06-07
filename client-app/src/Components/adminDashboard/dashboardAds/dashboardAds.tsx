@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import agent from "../../../app/api/agent";
 import { IAd } from "../../../app/models/ad";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
@@ -18,45 +17,45 @@ const columns = [
   { field: 'title', headerName: 'Title', width: 130 },
   {
     field: 'type', headerName: 'Type', width: 150, renderCell: (params: any) => (
-        <div>
-            <span className='categoryChip'>{params.row.type}</span>
-        </div>
+      <div>
+        <span className='categoryChip'>{params.row.type}</span>
+      </div>
     )
-},
-  { field: 'price', headerName: 'Price', width: 110},
-  { field: 'isBanner', headerName: 'Banner', width: 120, type: 'boolean'},
-  { field: 'isSlideshow', headerName: 'Slideshow', width: 135, type: 'boolean'},
+  },
+  { field: 'price', headerName: 'Price', width: 110 },
+  { field: 'isBanner', headerName: 'Banner', width: 120, type: 'boolean' },
+  { field: 'isSlideshow', headerName: 'Slideshow', width: 135, type: 'boolean' },
   {
     field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
-        <div>
-            {params.row.status === 'verified'
-                ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
-                : params.row.status === 'pending'
-                    ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
-                    : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
-            }
-        </div>
+      <div>
+        {params.row.status === 'verified'
+          ? <Chip color="primary" label={params.row.status} className='verifiedChipStatus' />
+          : params.row.status === 'pending'
+            ? <Chip color="primary" label={params.row.status} className='pendingChipStatus' />
+            : <Chip color="secondary" label={params.row.status} className='rejectedChipStatus' />
+        }
+      </div>
     )
-},
+  },
   { field: 'status', headerName: 'Status', width: 130, hide: true },
   { field: 'dateCreated', headerName: 'Date Created', width: 160 },
-  { field: 'expirationDate', headerName: 'Expiration Date', width: 180},
+  { field: 'expirationDate', headerName: 'Expiration Date', width: 180 },
   {
     field: 'action', headerName: 'Action', width: 160, renderCell: (params: any) => (
-        <div className='actionIconsContainer'>
-            <Link to={`/dashboard/delete/ads/${params.id}`}>
-                <Button className='deleteIcon'>
-                    <img src={DeleteIcon} alt="delete" className='actionIcon' />
-                </Button>
-            </Link>
-            <Link to={`/dashboard/edit/ads/${params.id}`}>
-                <Button className='editIcon'>
-                    <img src={EditIcon} alt="edit" className='actionIcon' />
-                </Button>
-            </Link>
-        </div>
+      <div className='actionIconsContainer'>
+        <Link to={`/dashboard/delete/ads/${params.id}`}>
+          <Button className='deleteIcon'>
+            <img src={DeleteIcon} alt="delete" className='actionIcon' />
+          </Button>
+        </Link>
+        <Link to={`/dashboard/edit/ads/${params.id}`}>
+          <Button className='editIcon'>
+            <img src={EditIcon} alt="edit" className='actionIcon' />
+          </Button>
+        </Link>
+      </div>
     ),
-},
+  },
 ];
 
 const DashboardAds = () => {
@@ -81,13 +80,13 @@ const DashboardAds = () => {
           ad.dateCreated = ad.dateCreated.split(".")[0];
           ad.expirationDate = ad.expirationDate.split(".")[0];
           ads.push(ad);
-          if (ad.status == 'verified') {
+          if (ad.status === 'verified') {
             countVerified++;
-        } else if (ad.status == 'pending') {
+          } else if (ad.status === 'pending') {
             countPending++;
-        } else if (ad.status == 'rejected') {
+          } else if (ad.status === 'rejected') {
             countRejected++;
-        }
+          }
         });
         setAds(ads);
         setTotalAds(count);
@@ -122,7 +121,7 @@ const DashboardAds = () => {
         </div>
         <div className="PostsTable">
           <div style={{ width: '95%' }}>
-            <DataGrid rows={ads} columns={columns} pageSize={4} checkboxSelection autoHeight/>
+            <DataGrid rows={ads} columns={columns} pageSize={4} checkboxSelection autoHeight />
           </div>
         </div>
       </div>
