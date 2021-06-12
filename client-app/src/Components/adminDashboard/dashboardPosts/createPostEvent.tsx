@@ -8,6 +8,7 @@ import './style.css'
 import { IEvent } from '../../../app/models/event';
 import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
+import { toast } from 'react-toastify';
 
 interface IProps {
     events: IEvent[];
@@ -71,9 +72,11 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
     const handleCreateEvent = (post: IEvent) => {
         try {
             agent.Events.create(post).then(() => {
+                toast.success('Successfully created post!');
                 setEvents([...events, post])
             })
         } catch (e) {
+            toast.error('Could not create post!');
             console.error(e);
         }
     }
@@ -115,6 +118,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                         <h2>Event Infos</h2>
                         <TextField
                             onChange={handleInputEvChange}
+                            required
                             id="datetime-local"
                             label="Date Of Event"
                             type="datetime-local"

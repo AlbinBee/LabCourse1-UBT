@@ -17,7 +17,7 @@ import DashboardCv from '../adminDashboard/dashboardCv/dashboardCv';
 import DashboardSettings from '../adminDashboard/dashboardSettings/dashboardSettings';
 import { IAd } from '../../app/models/ad';
 import { IMyTask } from '../../app/models/myTask';
-import CreatePosts from '../adminDashboard/dashboardPosts/createPost';
+import CreatePost from '../adminDashboard/dashboardPosts/createPost';
 
 const AdminRouter = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -69,8 +69,6 @@ const AdminRouter = () => {
                         <MainDashboard />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/posts"
@@ -78,28 +76,23 @@ const AdminRouter = () => {
                         <DashboardPosts />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/create/posts"
                     render={() => (
-                        <CreatePosts events={events} />
+                        <CreatePost events={events} />
                     )}
                 />
-            </Switch>
-            {events.map((event) => (
-                <Switch key={event.id}>
+                {events.map((event) => (
                     <Route
+                        key={event.id}
                         exact
                         path={`/dashboard/edit/posts/${event.id}`}
                         render={() => (
                             <EditPosts event={event} events={events} key={event.id} />
                         )}
                     />
-                </Switch>
-            ))}
-            <Switch>
+                ))}
                 <Route
                     exact
                     path="/dashboard/users"
@@ -107,8 +100,6 @@ const AdminRouter = () => {
                         <DashboardUsers />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/sales"
@@ -116,8 +107,6 @@ const AdminRouter = () => {
                         <DashboardSales />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/ads"
@@ -125,19 +114,16 @@ const AdminRouter = () => {
                         <DashboardAds />
                     )}
                 />
-            </Switch>
-            {ads.map((ad) => (
-                <Switch key={ad.id}>
+                {ads.map((ad) => (
                     <Route
+                        key={ad.id}
                         exact
                         path={`/dashboard/edit/ads/${ad.id}`}
                         render={() => (
                             <EditAds ad={ad} key={ad.id} />
                         )}
                     />
-                </Switch>
-            ))}
-            <Switch>
+                ))}
                 <Route
                     exact
                     path="/dashboard/mails"
@@ -145,8 +131,6 @@ const AdminRouter = () => {
                         <DashboardMails />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/tasks"
@@ -154,19 +138,16 @@ const AdminRouter = () => {
                         <DashboardTasks />
                     )}
                 />
-            </Switch>
-            {myTasks.map((task) => (
-                <Switch key={task.id}>
+                {myTasks.map((task) => (
                     <Route
+                        key={task.id}
                         exact
                         path={`/dashboard/edit/tasks/${task.id}`}
                         render={() => (
                             <EditTasks task={task} key={task.id} />
                         )}
                     />
-                </Switch>
-            ))}
-            <Switch>
+                ))}
                 <Route
                     exact
                     path="/dashboard/cv"
@@ -174,8 +155,6 @@ const AdminRouter = () => {
                         <DashboardCv />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/dashboard/settings"

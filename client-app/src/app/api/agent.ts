@@ -5,16 +5,40 @@ import { IUser } from '../models/user';
 import { IAd } from '../models/ad';
 import { IEmail } from '../models/email';
 import { IMyTask } from '../models/myTask';
+import { history } from '../..';
+import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+//NOT WORKING!!!!!!!!!
+axios.interceptors.response.use(undefined, error => {
+    if (error.message === 'Network Error' && !error.response) {
+        toast.error('Network Error - make sure API is running!')
+    }
+    const { status, data, config } = error.response
+    if (status === 400) {
+        history.push('/notfound');
+        toast.error('There was a problem with your request!')
+    }
+    if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
+        history.push('/notfound');
+        toast.error('There was a problem with your request!')
+    }
+    if (status === 500) {
+        toast.error('Server Error - check terminal!')
+        toast.error('There was a problem with the server!')
+    }
+    // console.log(axios.interceptors.response);
+})
+
 const responseBody = (response: AxiosResponse) => response.data;
-const sleep = (ms: number) =>(response: AxiosResponse) =>
+
+const sleep = (ms: number) => (response: AxiosResponse) =>
     new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(response), ms));
 
 const requests = {
     get: (url: string) => axios.get(url).then(sleep(1000)).then(responseBody),
-    post: (url: string, body: {}) => axios.post(url, body).then(sleep(1000)).then(responseBody),
+    post: (url: string, body: {}) => axios.post(url, body).then(responseBody),
     put: (url: string, body: {}) => axios.put(url, body).then(sleep(1000)).then(responseBody),
     delete: (url: string) => axios.delete(url).then(responseBody)
 }

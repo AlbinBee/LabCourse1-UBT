@@ -48,6 +48,39 @@ button.ui.blue.basic.button {
 .routerContainer{
   min-height: 420px;  
 }
+.NotFoundContainer{
+  display: block;
+  margin-bottom: 100px;
+}
+.NotFoundImgContainer{
+  display: flex;
+  justify-content: center;
+}
+.NotFoundContentContainer{
+  display: block;
+  margin-top: 30px;
+}
+.NotFoundContentContainer h2{
+  display: flex;
+  justify-content: center;
+}
+.NotFoundGoBack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.NotFoundSpanTxt{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  font-weight: 400;
+}
+.Page404Img{
+  width: 50vw !important;
+  height: 50vh !important;
+}
 .ui.cards {
   justify-content: center;
 }

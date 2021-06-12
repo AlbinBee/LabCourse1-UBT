@@ -1,6 +1,8 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
 using MediatR;
 using Persistence;
 
@@ -24,10 +26,13 @@ namespace Application.Events
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var myEvent = await _context.Events.FindAsync(request.Id);
+
                 if (myEvent == null)
                 {
-                    throw new Exception("Could not find event");
-                }else{
+                    throw new RestException(HttpStatusCode.NotFound, new { myEvent = "Not Found" });
+                }
+                else
+                {
                     _context.Remove(myEvent);
                 }
                 //handler logic

@@ -2,15 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app/layout/styles.css';
 import App from './app/layout/App';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { createBrowserHistory } from "history";
+import 'react-toastify/dist/ReactToastify.min.css';
+import { BrowserRouter, Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+
+axios.interceptors.request.use((request) => {
+  console.log(request);
+  return request;
+})
+axios.interceptors.response.use((response) => {
+  console.log(response);
+  return response;
+})
+
+export const history = createBrowserHistory();
 
 ReactDOM.render(
 
   <React.StrictMode>
-    <BrowserRouter>
+    <Router history={history}>
+    <ToastContainer position='bottom-left' />
       <App />
-    </BrowserRouter>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
