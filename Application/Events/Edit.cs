@@ -1,6 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -30,6 +33,20 @@ namespace Application.Events
             public string Extra4 { get; set; }
             public string Status { get; set; }
         }
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.DateCreated).NotEmpty();
+                RuleFor(x => x.DateOfEvent).NotEmpty();
+                RuleFor(x => x.City).NotEmpty();
+                RuleFor(x => x.isBookable).NotEmpty();
+                RuleFor(x => x.hasTickets).NotEmpty();
+            }
+        }
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
@@ -43,7 +60,7 @@ namespace Application.Events
                 var myEvent = await _context.Events.FindAsync(request.Id);
                 if (myEvent == null)
                 {
-                    throw new Exception("Could not find event");
+                    throw new RestException(HttpStatusCode.NotFound, new {myEvent = "Not Found"});
                 }
                 myEvent.Title = request.Title ?? myEvent.Title;
                 myEvent.Description = request.Description ?? myEvent.Description;

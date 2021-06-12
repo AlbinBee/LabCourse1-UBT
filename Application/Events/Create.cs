@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -17,7 +18,7 @@ namespace Application.Events
             public string Description { get; set; }
             public string Category { get; set; }
             public DateTime DateCreated { get; set; }
-            public DateTime DateOfEvent { get; set; }
+            public DateTime DateOfEvent { get; set; }   
             public string City { get; set; }
             public string MainImage { get; set; }
             public string GalleryImages { get; set; }
@@ -30,6 +31,17 @@ namespace Application.Events
             public string Extra3 { get; set; }
             public string Extra4 { get; set; }
             public string Status { get; set; }
+        }
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.DateCreated).NotEmpty();
+                RuleFor(x => x.City).NotEmpty();
+            }
         }
         public class Handler : IRequestHandler<Command>
         {

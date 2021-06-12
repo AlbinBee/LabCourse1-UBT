@@ -5,7 +5,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import DashboardTopbar from '../dashboardTopbar/dashboardTopbar';
 import './style.css';
 import InfoCard from '../../infoCard/infoCard';
-import { DataGrid } from '@material-ui/data-grid';
+import { DataGrid, GridSortDirection } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import EditIcon from '../../assets/Icons/edit.svg';
 import DeleteIcon from '../../assets/Icons/delete.svg';
@@ -13,6 +13,7 @@ import AddIcon from '../../assets/Icons/add.svg';
 import { Link } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 import { MainButtonIcon } from '../../buttons/mainButton';
+import { toast } from 'react-toastify';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -36,7 +37,6 @@ const DashboardPosts = () => {
 
         { field: 'isBookable', headerName: 'Bookable', width: 130, type: 'boolean' },
         { field: 'hasTickets', headerName: 'Tickets', width: 130, type: 'boolean' },
-        { field: 'status', headerName: 'Status', width: 110, hide: true },
         {
             field: 'chip', headerName: 'Status', width: 130, renderCell: (params: any) => (
                 <div>
@@ -50,7 +50,7 @@ const DashboardPosts = () => {
             )
         },
         { field: 'views', headerName: 'Views', width: 110 },
-        { field: 'dateCreated', headerName: 'Date Created', width: 160 },
+        { field: 'dateCreated', headerName: 'Date Created', width: 160},
         {
             field: 'edit', headerName: 'Action', width: 130, renderCell: (params: any) => (
                 <div className='actionIconsContainer'>
@@ -68,9 +68,16 @@ const DashboardPosts = () => {
     ];
 
     const handleDeleteEvent = (id: string) => {
-        agent.Events.delete(id).then(() => {
-            setEvents([...events.filter(e => e.id !== id)])
-        }).then(() => setLoading(false));
+        try {
+            agent.Events.delete(id).then(() => {
+                setEvents([...events.filter(e => e.id !== id)])
+                toast.success('Successfully deleted post!');
+                setTotalPosts(totalPosts - 1);
+            }).then(() => setLoading(false));
+        } catch (error) {
+            console.log(error);
+            toast.error('Could not delete post!');
+        }
     }
 
     //REFACTOR CODE LATER!!!!!
@@ -131,7 +138,12 @@ const DashboardPosts = () => {
                 </div>
                 <div className="PostsTable">
                     <div style={{ width: '95%' }}>
-                        <DataGrid rows={events} columns={columns} pageSize={10} checkboxSelection autoHeight />
+                        <DataGrid
+                            rows={events}
+                            columns={columns}
+                            pageSize={10}
+                            checkboxSelection
+                            autoHeight />
                     </div>
                 </div>
             </div>

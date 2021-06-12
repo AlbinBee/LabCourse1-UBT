@@ -5,12 +5,13 @@ import './style.css'
 import { IEvent } from '../../../app/models/event';
 import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
+import { toast } from 'react-toastify';
 
 interface IProps {
     events: IEvent[];
 }
 
-const CreatePostJob: React.FC<IProps> = (props) => {
+const CreatePostJob: React.FC<IProps> = (props, history) => {
     const [events, setEvents] = useState<IEvent[]>(props.events);
     const currDate = new Date();
     const currYear = currDate.getFullYear();
@@ -53,13 +54,17 @@ const CreatePostJob: React.FC<IProps> = (props) => {
     const handleCreateEvent = (post: IEvent) => {
         try {
             agent.Events.create(post).then(() => {
+                toast.success('Successfully created post!');
                 setEvents([...events, post])
             })
         } catch (e) {
+            e.preventDefault();
+            toast.error('Could not create post!');
             console.error(e);
         }
     }
     const handleSubmit = (e: any) => {
+        // e.preventDefault();
         let newEvent = {
             ...post,
             id: uuid()
@@ -98,6 +103,7 @@ const CreatePostJob: React.FC<IProps> = (props) => {
                         <h2>Job Infos</h2>
                         <TextField
                             onChange={handleInputJbChange}
+                            required
                             id="datetime-local"
                             label="Expiration Date"
                             type="datetime-local"

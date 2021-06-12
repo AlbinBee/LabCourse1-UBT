@@ -12,9 +12,12 @@ import ActivityPage from '../ActivityPage';
 import Homepage from '../homepage/homepage';
 import { Container } from 'semantic-ui-react';
 import AdminDashboard from '../adminDashboard/adminDashboard';
+import NotFound from '../../app/layout/NotFound';
+import { toast } from 'react-toastify';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
+    const [activity, setActivity] = useState<IActivity>();
     const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -83,8 +86,6 @@ const Router = () => {
                         <Homepage />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/login"
@@ -92,8 +93,6 @@ const Router = () => {
                         <Login />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/register"
@@ -101,8 +100,6 @@ const Router = () => {
                         <Register />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route exact path='/activities' render={() => (
                     <ActivityDashboard
                         activities={activities}
@@ -118,13 +115,9 @@ const Router = () => {
                         target={target}
                     />
                 )} />
-            </Switch>
-            <Switch>
                 <Route path='/explore' exact render={() => (
                     <Explore activities={activities} />
                 )} />
-            </Switch>
-            <Switch>
                 <Route
                     exact
                     path="/cv"
@@ -132,23 +125,25 @@ const Router = () => {
                         <Cv />
                     )}
                 />
-            </Switch>
-            <Switch>
                 <Route
                     path="/dashboard"
                     render={() => (
                         <AdminDashboard />
                     )}
                 />
+                {activities.map((activity) => (
+                    <Route path={`/explore/${activity.id}`} key={activity.id} render={() => (
+                        <Container style={{ marginTop: '8em' }}>
+                            <ActivityPage key={activity.id} activity={activity} />
+                        </Container>
+                    )} />
+                ))}
+
+
+                <Route component={NotFound} />
             </Switch>
 
-            {activities.map((activity) => (
-                <Route path={`/explore/${activity.id}`} key={activity.id} render={() => (
-                    <Container style={{ marginTop: '8em' }}>
-                        <ActivityPage activity={activity} key={activity.id} />
-                    </Container>
-                )} />
-            ))}
+
         </div>
     );
 }

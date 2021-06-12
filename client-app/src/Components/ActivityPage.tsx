@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IActivity } from '../app/models/activity';
 import { Button, Container, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import agent from '../app/api/agent';
 
 interface IProps {
     activity: IActivity;
@@ -14,7 +15,7 @@ const ActivityPage: React.FC<IProps> = ({ activity }) => {
                 <Button floated='left' content='Back' color='blue' />
             </Link>
             <h1 style={{ textAlign: 'center' }}>{activity.title}</h1>
-            <Container fluid>
+            <Container fluid textAlign='center'>
                 <Image.Group size='big'>
                     <Image className='ActivityPageImg' src={`/assets/categoryImages/${activity.category}.jpg`} rounded wrapped size='big' label={{
                         color: 'orange',

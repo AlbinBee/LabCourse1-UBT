@@ -15,6 +15,7 @@ import Select from '@material-ui/core/Select';
 import './style.css'
 import { MainButton } from '../../buttons/mainButton';
 import agent from '../../../app/api/agent';
+import { toast } from 'react-toastify';
 
 interface IProps {
     event: IEvent;
@@ -75,8 +76,10 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
         try {
             agent.Events.update(post).then(() => {
                 setPosts([...events.filter(a => a.id !== post.id), post])
+                toast.success('Successfully edited post!');
             })
         } catch (e) {
+            toast.error('Could not edit post!');
             console.error(e);
         }
     }

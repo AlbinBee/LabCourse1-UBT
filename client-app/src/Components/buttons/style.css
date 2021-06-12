@@ -1,20 +1,26 @@
 .mainButton {
   background-color: #109cf1 !important;
-  font-family: 'Poppins' !important;
+  font-family: "Poppins" !important;
   text-transform: capitalize !important;
-  padding: 0px 0px !important;
+  padding: 10px 20px !important;
   box-shadow: 0px 4px 10px 0px rgba(16, 156, 241, 0.24) !important;
-  width: 160px !important;
-  height: 42px !important;
+  min-width: 160px !important;
+  min-height: 42px !important;
 }
 .mainButton:hover {
   box-shadow: 0px 5px 11px 0px rgba(16, 156, 241, 0.5) !important;
 }
-.mainButtonIcon{
+.mainButtonIcon {
   margin-left: 10px !important;
 }
-.mainButtonTitle{
-    font-size: 13px !important;
-    margin-left: -10px !important;
-    color: #fff !important;
+.mainButtonTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px !important;
+  color: #fff !important;
+}
+
+.mainButtonTitleIcon {
+  margin-left: -10px !important;
 }

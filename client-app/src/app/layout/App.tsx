@@ -4,8 +4,10 @@ import Navbar from '../../Components/nav/Navbar';
 import Footer from '../../Components/footer/footer'
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Route } from 'react-router-dom';
 import Router from '../../Components/router/router';
+import NotFound from './NotFound';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const location = useLocation();

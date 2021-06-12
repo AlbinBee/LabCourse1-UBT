@@ -5,7 +5,7 @@ import './style.css'
 const MainButtonIcon = (props: any) => {
     return (
         <Button {...props} variant="contained" color="primary" className='mainButton' >
-            <span className='mainButtonTitle'>{props.title}</span>
+            <span className='mainButtonTitle mainButtonTitleIcon'>{props.title}</span>
             <img src={props.icon} alt="mainBtn" className='mainButtonIcon' />
         </Button>
 
