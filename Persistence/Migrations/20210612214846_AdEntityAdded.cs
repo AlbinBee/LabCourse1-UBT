@@ -21,7 +21,8 @@ namespace Persistence.Migrations
                     BannerImage = table.Column<string>(nullable: true),
                     SlideshowImage = table.Column<string>(nullable: true),
                     dateCreated = table.Column<DateTime>(nullable: false),
-                    expirationDate = table.Column<DateTime>(nullable: false)
+                    expirationDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,6 +34,10 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Ads");
+
+            migrationBuilder.DropColumn(
+                name: "Status",
+                table: "Users");
         }
     }
 }
