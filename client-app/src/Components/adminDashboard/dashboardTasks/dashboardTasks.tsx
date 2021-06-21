@@ -76,7 +76,7 @@ const DashboardTasks = () => {
     agent.MyTasks.list()
       .then((response) => {
         // console.log(response);
-        let users: IMyTask[] = [];
+        let myTasks: IMyTask[] = [];
         response.forEach((myTask) => {
           count++;
           myTask.dateCreated = myTask.dateCreated.split(".")[0];

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Application.MyTasks;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -19,10 +20,11 @@ namespace API.Controllers
         }
         
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<MyTask>>> List(){
             return await _mediator.Send(new List.Query());
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<MyTask>> Details(Guid id)
         {

@@ -1,3 +1,42 @@
-.loginContainer{
-    min-height: 500px;
+.loginContainer {
+  margin-top: 100px;
+  min-height: 100vh;
+  background-image: url("../../assets/loginBG.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.loginFormContainer {
+  display: flex;
+  justify-content: center;
+}
+.loginFormContent {
+  display: flex;
+  justify-content: center;
+  padding: 50px 50px;
+  margin-top: 100px;
+  background-color: #fff;
+}
+.loginHeaderText {
+  display: flex;
+  justify-content: center;
+  color: #0288d1;
+}
+.loginInputField {
+  width: 100%;
+}
+.submitEditBtn {
+  display: flex;
+  justify-content: flex-start !important;
+  align-items: center;
+  margin-top: 10px;
+}
+.loginHelpEmail {
+  display: flex;
+  justify-content: flex-start !important;
+  margin-top: 20px;
+}
+.loginHelpEmail > a {
+  color: #0288d1;
+  text-decoration: underline;
 }

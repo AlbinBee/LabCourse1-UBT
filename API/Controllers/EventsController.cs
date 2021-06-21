@@ -4,17 +4,20 @@ using System.Threading.Tasks;
 using Application.Events;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     public class EventsController : BaseController
     {
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> List(){
+        public async Task<ActionResult<List<Event>>> List()
+        {
             return await Mediator.Send(new List.Query());
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Event>> Details(Guid id)
         {
@@ -37,7 +40,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {
-            return await Mediator.Send(new Delete.Command{Id = id});
-        } 
+            return await Mediator.Send(new Delete.Command { Id = id });
+        }
     }
 }

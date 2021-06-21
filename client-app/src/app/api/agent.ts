@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { IActivity } from '../models/activity';
 import { IEvent } from '../models/event';
-import { IUser } from '../models/user';
+import { IUser, IUserFormValues } from '../models/user';
 import { IAd } from '../models/ad';
 import { IEmail } from '../models/email';
 import { IMyTask } from '../models/myTask';
@@ -10,23 +10,33 @@ import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
-//NOT WORKING!!!!!!!!!
+axios.interceptors.request.use((config) => {
+    const token = sessionStorage.getItem('token')!;
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    return config;
+}, error => {
+    Promise.reject(error);
+})
+
 axios.interceptors.response.use(undefined, error => {
     if (error.message === 'Network Error' && !error.response) {
         toast.error('Network Error - make sure API is running!')
     }
     const { status, data, config } = error.response
-    if (status === 400) {
-        history.push('/notfound');
-        toast.error('There was a problem with your request!')
-    }
-    if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
-        history.push('/notfound');
-        toast.error('There was a problem with your request!')
-    }
-    if (status === 500) {
-        toast.error('Server Error - check terminal!')
-        toast.error('There was a problem with the server!')
+    if (error.response !== undefined) {
+        if (status === 400) {
+            history.push('/notfound');
+            toast.error('There was a problem with your request!')
+        }
+        if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
+            history.push('/notfound');
+            toast.error('There was a problem with your request!')
+        }
+        if (status === 500) {
+            toast.error('Server Error - check terminal!')
+            toast.error('There was a problem with the server!')
+        }
+        throw error.response;
     }
     // console.log(axios.interceptors.response);
 })
@@ -59,12 +69,10 @@ const Events = {
     delete: (id: string) => requests.delete(`/events/${id}`)
 }
 
-const Users = {
-    list: (): Promise<IUser[]> => requests.get('/users'),
-    details: (id: string) => requests.get(`/users/${id}`),
-    create: (user: IUser) => requests.post('/users', user),
-    update: (user: IUser) => requests.put(`/users/${user.id}`, user),
-    delete: (id: string) => requests.delete(`/users/${id}`)
+const User = {
+    current: (): Promise<IUser> => requests.get('/user'),
+    login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
+    register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user)
 }
 
 const Ads = {
@@ -92,5 +100,5 @@ const MyTasks = {
 }
 
 export default {
-    Activities, Events, Users, Ads, Emails, MyTasks
+    Activities, Events, User, Ads, Emails, MyTasks
 }

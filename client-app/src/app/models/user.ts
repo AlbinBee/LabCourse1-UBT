@@ -1,17 +1,13 @@
-export interface IUser{
-    id : string;
-    username : string;
-    firstName : string;
-    lastName : string;
-    password : string;
-    email : string;
-    role : string;
-    age : string;
-    isPremium : string;
-    dateRegistered : string;
-    city : string;
-    avatarImage : string;
-    extra1 : string;
-    status : string;
+export interface IUser {
+    username: string;
+    displayName: string;
+    token: string;
+    image?: string;
+}
+export interface IUserFormValues {
+    email: string;
+    password: string;
+    username?: string;
+    displayName?: string;
 }
 
