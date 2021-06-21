@@ -24,7 +24,6 @@ namespace API
                     context.Database.Migrate();
                     Seed.SeedData(context, userManager).Wait();
                     SeedEvents.SeedEventData(context);
-                    // SeedUsers.SeedUserData(context);
                     SeedAds.SeedAdData(context);
                     SeedEmails.SeedEmailData(context);
                     SeedMyTasks.SeedMyTaskData(context);

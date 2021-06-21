@@ -1,55 +1,47 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { IActivity } from '../models/activity';
 import Navbar from '../../Components/nav/Navbar';
 import Footer from '../../Components/footer/footer'
 import agent from '../api/agent';
-import LoadingComponent from './LoadingComponent';
 import { useLocation, Route } from 'react-router-dom';
 import Router from '../../Components/router/router';
-import NotFound from './NotFound';
-import { ToastContainer } from 'react-toastify';
+import { IUser } from '../models/user';
 
 const App = () => {
+
   const location = useLocation();
   const pathName = location.pathname;
-  const [activities, setActivities] = useState<IActivity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
-  const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState<IUser | null>();
+  const tokenFromSession = sessionStorage.getItem('token')!;
+  const [token, setToken] = useState<string | null>(tokenFromSession);
 
-  const handleOpenCreateForm = () => {
-    setSelectedActivity(null);
-    setEditMode(true);
+  const getUser = async () => {
+    try {
+      const user = await agent.User.current();
+      setUser(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    agent.Activities.list()
-      .then(response => {
-        // console.log(response);
-        let activities: IActivity[] = [];
-        response.forEach((activity) => {
-          activity.date = activity.date.split('.')[0]
-          activities.push(activity);
-        })
-        setActivities(activities)
-      }).then(() => setLoading(false));
-  }, []);
-  if (loading) {
-    return <LoadingComponent content='Loading...' />
-  }
+    if (token) {
+      // console.log('token from app: ' + token);
+      getUser();
+    }
+  }, [token]);
 
-  let notDashboard;
+  let notAdminDashboard;
   if (pathName.startsWith('/dashboard')) {
-    notDashboard = false;
+    notAdminDashboard = false;
   } else {
-    notDashboard = true;
+    notAdminDashboard = true;
   }
 
   return (
     <Fragment>
-      {notDashboard && <Navbar openCreateForm={handleOpenCreateForm} />}
+      {notAdminDashboard && <Navbar />}
       <Router />
-      {notDashboard && <Footer />}
+      {notAdminDashboard && <Footer />}
     </Fragment>
   );
 }

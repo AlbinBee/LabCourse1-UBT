@@ -1,0 +1,22 @@
+.registerContainer {
+  margin-top: 100px;
+  min-height: 100vh;
+  background-image: url("../../assets/loginBG.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.registerInputField {
+  width: 100% !important;
+}
+.asdasdasdasdads {
+  width: 100%;
+}
+.termsAndConditionsCheckbox {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.termsAndConditions {
+  text-decoration: underline;
+}

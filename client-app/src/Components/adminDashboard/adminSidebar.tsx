@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import MainLogo from '../assets/Logo-svg.svg'
 import avatar from '../assets/Icons/avatar.svg'
@@ -21,10 +21,16 @@ import adsIconActive from '../assets/Icons/ads-active.svg'
 import taskIcon from '../assets/Icons/task.svg'
 import taskIconActive from '../assets/Icons/task-active.svg'
 import homeIcon from '../assets/Icons/home.svg'
+import { IUser } from '../../app/models/user';
 
 const AdminSidebar = () => {
+    const [user, setUser] = useState<IUser | null>();
     const location = useLocation();
     const pathName = location.pathname;
+
+    useEffect(() => {
+        setUser(JSON.parse(sessionStorage.getItem('user')!));
+    }, [])
     return (
         <div className='sidebarContainer'>
             <div className='dashboardLogoContainer'>
@@ -33,7 +39,7 @@ const AdminSidebar = () => {
             <div className='dashboardUserContainer'>
                 <img src={avatar} alt="avatar" className='dashboardUser' />
                 <div className='dashboardUserDetails'>
-                    <h4 className='sidebarUsername'>Admin</h4>
+                    <h4 className='sidebarUsername'>{user?.displayName}</h4>
                     <h6 className='sidebarUserEmail'>Admin@posto-ks.com</h6>
                 </div>
             </div>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Application.Emails;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -18,11 +19,13 @@ namespace API.Controllers
             _mediator = mediator;
         }
         
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<List<Email>>> List(){
             return await _mediator.Send(new List.Query());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Email>> Details(Guid id)
         {

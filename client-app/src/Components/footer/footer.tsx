@@ -35,7 +35,7 @@ const Footer = () => {
                                 name='Explore'
                             />
                         </Link>
-                        <Link to='/login'>
+                        {/* <Link to='/login'>
                             <Menu.Item
                                 className="navItem navItemLogin"
                                 name='Log In'
@@ -46,7 +46,7 @@ const Footer = () => {
                                 className="navItem navItemLogin"
                                 name='Sign Up'
                             />
-                        </Link>
+                        </Link> */}
                     </div>
                     <div className='footerSocial'>
                         <Link to='dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
