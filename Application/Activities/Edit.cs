@@ -1,11 +1,11 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using Application.Errors;
 using FluentValidation;
+using MediatR;
 using Persistence;
-using System.Net;
 
 namespace Application.Activities
 {
@@ -43,12 +43,11 @@ namespace Application.Activities
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                //handler logic
                 var activity = await _context.Activities.FindAsync(request.Id);
+
                 if (activity == null)
-                {
-                    throw new RestException(HttpStatusCode.NotFound, new {activity = "Not Found"});
-                }
+                    throw new RestException(HttpStatusCode.NotFound, new { Activity = "Not Found" });
+
                 activity.Title = request.Title ?? activity.Title;
                 activity.Description = request.Description ?? activity.Description;
                 activity.Category = request.Category ?? activity.Category;
@@ -57,14 +56,10 @@ namespace Application.Activities
                 activity.Venue = request.Venue ?? activity.Venue;
 
                 var success = await _context.SaveChangesAsync() > 0;
-                if (success)
-                {
-                    return Unit.Value;
-                }
-                else
-                {
-                    throw new Exception("Problem saving changes");
-                }
+
+                if (success) return Unit.Value;
+
+                throw new Exception("Problem saving changes");
             }
         }
     }

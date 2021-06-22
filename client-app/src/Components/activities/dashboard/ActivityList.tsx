@@ -2,6 +2,7 @@ import React, { SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
 import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { IActivity } from "../../../app/models/activity";
+import ActivityListItemAttendees from "./ActivityListItemAttendees";
 
 interface IProps {
   activities: IActivity[];
@@ -49,6 +50,8 @@ const ActivityList: React.FC<IProps> = ({
                 />
                 {/* <Button onClick={() => console.log('deleted: '+activity.id)} floated='right' content='Delete' color='red' /> */}
                 <Label basic content={activity.category} />
+                <ActivityListItemAttendees attendees={activity.attendees}/>
+                {/* Hosted By:{activity.attendees[0]?.displayName} */}
               </Item.Extra>
             </Item.Content>
           </Item>
