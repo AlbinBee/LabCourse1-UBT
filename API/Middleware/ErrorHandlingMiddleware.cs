@@ -20,14 +20,14 @@ namespace API.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-         try
-         {
-            await _next(context);           
-         }
-         catch(Exception ex)
-         {
-            await HandleExceptionAsync(context, ex, _logger);
-         }
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex, _logger);
+            }
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<ErrorHandlingMiddleware> logger)
@@ -51,7 +51,8 @@ namespace API.Middleware
             context.Response.ContentType = "application/json";
             if (errors != null)
             {
-                var result = JsonConvert.SerializeObject(new {
+                var result = JsonConvert.SerializeObject(new
+                {
                     errors
                 });
 

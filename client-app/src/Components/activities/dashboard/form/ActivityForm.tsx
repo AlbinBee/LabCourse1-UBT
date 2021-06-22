@@ -30,6 +30,7 @@ const ActivityForm: React.FC<IProps> = ({
         date: "",
         city: "",
         venue: "",
+        attendees: []
       };
     }
   };

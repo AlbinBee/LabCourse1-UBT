@@ -36,7 +36,6 @@ namespace Application.User
                 _jwtGenerator = jwtGenerator;
                 _signInManager = signInManager;
                 _userManager = userManager;
-
             }
 
             public async Task<User> Handle(Query request, CancellationToken cancellationToken)
@@ -46,11 +45,11 @@ namespace Application.User
                 if (user == null)
                     throw new RestException(HttpStatusCode.Unauthorized);
 
-                var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                var result = await _signInManager
+                    .CheckPasswordSignInAsync(user, request.Password, false);
 
                 if (result.Succeeded)
                 {
-                    // TODO: generate Token
                     return new User
                     {
                         DisplayName = user.DisplayName,
