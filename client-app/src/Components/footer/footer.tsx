@@ -49,7 +49,7 @@ const Footer = () => {
                         </Link> */}
                     </div>
                     <div className='footerSocial'>
-                        <Link to='dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
+                        <Link to='/dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
                     </div>
                 </div>
             </div>

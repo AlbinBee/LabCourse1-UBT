@@ -2,7 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react';
 import Navbar from '../../Components/nav/Navbar';
 import Footer from '../../Components/footer/footer'
 import agent from '../api/agent';
-import { useLocation, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Router from '../../Components/router/router';
 import { IUser } from '../models/user';
 

@@ -1,0 +1,51 @@
+.profileBioCard {
+  width: 80vw;
+}
+.cardHeaderProfile .MuiCardHeader-title {
+  font-size: 25px;
+  font-family: "Montserrat" !important;
+  font-weight: 600;
+}
+.cardHeaderProfile .MuiCardHeader-subheader {
+  font-family: "Montserrat" !important;
+  font-weight: 500;
+  font-size: 15px;
+}
+.profileBioAvatar {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 100%;
+}
+.MuiTabs-indicator {
+  background-color: #0288d1 !important;
+  width: 3px !important;
+}
+.profileUserPhoto {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly !important;
+}
+.profileUserPhotos {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 15rem;
+  max-height: 15rem;
+}
+.profileUploadPhoto {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 20rem;
+}
+.profileUserPhotosButtons {
+  display: flex;
+  justify-content: center !important;
+  width: 100%;
+}
+.labelForUploadSteps{
+    display: flex;
+    justify-content: center;
+    color: #0288d1;
+}
+.profileUserPhotosButton {
+  width: 100%;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Card, Container, Image } from 'semantic-ui-react'
 import { IActivity } from '../../../../app/models/activity'
 
@@ -9,6 +10,7 @@ interface IProps {
 }
 
 const ActivityDetails: React.FC<IProps> = ({ activity, setEditMode, setSelectedActivity }) => {
+    const host = activity.attendees.filter(x => x.isHost)[0];
     return (
         <Container>
             <Card fluid>
@@ -21,6 +23,10 @@ const ActivityDetails: React.FC<IProps> = ({ activity, setEditMode, setSelectedA
                     <Card.Description>
                         {activity.description}
                     </Card.Description>
+                    {host === undefined || host === null
+                        ? <span>No one is hosting</span>
+                        : <span>Host:  <Link to={`/profile/${host.displayName}`}><strong>{host.displayName}</strong></Link><img className='hostImage' width="50" height="50" src={host.image} alt="" /></span>
+                    }
                 </Card.Content>
                 <Card.Content extra>
                     <Button.Group widths={2}>

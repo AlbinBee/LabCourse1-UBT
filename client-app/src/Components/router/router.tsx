@@ -14,10 +14,10 @@ import { Container } from 'semantic-ui-react';
 import AdminDashboard from '../adminDashboard/adminDashboard';
 import NotFound from '../../app/layout/NotFound';
 import { toast } from 'react-toastify';
+import ProfilePage from '../profiles/profilePage';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
-    const [activity, setActivity] = useState<IActivity>();
     const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -50,6 +50,7 @@ const Router = () => {
             setSelectedActivity(activity);
             setEditMode(false);
         }).then(() => setSubmitting(false));
+        toast.success("Successfully Edited Activity!");
     }
 
     const handleDeleteActivity = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
@@ -58,6 +59,7 @@ const Router = () => {
         agent.Activities.delete(id).then(() => {
             setActivities([...activities.filter(a => a.id !== id)]);
         }).then(() => setSubmitting(false));
+        toast.success("Successfully Deleted Activity!");
     }
 
     useEffect(() => {
@@ -115,6 +117,11 @@ const Router = () => {
                         target={target}
                     />
                 )} />
+
+                <Route path='/profile/:username' exact >
+                    <ProfilePage />
+                </Route>
+
                 <Route path='/explore' exact render={() => (
                     <Explore activities={activities} />
                 )} />
@@ -138,8 +145,6 @@ const Router = () => {
                         </Container>
                     )} />
                 ))}
-
-
                 <Route component={NotFound} />
             </Switch>
 

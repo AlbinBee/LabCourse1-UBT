@@ -51,7 +51,6 @@ const ActivityList: React.FC<IProps> = ({
                 {/* <Button onClick={() => console.log('deleted: '+activity.id)} floated='right' content='Delete' color='red' /> */}
                 <Label basic content={activity.category} />
                 <ActivityListItemAttendees attendees={activity.attendees}/>
-                {/* Hosted By:{activity.attendees[0]?.displayName} */}
               </Item.Extra>
             </Item.Content>
           </Item>

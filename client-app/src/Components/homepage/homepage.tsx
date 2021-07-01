@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react';
-import { Button, Container, Grid } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Container, Grid } from 'semantic-ui-react'
 import './style/styles.css';
 import sliderImg from '../assets/slider1.png';
 import sliderArrowLeft from '../assets/Icons/sliderArrowLeft.svg';
