@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Button, Header, Icon, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Page404 from "../../Components/assets/404Page.svg";
 import { MainButton } from '../../Components/buttons/mainButton';

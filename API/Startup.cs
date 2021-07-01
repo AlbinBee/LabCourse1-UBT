@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using Infrastructure.Security;
 using Persistence;
 using System.Text;
+using Infrastructure.Photos;
 
 namespace API
 {
@@ -91,8 +92,10 @@ namespace API
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
-            services.AddScoped<IAuthorizationHandler, IsHostRequirementHandler>();
-            services.AddHttpContextAccessor();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            // services.AddScoped<IAuthorizationHandler, IsHostRequirementHandler>();
+            // services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

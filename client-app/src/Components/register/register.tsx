@@ -23,6 +23,7 @@ const Register = () => {
         displayName: '',
         password: ''
     })
+    const userName = userDetails.username;
     const [hasEmailError, setHasEmailError] = useState(false)
     const [hasUsernameError, setHasUsernameError] = useState(false)
     const [hasPasswordError, setHasPasswordError] = useState(false)
@@ -35,7 +36,7 @@ const Register = () => {
     const passwordRegex = /^[a-zA-Z0-9-!$%^&*()_@#]{5,}$/;
 
     const HandlePasswordType = () => {
-        if (passwordType == 'password') {
+        if (passwordType === 'password') {
             setPasswordType('text');
         } else {
             setPasswordType('password');
@@ -68,15 +69,15 @@ const Register = () => {
 
     const handleUserSubmit = (e: any) => {
         // e.preventDefault();
-        if (!userDetails.email.match(emailRegex) || userDetails.email == "") {
+        if (!userDetails.email.match(emailRegex) || userDetails.email === "") {
             setHasEmailError(true);
             toast.error('Please enter a valid email!')
-        } else if (userDetails.displayName == '' || userDetails.username == '') {
+        } else if (userDetails.displayName === '' || userDetails.username === '') {
             setHasEmailError(false);
             setHasUsernameError(true);
             toast.error('Your username or display name cannot be empty!')
         }
-        else if (!userDetails.password.match(passwordRegex) || userDetails.password == "") {
+        else if (!userDetails.password.match(passwordRegex) || userDetails.password === "") {
             setHasEmailError(false);
             setHasUsernameError(false);
             setHasPasswordError(true);
@@ -85,6 +86,7 @@ const Register = () => {
             setHasEmailError(false);
             setHasUsernameError(false);
             setHasPasswordError(false);
+            userDetails.username = userDetails.username?.toLowerCase();
             register(userDetails).catch(error => (
                 toast.error('There was a problem logging you in!')
             ));
@@ -138,7 +140,7 @@ const Register = () => {
                                     name="password"
                                     type={passwordType}
                                     InputProps={{
-                                        endAdornment: passwordType == 'password'
+                                        endAdornment: passwordType === 'password'
                                             ? <Button><VisibilityOff onClick={HandlePasswordType} /></Button>
                                             : <Button><Visibility onClick={HandlePasswordType} /></Button>
                                         ,

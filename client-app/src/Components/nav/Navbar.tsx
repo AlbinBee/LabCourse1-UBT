@@ -5,6 +5,7 @@ import { history } from '../..';
 import './style/style.css';
 import { IUser } from '../../app/models/user';
 import Avatar from '../assets/Icons/avatar.svg';
+import Dashboard from '../assets/Icons/dashboard-active.svg';
 import User from '../assets/Icons/users-active.svg';
 import Logout from '../assets/Icons/logout-active.svg';
 import ArrowDown from '../assets/Icons/arrow-down.svg';
@@ -79,12 +80,16 @@ const Navbar = () => {
                             {user !== null ?
                                 <Fragment>
                                     <Menu.Item position='right'>
-                                        <img src={user?.image || Avatar} alt='userImg' />
+                                        <img src={user?.image || Avatar} alt='userImg' className='userAccountImg' />
                                         <Dropdown className='navbarUserName' text={user?.displayName}>
                                             <Dropdown.Menu>
                                                 <div className='navbarDropdownMenuItem'>
+                                                    <img src={Dashboard} alt='dashboard' />
+                                                    <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={'/dashboard'} text='Dashboard' />
+                                                </div>
+                                                <div className='navbarDropdownMenuItem'>
                                                     <img src={User} alt='userAccount' />
-                                                    <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={`/profile/username`} text='My Profile' />
+                                                    <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={`/profile/${user?.displayName}`} text='My Profile' />
                                                 </div>
                                                 <div className='navbarDropdownMenuItem' onClick={handleLogout}>
                                                     <img src={Logout} alt='logout' />

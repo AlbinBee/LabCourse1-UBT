@@ -120,6 +120,11 @@
   background-color: #0289d110;
   cursor: pointer;
 }
+.userAccountImg {
+  border-radius: 30px !important;
+  height: 50px !important;
+  width: 50px !important;
+}
 .navbarDropdownMenuLink {
   color: #0288d1 !important;
 }

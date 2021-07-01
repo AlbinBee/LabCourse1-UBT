@@ -11,6 +11,7 @@ import { Fragment } from 'react';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Button } from '@material-ui/core';
 import SideImg from '../assets/loginFormSide.svg';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Login = () => {
     const [user, setUser] = useState<IUser | null>(null);
@@ -29,7 +30,7 @@ const Login = () => {
     const passwordRegex = /^[a-zA-Z0-9-!$%^&*()_@#]{5,}$/;
 
     const HandlePasswordType = () => {
-        if (passwordType == 'password') {
+        if (passwordType === 'password') {
             setPasswordType('text');
         } else {
             setPasswordType('password');
@@ -41,9 +42,11 @@ const Login = () => {
         setUserDetails({ ...userDetails, [name]: value });
     }
     const login = async (values: IUserFormValues) => {
+        setSubmitting(true);
         try {
             const user = await agent.User.login(userDetails);
             setUser(user);
+            setSubmitting(false);
             toast.success('Successfully logged in !')
             sessionStorage.setItem('token', user.token)
             sessionStorage.setItem('user', JSON.stringify(user));
@@ -58,19 +61,23 @@ const Login = () => {
     }
 
     const handleUserSubmit = (e: any) => {
+        setSubmitting(true);
         // e.preventDefault();
-        if (!userDetails.email.match(emailRegex) || userDetails.email == "") {
+        if (!userDetails.email.match(emailRegex) || userDetails.email === "") {
             setHasEmailError(true);
             toast.error('Your email is incorrect!')
-        } else if (!userDetails.password.match(passwordRegex) || userDetails.password == "") {
+            setSubmitting(false);
+        } else if (!userDetails.password.match(passwordRegex) || userDetails.password === "") {
             setHasEmailError(false);
             setHasPasswordError(true);
             toast.error('Your password is incorrect!')
+            setSubmitting(false);
         } else {
             setHasEmailError(false);
             setHasPasswordError(false);
             login(userDetails).catch(error => (
-                toast.error('There was a problem logging you in!')
+                toast.error('There was a problem logging you in!'),
+                setSubmitting(false)
             ));
         }
     }
@@ -102,7 +109,7 @@ const Login = () => {
                                     name="password"
                                     type={passwordType}
                                     InputProps={{
-                                        endAdornment: passwordType == 'password'
+                                        endAdornment: passwordType === 'password'
                                             ? <Button onClick={HandlePasswordType}><VisibilityOff /></Button>
                                             : <Button onClick={HandlePasswordType}><Visibility /></Button>
                                         ,
@@ -112,7 +119,9 @@ const Login = () => {
                                 />
                                 <div className='submitEditBtn'>
                                     <button className='submitEditBtn' onClick={handleUserSubmit}>
-                                        <MainButton title='Login' component='a' loading={submitting} />
+                                        {submitting ? <CircularProgress size={24} />
+                                            : <MainButton title='Login' component='a' />
+                                        }
                                     </button>
                                 </div>
                                 <span className='loginHelpEmail'>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IActivity } from '../app/models/activity';
 import { Button, Container, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
-import agent from '../app/api/agent';
 
 interface IProps {
     activity: IActivity;

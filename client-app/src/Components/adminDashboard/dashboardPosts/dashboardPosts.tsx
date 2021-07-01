@@ -5,7 +5,7 @@ import LoadingComponent from '../../../app/layout/LoadingComponent';
 import DashboardTopbar from '../dashboardTopbar/dashboardTopbar';
 import './style.css';
 import InfoCard from '../../infoCard/infoCard';
-import { DataGrid, GridSortDirection } from '@material-ui/data-grid';
+import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
 import EditIcon from '../../assets/Icons/edit.svg';
 import DeleteIcon from '../../assets/Icons/delete.svg';
