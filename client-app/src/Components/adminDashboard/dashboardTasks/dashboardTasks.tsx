@@ -49,11 +49,9 @@ const columns = [
   {
     field: 'edit', headerName: 'Action', width: 130, renderCell: (params: any) => (
       <div className='actionIconsContainer'>
-        <Link to={`/dashboard/edit/tasks/${params.id}`}>
-          <Button className='editIcon editBlueIcon'>
-            <img src={EditBlueIcon} alt="edit" className='actionIcon' />
-          </Button>
-        </Link>
+        <Button component={Link} to={`/dashboard/edit/tasks/${params.id}`} className='editIcon editBlueIcon'>
+          <img src={EditBlueIcon} alt="edit" className='actionIcon' />
+        </Button>
       </div>
     ),
   },

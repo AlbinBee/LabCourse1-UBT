@@ -10,19 +10,19 @@ namespace Application.Ads
     {
         public class Command : IRequest
         {
-        public Guid Id { get; set; }
-        // public User Owner { get; set; }
-        public string Title { get; set; }
-        public string Type { get; set; }
-        public double? Price { get; set; }
-        public bool? isBanner { get; set; }
-        public bool? isSlideshow { get; set; }
-        public string MainImage { get; set; }
-        public string BannerImage { get; set; }
-        public string SlideshowImage { get; set; }
-        public DateTime? dateCreated { get; set; }
-        public DateTime? expirationDate { get; set; }
-        public string Status { get; set; }
+            public Guid Id { get; set; }
+            // public User Owner { get; set; }
+            public string Title { get; set; }
+            public string Type { get; set; }
+            public double? Price { get; set; }
+            public bool? isBanner { get; set; }
+            public bool? isSlideshow { get; set; }
+            public string MainImage { get; set; }
+            public string BannerImage { get; set; }
+            public string SlideshowImage { get; set; }
+            public DateTime? dateCreated { get; set; }
+            public DateTime? expirationDate { get; set; }
+            public string Status { get; set; }
         }
         public class Handler : IRequestHandler<Command>
         {
@@ -54,13 +54,9 @@ namespace Application.Ads
                 //handler logic
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success)
-                {
                     return Unit.Value;
-                }
-                else
-                {
-                    throw new Exception("Problem saving changes");
-                }
+
+                throw new Exception("Problem saving changes");
             }
         }
     }

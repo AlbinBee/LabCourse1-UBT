@@ -23,6 +23,7 @@ namespace Application.User
             public string UserName { get; set; }
             public string Email { get; set; }
             public string Password { get; set; }
+            public string Status { get; set; }
         }
 
         public class CommandValidator : AbstractValidator<Command>
@@ -59,6 +60,7 @@ namespace Application.User
                     DisplayName = request.DisplayName,
                     Email = request.Email,
                     UserName = request.UserName,
+                    Status = "pending"
                 };
 
                 var results = await _userManager.CreateAsync(user, request.Password);

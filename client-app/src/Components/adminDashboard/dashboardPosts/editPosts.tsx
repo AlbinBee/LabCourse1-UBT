@@ -1,14 +1,13 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { IEvent } from '../../../app/models/event'
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
-
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { FormControl } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
+import LoadingComponent from '../../../app/layout/LoadingComponent';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
@@ -16,6 +15,7 @@ import './style.css'
 import { MainButton } from '../../buttons/mainButton';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
+import { ICategory } from '../../../app/models/category';
 
 interface IProps {
     event: IEvent;
@@ -46,16 +46,26 @@ const useStyles = makeStyles((theme: Theme) =>
 const EditPosts: React.FC<IProps> = ({ event, events }) => {
     const [post, setPost] = useState<IEvent>(event);
     const [posts, setPosts] = useState<IEvent[]>(events);
+    const [categories, setCategories] = useState<ICategory[]>([]);
+    const [category, setCategory] = useState<ICategory>(event.category);
     const classes = useStyles();
+    const [currCategoryId, setCurrCategoryId] = useState<number | undefined>(event.categoryId);
     const [currStatus, setCurrStatus] = useState(event.status);
     const [bookable, setBookable] = useState(true)
     const [tickets, setTickets] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setCurrStatus(event.target.value as string);
         setPost({ ...post, status: currStatus });
     };
+    const handleCategoryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setCurrCategoryId(event.target.value as number);
+        setCategory([...categories.filter(a => a.id == currCategoryId)][0])
+        setPost({ ...post, category: category });
+    };
+
     const handleBookableChange = (event: any) => {
         setBookable(!bookable);
         setPost({ ...post, isBookable: !bookable });
@@ -84,13 +94,34 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
         }
     }
     const handleSubmit = (e: any) => {
+        // e.preventDefault();
         let editedPost = {
             ...post,
-            status: currStatus
+            status: currStatus,
+            categoryId: currCategoryId,
+            category: [...categories.filter(a => a.id == currCategoryId)][0]
         }
         handleEditEvent(editedPost);
-        // console.log(editedPost);
     }
+    useEffect(() => {
+        try {
+            agent.Categories.list()
+                .then(response => {
+                    // console.log(response);
+                    let categories: ICategory[] = [];
+                    response.forEach((category) => {
+                        categories.push(category);
+                    })
+                    setCategories(categories)
+                    setLoading(false)
+                });
+        } catch (error) {
+            toast.error('Error happened, check terminal');
+            console.log(error)
+        }
+    }, [])
+    if (loading) return <LoadingComponent content='Loading...' />
+
     return (
         <div>
             <form onSubmit={handleSubmit} action='/dashboard/posts'>
@@ -122,13 +153,37 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                             variant="outlined"
                             className='editPrimaryInputField'
                         />
+                        <div className='primaryEditFields'>
+                            <FormControl className={classes.formControl} >
+                                <InputLabel id="demo-simple-select-autowidth-label">Category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-autowidth-label"
+                                    id="demo-simple-select-autowidth"
+                                    name="categoryId"
+                                    value={currCategoryId}
+                                    onChange={handleCategoryChange}
+                                    autoWidth
+                                    className='editInputField'
+                                >
+                                    {categories.map((category) => (
+                                        <MenuItem
+                                            key={category.id}
+                                            value={category.id}
+                                        >
+                                            {category.title}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
                         <TextField
                             onChange={handleInputEditChange}
                             required
                             id="outlined-required"
-                            label="Category"
+                            label="Current Category"
                             name="category"
-                            defaultValue={event.category}
+                            disabled
+                            defaultValue={[...categories.filter(a => a.id == event.categoryId)][0].title}
                             variant="outlined"
                             className='editPrimaryInputField'
                         />
@@ -174,7 +229,7 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                                     <MenuItem value={'pending'}>pending</MenuItem>
                                     <MenuItem value={'rejected'}>rejected</MenuItem>
                                 </Select>
-                                <FormHelperText>current status: <b>{event.status}</b></FormHelperText>
+                                <FormHelperText>Current status: <b>{event.status}</b></FormHelperText>
                             </FormControl>
                         </div>
                     </div>

@@ -31,7 +31,13 @@ const CreatePostJob: React.FC<IProps> = (props, history) => {
         id: '',
         title: '',
         description: '',
-        category: category,
+        categoryId: undefined,
+        category: {
+            title: "Uncategorized",
+            description: "Uncategorized events goes here",
+            photos: [],
+            events: [],
+        },
         dateCreated: currDateFormatted,
         dateOfEvent: '',
         city: '',
@@ -70,7 +76,6 @@ const CreatePostJob: React.FC<IProps> = (props, history) => {
             id: uuid()
         }
         handleCreateEvent(newEvent);
-        // console.log(newEvent);
     }
     return (
         <div>

@@ -1,13 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 import { IActivity } from '../models/activity';
 import { IEvent } from '../models/event';
-import { IUser, IUserFormValues } from '../models/user';
+import { IListUser, IUser, IUserFormValues } from '../models/user';
 import { IAd } from '../models/ad';
 import { IEmail } from '../models/email';
 import { IMyTask } from '../models/myTask';
 import { history } from '../..';
 import { toast } from 'react-toastify';
 import { IPhoto, IProfile } from '../models/profile';
+import { ICategory } from '../models/category';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -76,8 +77,16 @@ const Events = {
     update: (event: IEvent) => requests.put(`/events/${event.id}`, event),
     delete: (id: string) => requests.delete(`/events/${id}`)
 }
+const Categories = {
+    list: (): Promise<ICategory[]> => requests.get('/categories'),
+    details: (id: number) => requests.get(`/categories/${id}`),
+    create: (category: ICategory) => requests.post('/categories', category),
+    update: (category: ICategory) => requests.put(`/categories/${category.id}`, category),
+    delete: (id: number) => requests.delete(`/categories/${id}`)
+}
 
 const User = {
+    list: (): Promise<IListUser[]> => requests.get('/users'),
     current: (): Promise<IUser> => requests.get('/user'),
     login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
     register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user)
@@ -119,5 +128,5 @@ const MyTasks = {
 
 
 export default {
-    Activities, Events, User, Profiles, Ads, Emails, MyTasks
+    Activities, Events, User, Profiles, Ads, Emails, MyTasks, Categories
 }

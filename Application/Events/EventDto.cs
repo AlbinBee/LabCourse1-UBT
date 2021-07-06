@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Domain;
 
-namespace Domain
+namespace Application.Events
 {
-    public class Event
+    public class EventDto
     {
         public Guid Id { get; set; }
         //organizer needed as a foreign key
@@ -12,7 +13,6 @@ namespace Domain
         public string Description { get; set; }
         public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateOfEvent { get; set; }
         public string City { get; set; }

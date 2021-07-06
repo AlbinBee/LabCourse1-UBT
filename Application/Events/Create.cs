@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
@@ -16,12 +17,13 @@ namespace Application.Events
             //organizer needed as a foreign key
             public string Title { get; set; }
             public string Description { get; set; }
-            public string Category { get; set; }
+            public int? CategoryId { get; set; }
+            public Category Category { get; set; }
             public DateTime DateCreated { get; set; }
-            public DateTime DateOfEvent { get; set; }   
+            public DateTime DateOfEvent { get; set; }
             public string City { get; set; }
             public string MainImage { get; set; }
-            public string GalleryImages { get; set; }
+            // public virtual ICollection<Photo> GalleryImages { get; set; }
             public bool isBookable { get; set; }
             public bool hasTickets { get; set; }
             public int AvailableTickets { get; set; }
@@ -38,7 +40,8 @@ namespace Application.Events
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
-                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.CategoryId).NotEmpty();
+                // RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.DateCreated).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
             }
@@ -55,24 +58,25 @@ namespace Application.Events
             {
                 var myEvent = new Event
                 {
-                        Id = request.Id,
-                        Title = request.Title,
-                        Description = request.Description,
-                        Category = request.Category,
-                        DateCreated = request.DateCreated,
-                        DateOfEvent = request.DateOfEvent,
-                        City = request.City,
-                        MainImage = request.MainImage,
-                        GalleryImages = request.GalleryImages,
-                        isBookable = request.isBookable,
-                        hasTickets = request.hasTickets,
-                        AvailableTickets = request.AvailableTickets,
-                        Views = request.Views,
-                        Extra1 = request.Extra1,
-                        Extra2 = request.Extra2,
-                        Extra3 = request.Extra3,
-                        Extra4 = request.Extra4,
-                        Status = request.Status
+                    Id = request.Id,
+                    Title = request.Title,
+                    Description = request.Description,
+                    CategoryId = request.CategoryId,
+                    Category = request.Category,
+                    DateCreated = request.DateCreated,
+                    DateOfEvent = request.DateOfEvent,
+                    City = request.City,
+                    MainImage = request.MainImage,
+                    // GalleryImages = request.GalleryImages,
+                    isBookable = request.isBookable,
+                    hasTickets = request.hasTickets,
+                    AvailableTickets = request.AvailableTickets,
+                    Views = request.Views,
+                    Extra1 = request.Extra1,
+                    Extra2 = request.Extra2,
+                    Extra3 = request.Extra3,
+                    Extra4 = request.Extra4,
+                    Status = request.Status
                 };
                 _context.Events.Add(myEvent);
                 var success = await _context.SaveChangesAsync() > 0;

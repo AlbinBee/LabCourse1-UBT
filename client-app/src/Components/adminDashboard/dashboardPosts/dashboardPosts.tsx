@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import Chip from '@material-ui/core/Chip';
 import { MainButtonIcon } from '../../buttons/mainButton';
 import { toast } from 'react-toastify';
+import { ICategory } from '../../../app/models/category';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -22,15 +23,16 @@ const DashboardPosts = () => {
     const [totalPostsPending, setTotalPostsPending] = useState(0);
     const [totalPostsRejected, setTotalPostsRejected] = useState(0);
     const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState<ICategory[]>([]);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'mainImage', headerName: 'Image', width: 130 },
         { field: 'title', headerName: 'Title', width: 130 },
         {
-            field: 'category', headerName: 'Category', width: 150, renderCell: (params: any) => (
+            field: 'categoryId', headerName: 'Category', width: 150, renderCell: (params: any) => (
                 <div>
-                    <span className='categoryChip'>{params.row.category}</span>
+                    <span className='categoryChip'>{[...categories.filter(a => a.id === params.row.categoryId)][0].title}</span>
                 </div>
             )
         },
@@ -50,18 +52,16 @@ const DashboardPosts = () => {
             )
         },
         { field: 'views', headerName: 'Views', width: 110 },
-        { field: 'dateCreated', headerName: 'Date Created', width: 160},
+        { field: 'dateCreated', headerName: 'Date Created', width: 160 },
         {
-            field: 'edit', headerName: 'Action', width: 130, renderCell: (params: any) => (
+            field: 'edit', headerName: 'Action', width: 160, renderCell: (params: any) => (
                 <div className='actionIconsContainer'>
                     <Button className='deleteIcon' onClick={() => handleDeleteEvent(params.id)}>
                         <img src={DeleteIcon} alt="delete" className='actionIcon' />
                     </Button>
-                    <Link to={`/dashboard/edit/posts/${params.id}`} className='editIconContainer'>
-                        <Button className='editIcon'>
-                            <img src={EditIcon} alt="edit" className='actionIcon' />
-                        </Button>
-                    </Link>
+                    <Button component={Link} to={`/dashboard/posts/edit/${params.id}`} className='editIcon editIconContainer'>
+                        <img src={EditIcon} alt="edit" className='actionIcon' />
+                    </Button>
                 </div>
             ),
         },
@@ -82,10 +82,20 @@ const DashboardPosts = () => {
 
     //REFACTOR CODE LATER!!!!!
     useEffect(() => {
+        setLoading(true);
         let count = 0;
         let countVerified = 0;
         let countPending = 0;
         let countRejected = 0;
+        agent.Categories.list()
+            .then(response => {
+                // console.log(response);
+                let categories: ICategory[] = [];
+                response.forEach((category) => {
+                    categories.push(category);
+                })
+                setCategories(categories)
+            });
         agent.Events.list()
             .then(response => {
                 // console.log(response);
@@ -132,7 +142,7 @@ const DashboardPosts = () => {
             <div className="dashboardPostsTable">
                 <div className="PostsTableTopbar">
                     <h6 className="postsTopBarCategory">Category: <span>All</span></h6>
-                    <Link to='/dashboard/create/posts'>
+                    <Link to='/dashboard/posts/create'>
                         <MainButtonIcon variant="contained" color="primary" className='createPostBtn' icon={AddIcon} title='Create Post' />
                     </Link>
                 </div>

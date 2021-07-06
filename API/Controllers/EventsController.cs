@@ -13,13 +13,13 @@ namespace API.Controllers
     {
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<List<Event>>> List()
+        public async Task<ActionResult<List<EventDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Event>> Details(Guid id)
+        public async Task<ActionResult<EventDto>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id });
         }

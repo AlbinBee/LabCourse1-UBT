@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Switch, Route } from "react-router-dom";
 
-import agent from '../../app/api/agent';
+import { IAd } from '../../app/models/ad';
+import { ICategory } from '../../app/models/category';
 import { IEvent } from '../../app/models/event';
+import { IMyTask } from '../../app/models/myTask';
+
+import agent from '../../app/api/agent';
 import EditPosts from '../adminDashboard/dashboardPosts/editPosts';
 import DashboardUsers from '../adminDashboard/dashboardUsers/dashboardUsers';
 import MainDashboard from '../adminDashboard/mainDashboard/mainDashboard';
@@ -15,12 +19,14 @@ import DashboardTasks from '../adminDashboard/dashboardTasks/dashboardTasks';
 import EditTasks from '../adminDashboard/dashboardTasks/editTasks';
 import DashboardCv from '../adminDashboard/dashboardCv/dashboardCv';
 import DashboardSettings from '../adminDashboard/dashboardSettings/dashboardSettings';
-import { IAd } from '../../app/models/ad';
-import { IMyTask } from '../../app/models/myTask';
 import CreatePost from '../adminDashboard/dashboardPosts/createPost';
+import DashboardCategories from '../adminDashboard/dashboardCategories/dashboardCategories';
+import EditCategories from '../adminDashboard/dashboardCategories/editCategories';
+import CreateCategory from '../adminDashboard/dashboardCategories/createCategory';
 
 const AdminRouter = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
+    const [categories, setCategories] = useState<ICategory[]>([]);
     const [ads, setAds] = useState<IAd[]>([]);
     const [myTasks, setMyTasks] = useState<IMyTask[]>([]);
 
@@ -57,6 +63,15 @@ const AdminRouter = () => {
                 })
                 setMyTasks(tasks)
             });
+        agent.Categories.list()
+            .then(response => {
+                // console.log(response);
+                let categories: ICategory[] = [];
+                response.forEach((category) => {
+                    categories.push(category);
+                })
+                setCategories(categories)
+            });
     }, []);
 
     return (
@@ -78,7 +93,7 @@ const AdminRouter = () => {
                 />
                 <Route
                     exact
-                    path="/dashboard/create/posts"
+                    path="/dashboard/posts/create"
                     render={() => (
                         <CreatePost events={events} />
                     )}
@@ -87,12 +102,36 @@ const AdminRouter = () => {
                     <Route
                         key={event.id}
                         exact
-                        path={`/dashboard/edit/posts/${event.id}`}
+                        path={`/dashboard/posts/edit/${event.id}`}
                         render={() => (
                             <EditPosts event={event} events={events} key={event.id} />
                         )}
                     />
                 ))}
+                {categories.map((category) => (
+                    <Route
+                        key={category.id}
+                        exact
+                        path={`/dashboard/category/edit/${category.id as number}`}
+                        render={() => (
+                            <EditCategories category={category} categories={categories} key={category.id} />
+                        )}
+                    />
+                ))}
+                <Route
+                    exact
+                    path="/dashboard/categories"
+                    render={() => (
+                        <DashboardCategories />
+                    )}
+                />
+                <Route
+                    exact
+                    path="/dashboard/categories/create"
+                    render={() => (
+                        <CreateCategory categories={categories} />
+                    )}
+                />
                 <Route
                     exact
                     path="/dashboard/users"
