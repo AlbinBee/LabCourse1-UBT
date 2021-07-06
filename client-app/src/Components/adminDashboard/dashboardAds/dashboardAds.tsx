@@ -43,16 +43,12 @@ const columns = [
   {
     field: 'action', headerName: 'Action', width: 160, renderCell: (params: any) => (
       <div className='actionIconsContainer'>
-        <Link to={`/dashboard/delete/ads/${params.id}`}>
-          <Button className='deleteIcon'>
-            <img src={DeleteIcon} alt="delete" className='actionIcon' />
-          </Button>
-        </Link>
-        <Link to={`/dashboard/edit/ads/${params.id}`}>
-          <Button className='editIcon'>
-            <img src={EditIcon} alt="edit" className='actionIcon' />
-          </Button>
-        </Link>
+        <Button component={Link} to={`/dashboard/delete/ads/${params.id}`} className='deleteIcon'>
+          <img src={DeleteIcon} alt="delete" className='actionIcon' />
+        </Button>
+        <Button component={Link} to={`/dashboard/edit/ads/${params.id}`} className='editIcon editIconContainer'>
+          <img src={EditIcon} alt="edit" className='actionIcon' />
+        </Button>
       </div>
     ),
   },

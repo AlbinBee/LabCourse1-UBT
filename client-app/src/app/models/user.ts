@@ -1,3 +1,13 @@
+import { IPhoto } from "./profile";
+
+export interface IListUser {
+    displayName: string;
+    bio: string;
+    photos: IPhoto[];
+    username: string;
+    email: string;
+    status: string;
+}
 export interface IUser {
     username: string;
     displayName: string;

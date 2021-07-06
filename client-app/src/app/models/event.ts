@@ -1,8 +1,11 @@
+import { ICategory } from "./category";
+
 export interface IEvent {
     id: string;
     title: string;
     description: string;
-    category: string;
+    categoryId?: number;
+    category: ICategory;
     dateCreated: string;
     dateOfEvent: string;
     city: string;

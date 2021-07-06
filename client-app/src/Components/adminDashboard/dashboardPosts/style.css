@@ -48,6 +48,7 @@
 .editIconContainer {
   display: flex;
   align-items: center;
+  margin-left: 10px !important;
 }
 .editIcon {
   background-color: #dcf9e6 !important;
@@ -151,7 +152,7 @@
 }
 .submitEditBtn {
   display: flex;
-  justify-content: center;
+  justify-content: center !important;
   border: none;
   background: none;
   outline: none;

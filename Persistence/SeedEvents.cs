@@ -10,18 +10,47 @@ namespace Persistence
     {
         public static void SeedEventData(DataContext context)
         {
+            if (!context.Categories.Any())
+            {
+                var categories = new List<Category>
+                {
+                    new Category{
+                        Title = "Uncategorized",
+                        Description = "Non categorized events goes here",
+                        // Photos = null,
+                        // Events = null
+                    },
+                    new Category{
+                        Title = "Jobs",
+                        Description = "Job related events goes here",
+                        // Photos = null,
+                        // Events = null
+                    },
+                    new Category{
+                        Title = "Events",
+                        Description = "Event related events goes here",
+                        // Photos = null,
+                        // Events = null
+                    },
+                    new Category{
+                        Title = "Bookings",
+                        Description = "Booking related events goes here",
+                        // Photos = null,
+                        // Events = null
+                    },
+                };
+            }
             if (!context.Events.Any())
             {
                 var events = new List<Event>{
                     new Event{
                         Title = "Event 1",
                         Description = "First Event here",
-                        Category = "Test",
+                        // Category = null,
                         DateCreated = DateTime.Now,
                         DateOfEvent = DateTime.Now.AddMonths(2),
                         City = "Ferizaj",
-                        MainImage = "ImagePath",
-                        GalleryImages = "ImagesPaths",
+                        GalleryImages = null,
                         isBookable = true,
                         hasTickets = true,
                         AvailableTickets = 100,
@@ -35,12 +64,11 @@ namespace Persistence
                     new Event{
                         Title = "Event 2",
                         Description = "Second Event here",
-                        Category = "Test",
+                        // Category = null,
                         DateCreated = DateTime.Now,
                         DateOfEvent = DateTime.Now.AddMonths(3),
                         City = "Prishtine",
-                        MainImage = "ImagePath",
-                        GalleryImages = "ImagesPaths",
+                        GalleryImages = null,
                         isBookable = true,
                         hasTickets = true,
                         AvailableTickets = 20,
@@ -54,12 +82,11 @@ namespace Persistence
                     new Event{
                         Title = "Event 3",
                         Description = "Third Event here",
-                        Category = "Test",
+                        // Category = null,
                         DateCreated = DateTime.Now,
                         DateOfEvent = DateTime.Now.AddMonths(4),
                         City = "Prizren",
-                        MainImage = "ImagePath",
-                        GalleryImages = "ImagesPaths",
+                        GalleryImages = null,
                         isBookable = false,
                         hasTickets = false,
                         AvailableTickets = 120,
@@ -73,12 +100,11 @@ namespace Persistence
                     new Event{
                         Title = "Event 4",
                         Description = "Fourth Event here",
-                        Category = "Test",
+                        // Category = null,
                         DateCreated = DateTime.Now,
                         DateOfEvent = DateTime.Now.AddMonths(4),
                         City = "Gjilan",
-                        MainImage = "ImagePath",
-                        GalleryImages = "ImagesPaths",
+                        GalleryImages = null,
                         isBookable = false,
                         hasTickets = true,
                         AvailableTickets = 20,
@@ -87,7 +113,16 @@ namespace Persistence
                         Extra2 = "Extra2",
                         Extra3 = "Extra3",
                         Extra4 = "Extra4",
-                        Status = "active"
+                        Status = "active",
+                        // Category = new Category
+                        // {
+                        //     new Category
+                        //     {
+                        //         Title = "Uncategorized",
+                        //         Description = "",
+                                
+                        //     }
+                        // }
                     },
                 };
 

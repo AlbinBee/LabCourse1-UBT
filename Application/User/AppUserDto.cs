@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 
-namespace Domain
+namespace Application.User
 {
-    public class AppUser : IdentityUser
+    public class AppUserDto : IdentityUser
     {
         public string DisplayName { get; set; }
         public string Bio { get; set; }
         public string Status { get; set; }
-        public virtual ICollection<UserActivity> UserActivities { get; set; }
+        // public virtual ICollection<UserActivity> UserActivities { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
     }
 }

@@ -20,6 +20,8 @@ import adsIcon from '../assets/Icons/ads.svg'
 import adsIconActive from '../assets/Icons/ads-active.svg'
 import taskIcon from '../assets/Icons/task.svg'
 import taskIconActive from '../assets/Icons/task-active.svg'
+import categoriesIcon from '../assets/Icons/categories.svg'
+import categoriesIconActive from '../assets/Icons/categories-active.svg'
 import homeIcon from '../assets/Icons/home.svg'
 import { IUser } from '../../app/models/user';
 
@@ -64,6 +66,18 @@ const AdminSidebar = () => {
                             </Fragment> :
                             <Fragment>
                                 <img src={postsIcon} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName'>Posts</span>
+                            </Fragment>
+                        }
+                    </div>
+                </Link>
+                <Link to='/dashboard/categories' className='dashboardLink'>
+                    <div className='dashboardLinkA'>
+                        {(pathName === '/dashboard/categories') ?
+                            <Fragment>
+                                <img src={categoriesIconActive} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName dashboardLinkNameActive'>Categories</span>
+                            </Fragment> :
+                            <Fragment>
+                                <img src={categoriesIcon} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName'>Categories</span>
                             </Fragment>
                         }
                     </div>
@@ -153,7 +167,7 @@ const AdminSidebar = () => {
                         }
                     </div>
                 </Link>
-                <Link to='/' className='dashboardLink' style={{ marginTop: '60px' }}>
+                <Link to='/' className='dashboardLink' style={{ marginTop: '20px' }}>
                     <div className='dashboardLinkA backToHomeBtn' >
                         <img src={homeIcon} alt="icon" className='dashboardLinkIcon' /><span className='dashboardLinkName'>Homepage</span>
                     </div>

@@ -13,8 +13,8 @@ namespace Persistence
         public DbSet<Activity> Activities { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
         public DbSet<Photo> Photos { get; set; }
-
         public DbSet<Event> Events { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Email> Emails { get; set; }
         public DbSet<MyTask> MyTasks { get; set; }
@@ -43,6 +43,13 @@ namespace Persistence
                 .HasOne(a => a.Activity)
                 .WithMany(u => u.UserActivities)
                 .HasForeignKey(a => a.ActivityId);
+
+            //Event Category relationship
+            builder.Entity<Event>()
+                .HasOne(e => e.Category)
+                .WithMany(c => c.Events)
+                .HasForeignKey(e => e.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

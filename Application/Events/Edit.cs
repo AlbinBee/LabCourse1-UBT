@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Errors;
+using Domain;
 using FluentValidation;
 using MediatR;
 using Persistence;
@@ -17,12 +19,13 @@ namespace Application.Events
             //organizer needed as a foreign key
             public string Title { get; set; }
             public string Description { get; set; }
-            public string Category { get; set; }
+            public int? CategoryId { get; set; }
+            public Category Category { get; set; }
             public DateTime? DateCreated { get; set; }
             public DateTime? DateOfEvent { get; set; }
             public string City { get; set; }
             public string MainImage { get; set; }
-            public string GalleryImages { get; set; }
+            // public virtual ICollection<Photo> GalleryImages { get; set; }
             public bool? isBookable { get; set; }
             public bool? hasTickets { get; set; }
             public int? AvailableTickets { get; set; }
@@ -39,7 +42,8 @@ namespace Application.Events
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
-                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.CategoryId).NotEmpty();
+                // RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.DateCreated).NotEmpty();
                 RuleFor(x => x.DateOfEvent).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
@@ -60,16 +64,17 @@ namespace Application.Events
                 var myEvent = await _context.Events.FindAsync(request.Id);
                 if (myEvent == null)
                 {
-                    throw new RestException(HttpStatusCode.NotFound, new {myEvent = "Not Found"});
+                    throw new RestException(HttpStatusCode.NotFound, new { myEvent = "Not Found" });
                 }
                 myEvent.Title = request.Title ?? myEvent.Title;
                 myEvent.Description = request.Description ?? myEvent.Description;
+                myEvent.CategoryId = request.CategoryId ?? myEvent.CategoryId;
                 myEvent.Category = request.Category ?? myEvent.Category;
                 myEvent.DateCreated = request.DateCreated ?? myEvent.DateCreated;
                 myEvent.DateOfEvent = request.DateOfEvent ?? myEvent.DateOfEvent;
                 myEvent.City = request.City ?? myEvent.City;
                 myEvent.MainImage = request.MainImage ?? myEvent.MainImage;
-                myEvent.GalleryImages = request.GalleryImages ?? myEvent.GalleryImages;
+                // myEvent.GalleryImages = request.GalleryImages ?? myEvent.GalleryImages;
                 myEvent.isBookable = request.isBookable ?? myEvent.isBookable;
                 myEvent.hasTickets = request.hasTickets ?? myEvent.hasTickets;
                 myEvent.AvailableTickets = request.AvailableTickets ?? myEvent.AvailableTickets;
