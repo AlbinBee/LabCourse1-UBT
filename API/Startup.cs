@@ -1,7 +1,6 @@
 using API.Middleware;
 using Application.Activities;
 using Application.Interfaces;
-using AutoMapper;
 using Domain;
 using MediatR;
 using FluentValidation.AspNetCore;
@@ -42,6 +41,7 @@ namespace API
             {
                 opt.UseLazyLoadingProxies();
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                // opt.EnableSensitiveDataLogging();
             });
             services.AddCors(opt =>
             {

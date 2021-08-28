@@ -95,7 +95,7 @@ const AdminRouter = () => {
                     exact
                     path="/dashboard/posts/create"
                     render={() => (
-                        <CreatePost events={events} />
+                        <CreatePost events={events} categories={categories} />
                     )}
                 />
                 {events.map((event) => (

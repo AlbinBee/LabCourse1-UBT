@@ -9,13 +9,14 @@ import CreatePostJob from './createPostJob';
 import CreatePostEvent from './createPostEvent';
 import CreatePostBooking from './createPostBooking';
 import { IEvent } from '../../../app/models/event';
+import { ICategory } from '../../../app/models/category';
 
 interface IProps {
     events: IEvent[];
+    categories: ICategory[];
 }
 
-const CreatePosts: React.FC<IProps> = (props) => {
-    const [events] = useState(props.events)
+const CreatePosts: React.FC<IProps> = ({ events, categories }) => {
     const [postCategory, setPostCategory] = useState('');
 
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +38,11 @@ const CreatePosts: React.FC<IProps> = (props) => {
                 </FormControl>
             </div>
             {postCategory === 'jobs'
-                ? <CreatePostJob events={events} />
+                ? <CreatePostJob events={events} categories={categories} />
                 : postCategory === 'events'
-                    ? <CreatePostEvent events={events} />
+                    ? <CreatePostEvent events={events} categories={categories} />
                     : postCategory === 'bookings'
-                        ? <CreatePostBooking events={events} />
+                        ? <CreatePostBooking events={events} categories={categories} />
                         : postCategory === 'bookings'
             }
         </div>

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Events;
-using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +12,7 @@ namespace API.Controllers
     {
         [AllowAnonymous]
         [HttpGet]
+
         public async Task<ActionResult<List<EventDto>>> List()
         {
             return await Mediator.Send(new List.Query());
@@ -30,10 +30,10 @@ namespace API.Controllers
             return await Mediator.Send(command);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> Edit(Guid id, Edit.Command command)
+        [HttpPut("{EventId}")]
+        public async Task<ActionResult<Unit>> Edit(Guid EventId, Edit.Command command)
         {
-            command.Id = id;
+            command.EventId = EventId;
             return await Mediator.Send(command);
         }
 

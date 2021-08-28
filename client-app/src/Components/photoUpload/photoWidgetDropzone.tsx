@@ -24,7 +24,7 @@ const PhotoWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
         setFiles(acceptedFiles.map((file: object) => Object.assign(file, {
             preview: URL.createObjectURL(file)
         })));
-        // console.log(acceptedFiles);
+        console.log(acceptedFiles);
     }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
@@ -34,10 +34,11 @@ const PhotoWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
                 : dropzoneStyles
         }>
             <input {...getInputProps()} />
+            <h3>Drop image here</h3>
+            <h4>Or</h4>
             <Button size='large' style={{ width: '100%' }}>
                 <PublishIcon fontSize='large' />
             </Button>
-            <h4>Drop image here</h4>
         </div>
     )
 }

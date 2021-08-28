@@ -42,7 +42,7 @@ const AdminSidebar = () => {
                 <img src={avatar} alt="avatar" className='dashboardUser' />
                 <div className='dashboardUserDetails'>
                     <h4 className='sidebarUsername'>{user?.displayName}</h4>
-                    <h6 className='sidebarUserEmail'>Admin@posto-ks.com</h6>
+                    <h6 className='sidebarUserEmail'>{user?.displayName}@posto-ks.com</h6>
                 </div>
             </div>
             <div className='dashboardLinks'>

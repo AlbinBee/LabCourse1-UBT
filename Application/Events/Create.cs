@@ -18,7 +18,7 @@ namespace Application.Events
             public string Title { get; set; }
             public string Description { get; set; }
             public int? CategoryId { get; set; }
-            public Category Category { get; set; }
+            // public Category Category { get; set; }
             public DateTime DateCreated { get; set; }
             public DateTime DateOfEvent { get; set; }
             public string City { get; set; }
@@ -62,7 +62,7 @@ namespace Application.Events
                     Title = request.Title,
                     Description = request.Description,
                     CategoryId = request.CategoryId,
-                    Category = request.Category,
+                    // Category = request.Category,
                     DateCreated = request.DateCreated,
                     DateOfEvent = request.DateOfEvent,
                     City = request.City,

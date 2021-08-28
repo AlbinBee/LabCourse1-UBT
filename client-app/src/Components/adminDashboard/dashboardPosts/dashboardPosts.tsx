@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import agent from '../../../app/api/agent';
 import { IEvent } from '../../../app/models/event';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
@@ -15,6 +15,8 @@ import Chip from '@material-ui/core/Chip';
 import { MainButtonIcon } from '../../buttons/mainButton';
 import { toast } from 'react-toastify';
 import { ICategory } from '../../../app/models/category';
+import { AvatarGroup } from '@material-ui/lab';
+import { PhotoCamera } from '@material-ui/icons';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -27,7 +29,28 @@ const DashboardPosts = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'mainImage', headerName: 'Image', width: 130 },
+        {
+            field: 'galleryImages', headerName: 'Images', width: 150, renderCell: (params: any) => (
+                <div>
+                    {
+                        (params.row.galleryImages?.length > 0) ?
+                            <AvatarGroup max={3}>
+                                {params.row.galleryImages.map((photo: any) => (
+                                    <img src={photo.url} alt="image" className='userImagesDashboard' />
+                                ))}
+                            </AvatarGroup>
+                            : <Fragment>
+                                <Link to={`/dashboard/posts/edit/${params.id}`}>
+                                    <Button color="primary" aria-label="upload picture" component="span">
+                                        <PhotoCamera />
+                                        Add Image
+                                    </Button>
+                                </Link>
+                            </Fragment>
+                    }
+                </div>
+            )
+        },
         { field: 'title', headerName: 'Title', width: 130 },
         {
             field: 'categoryId', headerName: 'Category', width: 150, renderCell: (params: any) => (
@@ -66,7 +89,6 @@ const DashboardPosts = () => {
             ),
         },
     ];
-
     const handleDeleteEvent = (id: string) => {
         try {
             agent.Events.delete(id).then(() => {
@@ -143,7 +165,13 @@ const DashboardPosts = () => {
                 <div className="PostsTableTopbar">
                     <h6 className="postsTopBarCategory">Category: <span>All</span></h6>
                     <Link to='/dashboard/posts/create'>
-                        <MainButtonIcon variant="contained" color="primary" className='createPostBtn' icon={AddIcon} title='Create Post' />
+                        <MainButtonIcon
+                            variant="contained"
+                            color="primary"
+                            className='createPostBtn'
+                            icon={AddIcon}
+                            title='Create Post'
+                        />
                     </Link>
                 </div>
                 <div className="PostsTable">
@@ -151,9 +179,10 @@ const DashboardPosts = () => {
                         <DataGrid
                             rows={events}
                             columns={columns}
-                            pageSize={10}
+                            pageSize={7}
                             checkboxSelection
-                            autoHeight />
+                            autoHeight
+                        />
                     </div>
                 </div>
             </div>

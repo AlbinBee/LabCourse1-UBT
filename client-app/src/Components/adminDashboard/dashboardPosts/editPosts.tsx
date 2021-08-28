@@ -1,11 +1,11 @@
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { FormEvent, Fragment, useEffect, useState } from 'react'
 import { IEvent } from '../../../app/models/event'
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { FormControl } from '@material-ui/core';
+import { Button, ButtonGroup, FormControl, Paper } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,6 +16,10 @@ import { MainButton } from '../../buttons/mainButton';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
 import { ICategory } from '../../../app/models/category';
+import { IPhoto } from '../../../app/models/profile';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import PhotoWidgetDropzone from '../../photoUpload/photoWidgetDropzone';
 
 interface IProps {
     event: IEvent;
@@ -47,14 +51,14 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
     const [post, setPost] = useState<IEvent>(event);
     const [posts, setPosts] = useState<IEvent[]>(events);
     const [categories, setCategories] = useState<ICategory[]>([]);
-    const [category, setCategory] = useState<ICategory>(event.category);
+    const [category, setCategory] = useState<ICategory>();
     const classes = useStyles();
     const [currCategoryId, setCurrCategoryId] = useState<number | undefined>(event.categoryId);
     const [currStatus, setCurrStatus] = useState(event.status);
-    const [bookable, setBookable] = useState(true)
-    const [tickets, setTickets] = useState(true);
+    const [bookable, setBookable] = useState(event.isBookable)
+    const [tickets, setTickets] = useState(event.hasTickets);
     const [loading, setLoading] = useState(true);
-
+    const [files, setFiles] = useState<any[]>([]);
 
     const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setCurrStatus(event.target.value as string);
@@ -62,7 +66,7 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
     };
     const handleCategoryChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         setCurrCategoryId(event.target.value as number);
-        setCategory([...categories.filter(a => a.id == currCategoryId)][0])
+        setCategory([...categories.filter(a => a.id === event.target.value as number)][0])
         setPost({ ...post, category: category });
     };
 
@@ -93,17 +97,58 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
             console.error(e);
         }
     }
+    const uploadPhoto = async (file: Blob) => {
+        try {
+            const photo = await agent.Events.uploadPhoto(post.id, file);
+            post!.galleryImages!.push(photo);
+            setFiles([]);
+            toast.success('Photo uploaded successfully!');
+        } catch (error) {
+            console.log(error);
+            toast.error('Problem uploading photo');
+        }
+    }
+    const setMainPhoto = async (photo: IPhoto) => {
+        setLoading(true);
+        try {
+            await agent.Events.setMainPhoto(post.id, photo.id);
+            toast.success('Photo set to main successfully!');
+            setLoading(false);
+            window.location.reload();
+        } catch (error) {
+            toast.error('Problem making photo as main');
+            setLoading(false);
+            console.log(error);
+        }
+    }
+    const deletePhoto = async (photo: IPhoto) => {
+        setLoading(true);
+        try {
+            await agent.Events.deletePhoto(photo.id, post);
+            post!.galleryImages = post!.galleryImages?.filter(a => a.id !== photo.id);
+            toast.info('Photo deleted successfully!');
+            setLoading(false);
+        } catch (error) {
+            toast.error('Problem deleting photo!');
+            setLoading(false);
+            console.log(error);
+        }
+    }
+    const handleDiscardChanges = () => {
+        setFiles([]);
+    }
     const handleSubmit = (e: any) => {
         // e.preventDefault();
         let editedPost = {
             ...post,
             status: currStatus,
             categoryId: currCategoryId,
-            category: [...categories.filter(a => a.id == currCategoryId)][0]
         }
+        // console.log(editedPost)
         handleEditEvent(editedPost);
     }
     useEffect(() => {
+        setLoading(true);
         try {
             agent.Categories.list()
                 .then(response => {
@@ -113,6 +158,8 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                         categories.push(category);
                     })
                     setCategories(categories)
+                    setCategory([...categories.filter(a => a.id === event.categoryId)][0])
+                    post.category = category;
                     setLoading(false)
                 });
         } catch (error) {
@@ -183,7 +230,7 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                             label="Current Category"
                             name="category"
                             disabled
-                            defaultValue={[...categories.filter(a => a.id == event.categoryId)][0].title}
+                            defaultValue={[...categories.filter(a => a.id === event.categoryId)][0].title}
                             variant="outlined"
                             className='editPrimaryInputField'
                         />
@@ -235,6 +282,97 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                     </div>
                 </div>
                 <div className='editingFields'>
+                    <div className='primaryEditFields editingPostImages'>
+                        <h2>Post Images</h2>
+                        <div className='editingPostImage'>
+                            {event.galleryImages!?.length > 0
+                                ? <Fragment>
+                                    {event && event.galleryImages!?.map((photo) => (
+                                        <Paper key={photo.id} className='eventPaperImg'>
+                                            <img src={photo.url} className='profileUserPhotos' />
+                                            <ButtonGroup className='profileUserPhotosButtons'>
+                                                <Button
+                                                    className='profileUserPhotosButton'
+                                                    color='primary'
+                                                    name={photo.id}
+                                                    onClick={(e) => {
+                                                        setMainPhoto(photo);
+                                                    }}
+                                                    disabled={photo.isMain}
+                                                >
+                                                    Main
+                                                </Button>
+                                                <Button
+                                                    className='profileUserPhotosButton'
+                                                    color='secondary'
+                                                    name={photo.id}
+                                                    onClick={(e) => {
+                                                        deletePhoto(photo);
+                                                    }}
+                                                    disabled={photo.isMain}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </ButtonGroup>
+                                        </Paper>
+                                    ))}
+                                    {files.length > 0 ?
+                                        <div>
+                                            <img src={files[0].preview} alt="previewImage" className='eventImgPreview' />
+                                            <div className='saveChangesBtnContainer saveEventChangesBtnContainer'>
+                                                <Button
+                                                    className='editIcon saveChangesBtn saveEventChangesBtn'
+                                                    style={{ color: '#2ed47a' }}
+                                                    onClick={() => uploadPhoto(files[0])}
+                                                >
+                                                    <CheckIcon />
+                                                </Button>
+                                                <Button
+                                                    className='deleteIcon discardChangesBtn discardEventChangesBtn'
+                                                    style={{ color: '#ff0000' }}
+                                                    onClick={() => handleDiscardChanges()}
+                                                >
+                                                    <ClearIcon />
+                                                </Button>
+                                            </div>
+                                        </div>
+                                        : <Fragment>
+                                            <div className='eventPhotoWidgetDropzone'><span className='eventPhotoWidgetSpan'>Or add image</span> <PhotoWidgetDropzone setFiles={setFiles} /></div>
+                                        </Fragment>
+                                    }
+                                </Fragment>
+                                : <Fragment>
+                                    {files.length > 0 ?
+                                        <Fragment>
+                                            <img src={files[0].preview} alt="previewImage" className='eventImgPreview' />
+                                            <div className='saveChangesBtnContainer saveEventChangesBtnContainer'>
+                                                <Button
+                                                    className='editIcon saveChangesBtn saveEventChangesBtn'
+                                                    style={{ color: '#2ed47a' }}
+                                                    onClick={() => uploadPhoto(files[0])}
+                                                >
+                                                    <CheckIcon />
+                                                </Button>
+                                                <Button
+                                                    className='deleteIcon discardChangesBtn discardEventChangesBtn'
+                                                    style={{ color: '#ff0000' }}
+                                                    onClick={() => handleDiscardChanges()}
+                                                >
+                                                    <ClearIcon />
+                                                </Button>
+                                            </div>
+                                        </Fragment>
+                                        : <Fragment>
+                                            <div style={{ marginBottom: '10px' }}>No images to display</div>
+                                            <div className='eventPhotoWidgetDropzone'><PhotoWidgetDropzone setFiles={setFiles} /></div>
+                                        </Fragment>
+                                    }
+                                </Fragment>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div className='editingFields'>
                     <div className='tertiaryEditFields'>
                         <h2>Post Stats</h2>
                         <FormGroup row>
@@ -253,11 +391,6 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                                 name="availableTickets"
                                 type="number"
                                 defaultValue={event.availableTickets}
-                                // onChange={(event) =>
-                                //     parseInt(event.target.value) < 0
-                                //         ? (event.target.value = '0')
-                                //         : event.target.value
-                                // }
                                 variant="outlined"
                                 InputLabelProps={{
                                     shrink: true,
@@ -278,11 +411,6 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                             name="views"
                             type="number"
                             defaultValue={event.views}
-                            // onChange={(event) =>
-                            //     parseInt(event.target.value) < 0
-                            //         ? (event.target.value = '0')
-                            //         : event.target.value
-                            // }
                             variant="outlined"
                             className='editTertiaryInputField'
                         />

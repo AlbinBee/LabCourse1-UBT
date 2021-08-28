@@ -74,9 +74,13 @@ const Events = {
     list: (): Promise<IEvent[]> => requests.get('/events'),
     details: (id: string) => requests.get(`/events/${id}`),
     create: (event: IEvent) => requests.post('/events', event),
+    delete: (id: string) => requests.delete(`/events/${id}`),
     update: (event: IEvent) => requests.put(`/events/${event.id}`, event),
-    delete: (id: string) => requests.delete(`/events/${id}`)
+    uploadPhoto: (id: string, photo: Blob): Promise<IPhoto> => requests.postForm(`/photos/addEventPhoto/eventId=${id}`, photo),
+    setMainPhoto: (eventId: string, photoId: string) => requests.post(`/photos/setEventMainPhoto/eventId=${eventId}&photoId=${photoId}/setmain`, {}),
+    deletePhoto: (id: string, event: IEvent) => requests.delete(`/photos/deleteEventPhoto/eventId=${event.id}&photoId=${id}`)
 }
+
 const Categories = {
     list: (): Promise<ICategory[]> => requests.get('/categories'),
     details: (id: number) => requests.get(`/categories/${id}`),

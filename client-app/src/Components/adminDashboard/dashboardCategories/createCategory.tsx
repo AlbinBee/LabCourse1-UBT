@@ -9,7 +9,7 @@ interface IProps {
     categories: ICategory[];
 }
 
-const CreateCategory: React.FC<IProps> = (props, history) => {
+const CreateCategory: React.FC<IProps> = (props) => {
     const [categories, setCategories] = useState<ICategory[]>(props.categories);
     const [category, setCategory] = useState<ICategory>({
         title: '',

@@ -15,9 +15,13 @@ import AdminDashboard from '../adminDashboard/adminDashboard';
 import NotFound from '../../app/layout/NotFound';
 import { toast } from 'react-toastify';
 import ProfilePage from '../profiles/profilePage';
+import { IEvent } from '../../app/models/event';
+import { ICategory } from '../../app/models/category';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
+    const [events, setEvents] = useState<IEvent[]>([]);
+    const [categories, setCategories] = useState<ICategory[]>([]);
     const [selectedActivity, setSelectedActivity] = useState<IActivity | null>(null);
     const [editMode, setEditMode] = useState(false);
     const [loading, setLoading] = useState(true)
@@ -73,6 +77,26 @@ const Router = () => {
                 })
                 setActivities(activities)
             }).then(() => setLoading(false));
+        agent.Categories.list()
+            .then(response => {
+                // console.log(response);
+                let categories: ICategory[] = [];
+                response.forEach((category) => {
+                    categories.push(category);
+                })
+                setCategories(categories)
+            });
+        agent.Events.list()
+            .then(response => {
+                // console.log(response);
+                let events: IEvent[] = [];
+                response.forEach((event) => {
+                    event.dateCreated = event.dateCreated.split('.')[0]
+                    event.dateOfEvent = event.dateOfEvent.split('.')[0]
+                    events.push(event);
+                })
+                setEvents(events)
+            });
     }, []);
     if (loading) {
         return <LoadingComponent content='Loading...' />
@@ -85,7 +109,7 @@ const Router = () => {
                     exact
                     path="/"
                     render={() => (
-                        <Homepage />
+                        <Homepage events={events} categories={categories} />
                     )}
                 />
                 <Route

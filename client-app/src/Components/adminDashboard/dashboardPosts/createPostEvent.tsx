@@ -9,9 +9,11 @@ import { IEvent } from '../../../app/models/event';
 import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
+import { ICategory } from '../../../app/models/category';
 
 interface IProps {
     events: IEvent[];
+    categories: ICategory[];
 }
 
 const CreatePostEvent: React.FC<IProps> = (props) => {
@@ -29,7 +31,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
     const currHour = currDate.getHours();
     const currMinute = currDate.getMinutes();
     const currDateFormatted = currYear + '-' + currMonth + '-' + currDay + 'T' + currHour + ':' + currMinute;
-    const category = 'events';
+    const category = ([...props.categories.filter(a => a.id === 3)][0]);
     const [bookable, setBookable] = useState(true)
     const [tickets, setTickets] = useState(true);
     const [currentTickets, setCurrentTickets] = useState(0);
@@ -37,18 +39,13 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
         id: '',
         title: '',
         description: '',
-        categoryId: undefined,
-        category: { 
-            title: "Uncategorized",
-            description: "Uncategorized events goes here",
-            photos: [],
-            events: [],
-        },
+        categoryId: 3,
+        category: category,
         dateCreated: currDateFormatted,
         dateOfEvent: '',
         city: '',
         mainImage: 'ImagePath',
-        galleryImages: 'ImagesPath',
+        galleryImages: undefined,
         isBookable: bookable,
         hasTickets: tickets,
         availableTickets: currentTickets,
@@ -87,11 +84,13 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
         }
     }
     const handleSubmit = (e: any) => {
+        // e.preventDefault();
         let newEvent = {
             ...post,
             availableTickets: Number(currentTickets),
             id: uuid()
         }
+        // console.log(newEvent);
         handleCreateEvent(newEvent);
     }
     return (
@@ -114,7 +113,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                             id="outlined-required"
                             label="Category"
                             name="category"
-                            value={category}
+                            value={category.title}
                             disabled
                             variant="outlined"
                             className='editPrimaryInputField'
@@ -198,7 +197,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                             onChange={handleInputEvChange}
                             id="outlined-required"
                             label="Extra1"
-                            name="Extra1"
+                            name="extra1"
                             variant="outlined"
                             className='editOtherInputField'
                         />
@@ -206,7 +205,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                             onChange={handleInputEvChange}
                             id="outlined-required"
                             label="Extra2"
-                            name="Extra2"
+                            name="extra2"
                             variant="outlined"
                             className='editOtherInputField'
                         />
@@ -214,7 +213,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                             onChange={handleInputEvChange}
                             id="outlined-required"
                             label="Extra3"
-                            name="Extra3"
+                            name="extra3"
                             variant="outlined"
                             className='editOtherInputField'
                         />
@@ -222,7 +221,7 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
                             onChange={handleInputEvChange}
                             id="outlined-required"
                             label="Extra4"
-                            name="Extra4"
+                            name="extra4"
                             variant="outlined"
                             className='editOtherInputField'
                         />
