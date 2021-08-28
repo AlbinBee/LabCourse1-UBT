@@ -1,0 +1,1 @@
+DELETE FROM Photos WHERE AppUserId IS NULL AND EventId IS NULL;

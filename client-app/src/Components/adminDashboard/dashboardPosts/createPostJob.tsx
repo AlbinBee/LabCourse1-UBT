@@ -6,12 +6,14 @@ import { IEvent } from '../../../app/models/event';
 import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
+import { ICategory } from '../../../app/models/category';
 
 interface IProps {
     events: IEvent[];
+    categories: ICategory[];
 }
 
-const CreatePostJob: React.FC<IProps> = (props, history) => {
+const CreatePostJob: React.FC<IProps> = (props) => {
     const [events, setEvents] = useState<IEvent[]>(props.events);
     const currDate = new Date();
     const currYear = currDate.getFullYear();
@@ -26,23 +28,18 @@ const CreatePostJob: React.FC<IProps> = (props, history) => {
     const currHour = currDate.getHours();
     const currMinute = currDate.getMinutes();
     const currDateFormatted = currYear + '-' + currMonth + '-' + currDay + 'T' + currHour + ':' + currMinute;
-    const category = 'jobs';
+    const category = ([...props.categories.filter(a => a.id === 2)][0]);
     const [post, setPost] = useState<IEvent>({
         id: '',
         title: '',
         description: '',
-        categoryId: undefined,
-        category: {
-            title: "Uncategorized",
-            description: "Uncategorized events goes here",
-            photos: [],
-            events: [],
-        },
+        categoryId: 2,
+        category: category,
         dateCreated: currDateFormatted,
         dateOfEvent: '',
         city: '',
         mainImage: 'ImagePath',
-        galleryImages: 'ImagesPath',
+        galleryImages: undefined,
         isBookable: false,
         hasTickets: false,
         availableTickets: 0,
@@ -76,6 +73,7 @@ const CreatePostJob: React.FC<IProps> = (props, history) => {
             id: uuid()
         }
         handleCreateEvent(newEvent);
+        // console.log(newEvent)
     }
     return (
         <div>
@@ -98,7 +96,7 @@ const CreatePostJob: React.FC<IProps> = (props, history) => {
                             id="outlined-required"
                             label="Category"
                             name="category"
-                            value={category}
+                            value={category.title}
                             disabled
                             variant="outlined"
                             className='editPrimaryInputField'

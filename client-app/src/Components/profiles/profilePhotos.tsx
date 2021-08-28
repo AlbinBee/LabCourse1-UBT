@@ -115,40 +115,43 @@ const ProfilePhotos: React.FC<IProps> = ({ profile, isCurrentUser, user }) => {
                         <PhotoUploadWidget profile={profile!} isCurrentUser={isCurrentUser!} uploadPhoto={handleUploadImage} loading={uploadingPhoto} />
                     ) : (
                         <div className='profileUserPhoto'>
-                            {profile && profile.photos.map((photo) => (
-                                <Paper key={photo.id}>
-                                    <img src={photo.url} className='profileUserPhotos' />
-                                    {isCurrentUser &&
-                                        <ButtonGroup className='profileUserPhotosButtons'>
-                                            <Button
-                                                className='profileUserPhotosButton'
-                                                color='primary'
-                                                name={photo.id}
-                                                onClick={(e) => {
-                                                    setMainPhoto(photo);
-                                                    setTarget(e.currentTarget.name);
-                                                }}
-                                                disabled={photo.isMain}
-                                            >
-                                                Main
-                                            </Button>
-                                            <Button
-                                                className='profileUserPhotosButton'
-                                                color='secondary'
-                                                name={photo.id}
-                                                onClick={(e) => {
-                                                    deletePhoto(photo);
-                                                    setDeleteTarget(e.currentTarget.name);
-                                                }}
-                                                disabled={photo.isMain}
-                                            >
-                                                Delete
-                                            </Button>
-                                        </ButtonGroup>
+                            {profile.photos.length > 0
+                                ? profile && profile.photos.map((photo) => (
+                                    <Paper key={photo.id}>
+                                        <img src={photo.url} className='profileUserPhotos' />
+                                        {isCurrentUser &&
+                                            <ButtonGroup className='profileUserPhotosButtons'>
+                                                <Button
+                                                    className='profileUserPhotosButton'
+                                                    color='primary'
+                                                    name={photo.id}
+                                                    onClick={(e) => {
+                                                        setMainPhoto(photo);
+                                                        setTarget(e.currentTarget.name);
+                                                    }}
+                                                    disabled={photo.isMain}
+                                                >
+                                                    Main
+                                                </Button>
+                                                <Button
+                                                    className='profileUserPhotosButton'
+                                                    color='secondary'
+                                                    name={photo.id}
+                                                    onClick={(e) => {
+                                                        deletePhoto(photo);
+                                                        setDeleteTarget(e.currentTarget.name);
+                                                    }}
+                                                    disabled={photo.isMain}
+                                                >
+                                                    Delete
+                                                </Button>
+                                            </ButtonGroup>
+                                        }
+                                    </Paper>
+                                ))
+                                : <div>No images to display</div>
+                            }
 
-                                    }
-                                </Paper>
-                            ))}
                         </div>
                     )}
 

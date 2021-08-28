@@ -10,7 +10,7 @@ interface IProps {
     uploadPhoto: (file: Blob) => void;
 }
 
-const PhotoUploadWidget: React.FC<IProps> = ({ profile, isCurrentUser, loading, uploadPhoto }) => {
+const PhotoUploadWidget: React.FC<IProps> = ({ uploadPhoto }) => {
     const [files, setFiles] = useState<any[]>([]);
 
     useEffect(() => {

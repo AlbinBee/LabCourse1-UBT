@@ -33,6 +33,8 @@ namespace Application.Events
                 }
                 else
                 {
+                    myEvent.GalleryImages.Clear();
+                    myEvent.Category = null;
                     _context.Remove(myEvent);
                 }
                 //handler logic

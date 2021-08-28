@@ -8,9 +8,11 @@ import { IEvent } from '../../../app/models/event';
 import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
+import { ICategory } from '../../../app/models/category';
 
 interface IProps {
     events: IEvent[];
+    categories: ICategory[];
 }
 
 const CreatePostBooking: React.FC<IProps> = (props) => {
@@ -28,23 +30,18 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
     const currHour = currDate.getHours();
     const currMinute = currDate.getMinutes();
     const currDateFormatted = currYear + '-' + currMonth + '-' + currDay + 'T' + currHour + ':' + currMinute;
-    const category = 'bookings';
+    const category = ([...props.categories.filter(a => a.id === 4)][0]);
     const [post, setPost] = useState<IEvent>({
         id: '',
         title: '',
         description: '',
-        categoryId: undefined,
-        category: { 
-            title: "Uncategorized",
-            description: "Uncategorized events goes here",
-            photos: [],
-            events: [],
-        },
+        categoryId: 4,
+        category: category,
         dateCreated: currDateFormatted,
         dateOfEvent: '',
         city: '',
         mainImage: 'ImagePath',
-        galleryImages: 'ImagesPath',
+        galleryImages: undefined,
         isBookable: true,
         hasTickets: false,
         availableTickets: 0,
@@ -71,6 +68,7 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
         }
     }
     const handleSubmit = (e: any) => {
+        // e.preventDefault();
         let newEvent = {
             ...post,
             id: uuid()
@@ -99,7 +97,7 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
                             id="outlined-required"
                             label="Category"
                             name="category"
-                            value={category}
+                            value={category.title}
                             disabled
                             variant="outlined"
                             className='editPrimaryInputField'

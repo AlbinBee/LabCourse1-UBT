@@ -42,13 +42,40 @@
 .homepageCategoriesImg,
 .homepagePremiumAdsImg {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
   margin-top: 20px;
 }
 .categoryImg {
   max-width: 277px;
   max-height: 188px;
+}
+.cardContentTitle {
+  font-size: 20px;
+  font-family: "Montserrat";
+  color: #0288d1;
+  font-weight: 600;
+}
+.cardContentBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cardDateContent {
+  font-size: 15px;
+  font-family: "Montserrat";
+  color: silver;
+  font-weight: 400;
+}
+.favoriteCardIcon {
+  width: 30px;
+  height: 30px;
+  transition: all 0.25s ease-in !important;
+}
+.favoriteCardIcon:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  transition: all 0.25s ease-in !important;
 }
 .premiumAdsImg {
   max-width: 250px;
@@ -62,4 +89,7 @@
   width: 100%;
   object-fit: cover;
   max-height: 244px;
+}
+.homepageBannerContent{
+  width: 100%;
 }

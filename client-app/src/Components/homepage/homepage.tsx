@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Grid } from 'semantic-ui-react'
 import './style/styles.css';
 import sliderImg from '../assets/slider1.png';
@@ -8,11 +8,21 @@ import techCategoryImg from '../assets/categories/tech.png';
 import designCategoryImg from '../assets/categories/design.png';
 import financeCategoryImg from '../assets/categories/finance.png';
 import eventsCategoryImg from '../assets/categories/events.png';
-import premiumAdImg1 from '../assets/ads/premiumAd1.png';
-import premiumAdImg2 from '../assets/ads/premiumAd2.png';
-import premiumAdImg3 from '../assets/ads/premiumAd3.png';
+import noImg from '../assets/ads/noImg.png';
+import { IEvent } from '../../app/models/event';
+import Heart from '../assets/Icons/heart.svg';
+import HeartFilled from '../assets/Icons/heart-filled.svg';
+import { Chip } from '@material-ui/core';
+import { ICategory } from '../../app/models/category';
 
-const Homepage = () => {
+interface IProps {
+    events: IEvent[];
+    categories: ICategory[];
+}
+
+const Homepage: React.FC<IProps> = ({ events, categories }) => {
+    const [isFavorite, setIsFavorite] = useState(false);
+
     return (
         <Container className='hompageContainer'>
             <Grid className='homepageSlider'>
@@ -27,10 +37,10 @@ const Homepage = () => {
                     <h2>Categories</h2>
                 </div>
                 <div className='homepageCategoriesImg'>
-                    <img src={techCategoryImg} alt="categoryImg" className='categoryImg'/>
-                    <img src={designCategoryImg} alt="categoryImg" className='categoryImg'/>
-                    <img src={financeCategoryImg} alt="categoryImg" className='categoryImg'/>
-                    <img src={eventsCategoryImg} alt="categoryImg" className='categoryImg'/>
+                    <img src={techCategoryImg} alt="categoryImg" className='categoryImg' />
+                    <img src={designCategoryImg} alt="categoryImg" className='categoryImg' />
+                    <img src={financeCategoryImg} alt="categoryImg" className='categoryImg' />
+                    <img src={eventsCategoryImg} alt="categoryImg" className='categoryImg' />
                 </div>
             </Grid>
             <Grid className='homepagePremiumAds'>
@@ -38,11 +48,27 @@ const Homepage = () => {
                     <h2>Premium Ads</h2>
                 </div>
                 <div className='homepagePremiumAdsImg'>
-                    <img src={premiumAdImg1} alt="premiumAdsImg" className='premiumAdsImg'/>
-                    <img src={premiumAdImg2} alt="premiumAdsImg" className='premiumAdsImg'/>
-                    <img src={premiumAdImg3} alt="premiumAdsImg" className='premiumAdsImg'/>
-                    <img src={premiumAdImg1} alt="premiumAdsImg" className='premiumAdsImg'/>
-                    <img src={premiumAdImg2} alt="premiumAdsImg" className='premiumAdsImg'/>
+                    {events.map((event, index) => (
+                        index < 5 &&
+                        <div className='homepagePremiumAdsContainer'>
+                            <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
+                            <div className='cardContent'>
+                                <h3 className='cardContentTitle'>{event.title}</h3>
+                                <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />
+                                <div className='cardContentBottom'>
+                                    <span className='cardDateContent'>{event.dateOfEvent}</span>
+                                    <span className='cardIconContent'>
+                                        <img
+                                            src={isFavorite ? Heart : HeartFilled}
+                                            alt="FavoriteEvent"
+                                            className='favoriteCardIcon'
+                                            onClick={() => setIsFavorite(!isFavorite)}
+                                        />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </Grid>
             <Grid className='homepageBanner'>
