@@ -12,7 +12,7 @@ const AdminDashboard = () => {
                 </div>
                 <div className='dashboardContent'>
                     <div className="dashboardRouteContent">
-                    <AdminRouter />
+                        <AdminRouter />
                     </div>
                 </div>
             </div>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import agent from "../../../app/api/agent";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import InfoCard from "../../infoCard/infoCard";
 import DashboardTopbar from "../dashboardTopbar/dashboardTopbar";
 import { DataGrid } from '@material-ui/data-grid';
-import { Button } from "@material-ui/core";
+import { Button, Tooltip } from "@material-ui/core";
 import { ICategory } from "../../../app/models/category";
 import EditIcon from '../../assets/Icons/edit.svg';
 import DeleteIcon from '../../assets/Icons/delete.svg';
@@ -20,8 +20,14 @@ const DashboardCategories = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'title', headerName: 'Title', width: 130 },
-    { field: 'description', headerName: 'Description', width: 200 },
+    { field: 'title', headerName: 'Title', width: 200 },
+    {
+      field: 'description', headerName: 'Description', width: 250, renderCell: (params: any) => (
+        <Tooltip title={params.value} placement='top' className='descriptionTooltip' arrow={true}>
+          <span className="table-cell-truncate">{params.value}</span>
+        </Tooltip>
+      ),
+    },
     {
       field: 'edit', headerName: 'Action', width: 160, renderCell: (params: any) => (
         <div className='actionIconsContainer'>
@@ -66,7 +72,7 @@ const DashboardCategories = () => {
       .then(() => setLoading(false));
   }, []);
   if (loading) {
-    return <LoadingComponent content="Loading..." />;
+    return <LoadingComponent content="Loading Categories..." />;
   }
   return (
     <div >

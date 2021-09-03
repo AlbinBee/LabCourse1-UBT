@@ -11,12 +11,14 @@ import Logout from '../assets/Icons/logout-active.svg';
 import ArrowDown from '../assets/Icons/arrow-down.svg';
 import Search3D from '../assets/Icons/search-3d.svg';
 import { toast } from 'react-toastify';
+import mainStates from '../../app/state/mainStates';
 
 const Navbar = () => {
     const [user, setUser] = useState<IUser | null>();
     const [openSearch, setOpenSearch] = useState(false)
     const location = useLocation();
     const pathName = location.pathname;
+    const userFromTs = mainStates.user;
 
     let canCreate;
     if (pathName === '/activities') {
@@ -83,10 +85,13 @@ const Navbar = () => {
                                         <img src={user?.image || Avatar} alt='userImg' className='userAccountImg' />
                                         <Dropdown className='navbarUserName' text={user?.displayName}>
                                             <Dropdown.Menu>
-                                                <div className='navbarDropdownMenuItem'>
-                                                    <img src={Dashboard} alt='dashboard' />
-                                                    <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={'/dashboard'} text='Dashboard' />
-                                                </div>
+                                                {
+                                                    userFromTs != null && userFromTs.roles.includes("Admin") &&
+                                                    <div className='navbarDropdownMenuItem'>
+                                                        <img src={Dashboard} alt='dashboard' />
+                                                        <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={'/dashboard'} text='Dashboard' />
+                                                    </div>
+                                                }
                                                 <div className='navbarDropdownMenuItem'>
                                                     <img src={User} alt='userAccount' />
                                                     <Dropdown.Item className='navbarDropdownMenuLink' as={Link} to={`/profile/${user?.displayName}`} text='My Profile' />

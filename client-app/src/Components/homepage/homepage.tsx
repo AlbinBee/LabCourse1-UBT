@@ -14,6 +14,7 @@ import Heart from '../assets/Icons/heart.svg';
 import HeartFilled from '../assets/Icons/heart-filled.svg';
 import { Chip } from '@material-ui/core';
 import { ICategory } from '../../app/models/category';
+import mainStates from '../../app/state/mainStates';
 
 interface IProps {
     events: IEvent[];
@@ -22,6 +23,7 @@ interface IProps {
 
 const Homepage: React.FC<IProps> = ({ events, categories }) => {
     const [isFavorite, setIsFavorite] = useState(false);
+    const user = mainStates.user;
 
     return (
         <Container className='hompageContainer'>
@@ -54,7 +56,7 @@ const Homepage: React.FC<IProps> = ({ events, categories }) => {
                             <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
                             <div className='cardContent'>
                                 <h3 className='cardContentTitle'>{event.title}</h3>
-                                <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />
+                                {[...categories.filter(a => a.id === event.categoryId)][0] != undefined && <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />}
                                 <div className='cardContentBottom'>
                                     <span className='cardDateContent'>{event.dateOfEvent}</span>
                                     <span className='cardIconContent'>

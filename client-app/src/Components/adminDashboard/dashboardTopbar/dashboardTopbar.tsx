@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import searchIcon from '../../assets/Icons/search.svg';
 import bellAlertIcon from '../../assets/Icons/bell-alert.svg';
-import avatarIcon from '../../assets/Icons/avatar.svg';
+import Avatar from '../../assets/Icons/avatar.svg';
 import { IUser } from '../../../app/models/user';
 import '../style/style.css';
 
@@ -24,8 +24,8 @@ const DashboardTopbar = (props: any) => {
                     <img src={bellAlertIcon} alt="bell" className='mainDashboardIcons' />
                 </div>
                 <div className='mainDashboardUser'>
-                    <span className='mainDashboardUsername'>{user?.username}</span>
-                    <span><img src={avatarIcon} alt="" /></span>
+                    <span className='mainDashboardUsername'>{user?.displayName}</span>
+                    <img src={user?.image || Avatar} alt='userImg' className='userAccountImg' />
                 </div>
             </div>
         </div>

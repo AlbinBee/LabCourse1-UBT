@@ -52,8 +52,10 @@ const Login = () => {
             sessionStorage.setItem('user', JSON.stringify(user));
             sessionStorage.setItem('isLoggedIn', 'true');
             setTimeout(function () {
-                history.push('/');
                 window.location.reload();
+                setTimeout(function () {
+                    history.push('/');
+                }, 500);
             }, 1000);
         } catch (error) {
             throw error;
@@ -76,6 +78,7 @@ const Login = () => {
             setHasEmailError(false);
             setHasPasswordError(false);
             login(userDetails).catch(error => (
+                toast.error(error.data.errors.User),
                 toast.error('There was a problem logging you in!'),
                 setSubmitting(false)
             ));

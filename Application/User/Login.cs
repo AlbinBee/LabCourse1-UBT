@@ -8,7 +8,6 @@ using Domain;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Persistence;
 
 namespace Application.User
 {
@@ -44,7 +43,10 @@ namespace Application.User
                 var user = await _userManager.FindByEmailAsync(request.Email);
 
                 if (user == null)
-                    throw new RestException(HttpStatusCode.Unauthorized);
+                    throw new RestException(HttpStatusCode.NotFound, new { User = "Couldn't find user!" });
+               
+                if (user.Status == "blocked")
+                    throw new RestException(HttpStatusCode.Unauthorized, new { User = "Your account is restricted!" });
 
                 var result = await _signInManager
                     .CheckPasswordSignInAsync(user, request.Password, false);
@@ -54,13 +56,13 @@ namespace Application.User
                     return new User
                     {
                         DisplayName = user.DisplayName,
-                        Token = _jwtGenerator.CreateToken(user),
+                        Token = await _jwtGenerator.CreateToken(user),
                         Username = user.UserName,
                         Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                     };
                 }
 
-                throw new RestException(HttpStatusCode.Unauthorized);
+                throw new RestException(HttpStatusCode.Unauthorized, new { User = "Username or Password is incorrect!" });
             }
         }
     }

@@ -65,8 +65,11 @@ namespace API
 
             var builder = services.AddIdentityCore<AppUser>();
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
-            identityBuilder.AddEntityFrameworkStores<DataContext>();
+            identityBuilder.AddRoles<AppRole>();
+            identityBuilder.AddRoleManager<RoleManager<AppRole>>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+            identityBuilder.AddRoleValidator<RoleValidator<AppRole>>();
+            identityBuilder.AddEntityFrameworkStores<DataContext>();
 
             services.AddAuthorization(opt =>
             {
@@ -74,6 +77,7 @@ namespace API
                 {
                     policy.Requirements.Add(new IsHostRequirement());
                 });
+                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 

@@ -3,3 +3,22 @@
   justify-content: space-evenly;
   margin-top: 20px;
 }
+.table-cell-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.MuiTooltip-popper{
+  margin-bottom: -20px;
+}
+.MuiTooltip-arrow {
+  color: #0288d1 !important;
+}
+.MuiTooltip-tooltip {
+  background-color: #0288d1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px !important;
+  font-size: 12px !important;
+}

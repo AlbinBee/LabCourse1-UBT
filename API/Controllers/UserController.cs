@@ -1,6 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using Application.User;
-using Domain;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,6 +27,13 @@ namespace API.Controllers
         public async Task<ActionResult<User>> CurrentUser()
         {
             return await Mediator.Send(new CurrentUser.Query());
+        }
+
+        // [AllowAnonymous]
+        [HttpPost("{id}/addToRole")]
+        public async Task<ActionResult<Unit>> AddToRole(Guid id)
+        {
+            return await Mediator.Send(new AddToRole.Command { Id = id });
         }
     }
 }

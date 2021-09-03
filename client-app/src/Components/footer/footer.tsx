@@ -4,8 +4,11 @@ import Logo from '../assets/Logo_Text.svg';
 import { Link } from 'react-router-dom';
 import { Menu } from 'semantic-ui-react';
 import dashboardIconWhite from '../assets/Icons/dashboard-white.svg';
+import mainStates from '../../app/state/mainStates';
 
 const Footer = () => {
+    const user = mainStates.user;
+
     return (
         <div className='footerContainer'>
             <div className='footerContent'>
@@ -35,22 +38,14 @@ const Footer = () => {
                                 name='Explore'
                             />
                         </Link>
-                        {/* <Link to='/login'>
-                            <Menu.Item
-                                className="navItem navItemLogin"
-                                name='Log In'
-                            />
-                        </Link>
-                        <Link to='/register'>
-                            <Menu.Item
-                                className="navItem navItemLogin"
-                                name='Sign Up'
-                            />
-                        </Link> */}
                     </div>
-                    <div className='footerSocial'>
-                        <Link to='/dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
-                    </div>
+                    {
+                        user != null && user.roles.includes("Admin") &&
+                        <div className='footerSocial'>
+                            <Link to='/dashboard'><button className='footerDashboard'><img src={dashboardIconWhite} alt="icon" /><span>Dashboard</span></button></Link>
+                        </div>
+                    }
+
                 </div>
             </div>
             <div className='footerCopyright'>

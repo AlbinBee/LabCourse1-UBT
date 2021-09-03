@@ -4,7 +4,7 @@ namespace Domain
 {
     public class UserActivity
     {
-        public string AppUserId {get; set;}
+        public Guid AppUserId {get; set;}
         public virtual AppUser AppUser { get; set; }
         public Guid ActivityId { get; set; }
         public virtual Activity Activity { get; set; }

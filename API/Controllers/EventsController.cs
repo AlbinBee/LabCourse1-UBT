@@ -24,12 +24,14 @@ namespace API.Controllers
             return await Mediator.Send(new Details.Query { Id = id });
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
             return await Mediator.Send(command);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("{EventId}")]
         public async Task<ActionResult<Unit>> Edit(Guid EventId, Edit.Command command)
         {
@@ -37,6 +39,7 @@ namespace API.Controllers
             return await Mediator.Send(command);
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> Delete(Guid id)
         {

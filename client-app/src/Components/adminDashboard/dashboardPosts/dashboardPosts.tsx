@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import { ICategory } from '../../../app/models/category';
 import { AvatarGroup } from '@material-ui/lab';
 import { PhotoCamera } from '@material-ui/icons';
+import { Tooltip } from '@material-ui/core';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -28,7 +29,13 @@ const DashboardPosts = () => {
     const [categories, setCategories] = useState<ICategory[]>([]);
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
+        {
+            field: 'id', headerName: 'ID', width: 100, renderCell: (params: any) => (
+                <Tooltip title={params.value} placement='top' className='descriptionTooltip' arrow={true}>
+                    <span className="table-cell-truncate">{params.value}</span>
+                </Tooltip>
+            ),
+        },
         {
             field: 'galleryImages', headerName: 'Images', width: 150, renderCell: (params: any) => (
                 <div>
@@ -51,11 +58,17 @@ const DashboardPosts = () => {
                 </div>
             )
         },
-        { field: 'title', headerName: 'Title', width: 130 },
+        {
+            field: 'title', headerName: 'Title', width: 130, renderCell: (params: any) => (
+                <Tooltip title={params.value} placement='top' className='descriptionTooltip' arrow={true}>
+                    <span className="table-cell-truncate">{params.value}</span>
+                </Tooltip>
+            ),
+        },
         {
             field: 'categoryId', headerName: 'Category', width: 150, renderCell: (params: any) => (
                 <div>
-                    <span className='categoryChip'>{[...categories.filter(a => a.id === params.row.categoryId)][0].title}</span>
+                    {[...categories.filter(a => a.id === params.row.categoryId)][0] != undefined && <span className='categoryChip'>{[...categories.filter(a => a.id === params.row.categoryId)][0].title}</span>}
                 </div>
             )
         },
