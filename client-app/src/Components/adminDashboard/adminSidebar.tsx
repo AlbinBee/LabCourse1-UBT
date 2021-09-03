@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import MainLogo from '../assets/Logo-svg.svg'
-import avatar from '../assets/Icons/avatar.svg'
+import Avatar from '../assets/Icons/avatar.svg'
 import dashboardIcon from '../assets/Icons/dashboard.svg'
 import dashboardIconActive from '../assets/Icons/dashboard-active.svg'
 import mailIcon from '../assets/Icons/mail.svg'
@@ -39,7 +39,8 @@ const AdminSidebar = () => {
                 <img src={MainLogo} alt="Logo" className='dashboardLogo' /><span>Dashboard</span>
             </div>
             <div className='dashboardUserContainer'>
-                <img src={avatar} alt="avatar" className='dashboardUser' />
+                <img src={user?.image || Avatar} alt='userImg' className='userAccountImg' />
+
                 <div className='dashboardUserDetails'>
                     <h4 className='sidebarUsername'>{user?.displayName}</h4>
                     <h6 className='sidebarUserEmail'>{user?.displayName}@posto-ks.com</h6>

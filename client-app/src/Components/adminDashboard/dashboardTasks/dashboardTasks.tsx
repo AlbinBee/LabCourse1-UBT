@@ -98,7 +98,7 @@ const DashboardTasks = () => {
       .then(() => setLoading(false));
   });
   if (loading) {
-    return <LoadingComponent content="Loading..." />;
+    return <LoadingComponent content="Loading Tasks..." />;
   }
   return (
     <div >

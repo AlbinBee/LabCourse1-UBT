@@ -95,6 +95,11 @@ const User = {
     login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
     register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user)
 }
+const Admin = {
+    list: (): Promise<IListUser[]> => requests.get('/admin/users-with-roles'),
+    addRole: (username: string, role: string) => requests.post(`/roles/add-role/user=${username}&role=${role}`, role),
+    deleteRole: (username: string, role: string) => requests.delete(`/roles/delete-role/user=${username}&role=${role}`)
+}
 
 const Profiles = {
     // list: (): Promise<IProfile[]> => requests.get('/profiles'),
@@ -132,5 +137,5 @@ const MyTasks = {
 
 
 export default {
-    Activities, Events, User, Profiles, Ads, Emails, MyTasks, Categories
+    Activities, Events, User, Admin, Profiles, Ads, Emails, MyTasks, Categories
 }

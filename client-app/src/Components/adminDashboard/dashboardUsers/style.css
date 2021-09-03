@@ -1,5 +1,21 @@
-.userImagesDashboard{
-    max-width: 50px;
-    max-height: 50px;
-    border-radius: 100%;
+.userImagesDashboard {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 100%;
+}
+.roleChipStatus {
+  background-color: #0288d1 !important;
+}
+.roleOutlineChipStatus {
+  border: 1px solid #0288d1 !important;
+  color: #0288d1 !important;
+}
+.roleOutlineIcon {
+  color: #0288d1 !important;
+}
+.roleChipStatus:not(:first-child) {
+  margin-left: 10px;
+}
+.roleOutlineChipStatus:not(:first-child) {
+  margin-left: 10px;
 }

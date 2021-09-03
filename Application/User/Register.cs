@@ -52,6 +52,7 @@ namespace Application.User
             {
                 if (await _context.Users.Where(x => x.Email == request.Email).AnyAsync())
                     throw new RestException(HttpStatusCode.BadRequest, new { Email = "Email already exists" });
+                    
                 if (await _context.Users.Where(x => x.UserName == request.UserName).AnyAsync())
                     throw new RestException(HttpStatusCode.BadRequest, new { UserName = "UserName is already chosen" });
 
@@ -60,17 +61,23 @@ namespace Application.User
                     DisplayName = request.DisplayName,
                     Email = request.Email,
                     UserName = request.UserName,
-                    Status = "pending"
+                    Status = "inactive"
                 };
 
                 var results = await _userManager.CreateAsync(user, request.Password);
+
+                var roleResult = await _userManager.AddToRoleAsync(user, "SimpleUser");
+                if (!roleResult.Succeeded)
+                {
+                    throw new Exception("Problem adding user to role!");
+                }
 
                 if (results.Succeeded)
                 {
                     return new User
                     {
                         DisplayName = user.DisplayName,
-                        Token = _jwtGenerator.CreateToken(user),
+                        Token = await _jwtGenerator.CreateToken(user),
                         Username = user.UserName,
                         Image = null
                         // Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url

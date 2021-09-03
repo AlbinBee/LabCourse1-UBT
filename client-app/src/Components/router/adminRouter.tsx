@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Switch, Route } from "react-router-dom";
+import { history } from '../..';
 
 import { IAd } from '../../app/models/ad';
 import { ICategory } from '../../app/models/category';
@@ -23,6 +24,8 @@ import CreatePost from '../adminDashboard/dashboardPosts/createPost';
 import DashboardCategories from '../adminDashboard/dashboardCategories/dashboardCategories';
 import EditCategories from '../adminDashboard/dashboardCategories/editCategories';
 import CreateCategory from '../adminDashboard/dashboardCategories/createCategory';
+import mainStates from '../../app/state/mainStates';
+import { toast } from 'react-toastify';
 
 const AdminRouter = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -73,7 +76,12 @@ const AdminRouter = () => {
                 setCategories(categories)
             });
     }, []);
+    const user = mainStates.user;
 
+    if(user == null || !user.roles.includes("Admin")){
+        history.push('/');
+        toast.info("You don't have access there!")
+    }
     return (
         <div className='routerContainer'>
             <Switch>

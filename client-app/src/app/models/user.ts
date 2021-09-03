@@ -7,12 +7,16 @@ export interface IListUser {
     username: string;
     email: string;
     status: string;
+    roles: string[];
 }
 export interface IUser {
     username: string;
     displayName: string;
     token: string;
     image?: string;
+    status: string;
+    email: string;
+    roles: string[];
 }
 export interface IUserFormValues {
     email: string;

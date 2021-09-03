@@ -72,7 +72,7 @@ const DashboardMails = () => {
       .then(() => setLoading(false));
   });
   if (loading) {
-    return <LoadingComponent content="Loading..." />;
+    return <LoadingComponent content="Loading Mails..." />;
   }
   return (
     <div >

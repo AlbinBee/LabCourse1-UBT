@@ -63,12 +63,15 @@ const Register = () => {
                 window.location.reload();
             }, 1000);
         } catch (error) {
-            throw error;
+            toast.error('Could not register!');
+            Object.values(error.data.errors).flat().map((err:any, i) => (
+                toast.error(err)
+            ));
         }
     }
 
     const handleUserSubmit = (e: any) => {
-        // e.preventDefault();
+        e.preventDefault();
         if (!userDetails.email.match(emailRegex) || userDetails.email === "") {
             setHasEmailError(true);
             toast.error('Please enter a valid email!')
@@ -88,7 +91,7 @@ const Register = () => {
             setHasPasswordError(false);
             userDetails.username = userDetails.username?.toLowerCase();
             register(userDetails).catch(error => (
-                toast.error('There was a problem logging you in!')
+                toast.error('There was a problem registering you!')
             ));
         }
     }

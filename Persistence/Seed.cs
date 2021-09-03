@@ -9,35 +9,53 @@ namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager,
+            RoleManager<AppRole> roleManager)
         {
             if (!userManager.Users.Any())
             {
-                var users = new List<AppUser>{
+                var users = new List<AppUser>
+                {
                     new AppUser{
                         DisplayName = "Bob",
                         UserName = "bob",
                         Email = "bob@test.com"
-                    }, 
+                    },
                     new AppUser{
                         DisplayName = "Tom",
                         UserName = "tom",
                         Email = "tom@test.com"
-                    }, 
+                    },
                     new AppUser{
                         DisplayName = "John",
                         UserName = "john",
                         Email = "john@test.com"
-                    }, 
+                    },
                 };
                 foreach (var user in users)
                 {
                     await userManager.CreateAsync(user, "Pa$$w0rd");
+                    await userManager.AddToRoleAsync(user, "SimpleUser");
+                }
+            }
+            if (!context.Roles.Any())
+            {
+                var roles = new List<AppRole>
+                {
+                    new AppRole{Name = "SuperAdmin"},
+                    new AppRole{Name = "Admin"},
+                    new AppRole{Name = "SimpleUser"},
+                    new AppRole{Name = "PremiumUser"}
+                };
+                foreach (var role in roles)
+                {
+                    await roleManager.CreateAsync(role);
                 }
             }
             if (!context.Activities.Any())
             {
-                var activities = new List<Activity>{
+                var activities = new List<Activity>
+                {
                     new Activity
                     {
                         Title = "Past Activity 1",

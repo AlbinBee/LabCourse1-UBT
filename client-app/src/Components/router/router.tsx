@@ -67,6 +67,7 @@ const Router = () => {
     }
 
     useEffect(() => {
+        setLoading(true);
         agent.Activities.list()
             .then(response => {
                 // console.log(response);
@@ -76,7 +77,7 @@ const Router = () => {
                     activities.push(activity);
                 })
                 setActivities(activities)
-            }).then(() => setLoading(false));
+            });
         agent.Categories.list()
             .then(response => {
                 // console.log(response);
@@ -97,6 +98,7 @@ const Router = () => {
                 })
                 setEvents(events)
             });
+        setLoading(false);
     }, []);
     if (loading) {
         return <LoadingComponent content='Loading...' />
