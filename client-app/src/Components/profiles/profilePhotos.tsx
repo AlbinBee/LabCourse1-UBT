@@ -10,8 +10,8 @@ interface IProps {
     profile: IProfile;
     isCurrentUser: boolean;
     user: IUser;
-
 }
+
 const ProfilePhotos: React.FC<IProps> = ({ profile, isCurrentUser, user }) => {
     const [addPhotoMode, setAddPhotoMode] = useState(false);
     const [uploadingPhoto, setUploadingPhoto] = useState(false);
@@ -151,12 +151,9 @@ const ProfilePhotos: React.FC<IProps> = ({ profile, isCurrentUser, user }) => {
                                 ))
                                 : <div>No images to display</div>
                             }
-
                         </div>
                     )}
-
                 </Grid>
-
             </CardContent>
         </Card>
     )

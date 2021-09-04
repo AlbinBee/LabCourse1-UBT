@@ -46,6 +46,7 @@ const Login = () => {
         try {
             const user = await agent.User.login(userDetails);
             setUser(user);
+            user.email = userDetails.email;
             setSubmitting(false);
             toast.success('Successfully logged in !')
             sessionStorage.setItem('token', user.token)

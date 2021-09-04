@@ -3,12 +3,17 @@ import { useParams } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import agent from '../../app/api/agent'
 import LoadingComponent from '../../app/layout/LoadingComponent'
+import { IEvent } from '../../app/models/event'
 import { IProfile } from '../../app/models/profile'
 import { IUser } from '../../app/models/user'
 import ProfileContent from './profileContent'
 import ProfileHeader from './profileHeader'
 
-const ProfilePage = () => {
+interface IProps {
+    events: IEvent[];
+}
+
+const ProfilePage: React.FC<IProps> = ({ events }) => {
     const { username }: { username: string } = useParams();
     const [user, setUser] = useState<IUser | null>(JSON.parse(sessionStorage.getItem('user')!));
     const [profile, setProfile] = useState<IProfile | null>(null);
@@ -46,7 +51,7 @@ const ProfilePage = () => {
         <Grid style={{ marginTop: '100px' }}>
             <Grid.Column width={16}>
                 <ProfileHeader profile={profile!} />
-                <ProfileContent profile={profile!} isCurrentUser={isCurrentUser!} user={user!} />
+                <ProfileContent profile={profile!} isCurrentUser={isCurrentUser!} user={user!} events={events} />
             </Grid.Column>
         </Grid>
     )

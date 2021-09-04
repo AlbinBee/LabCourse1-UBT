@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Persistence;
 
 namespace Application.Events
@@ -49,13 +51,19 @@ namespace Application.Events
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly UserManager<AppUser> _userManager;
+            private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext context, UserManager<AppUser> userManager, IUserAccessor userAccessor)
             {
+                _userAccessor = userAccessor;
+                _userManager = userManager;
                 _context = context;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
+                var user = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());
+
                 var myEvent = new Event
                 {
                     Id = request.Id,
@@ -76,7 +84,8 @@ namespace Application.Events
                     Extra2 = request.Extra2,
                     Extra3 = request.Extra3,
                     Extra4 = request.Extra4,
-                    Status = request.Status
+                    Status = request.Status,
+                    Author = user
                 };
                 _context.Events.Add(myEvent);
                 var success = await _context.SaveChangesAsync() > 0;

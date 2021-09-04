@@ -1,5 +1,6 @@
 import { ICategory } from "./category";
 import { IPhoto } from "./profile";
+import { IUser } from "./user";
 
 export interface IEvent {
     id: string,
@@ -21,4 +22,5 @@ export interface IEvent {
     extra3: string,
     extra4: string,
     status: string,
+    author: IUser
 }

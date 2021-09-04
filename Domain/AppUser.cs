@@ -12,5 +12,6 @@ namespace Domain
         public virtual ICollection<UserActivity> UserActivities { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<AppUserRole> UserRoles { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

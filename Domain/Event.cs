@@ -28,5 +28,9 @@ namespace Domain
         public string Extra3 { get; set; }
         public string Extra4 { get; set; }
         public string Status { get; set; }
+        public Guid? AuthorId { get; set; }
+        [ForeignKey("AuthorId")]
+        public virtual AppUser Author { get; set; }
+
     }
 }

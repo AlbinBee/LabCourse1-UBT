@@ -8,11 +8,14 @@ import { IProfile } from '../../app/models/profile';
 import { IUser } from '../../app/models/user';
 import ProfileBio from './profileBio';
 import ProfilePhotos from './profilePhotos';
+import ProfileEvents from './profileEvents';
+import { IEvent } from '../../app/models/event';
 
 interface IProps {
     profile: IProfile,
     isCurrentUser: boolean,
-    user: IUser
+    user: IUser,
+    events: IEvent[]
 }
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const ProfileContent: React.FC<IProps> = ({ profile, isCurrentUser, user }) => {
+const ProfileContent: React.FC<IProps> = ({ profile, isCurrentUser, user, events }) => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -91,7 +94,7 @@ const ProfileContent: React.FC<IProps> = ({ profile, isCurrentUser, user }) => {
                 <ProfilePhotos profile={profile!} isCurrentUser={isCurrentUser} user={user} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Events
+                <ProfileEvents profile={profile!} isCurrentUser={isCurrentUser} user={user} events={events} />
             </TabPanel>
             <TabPanel value={value} index={3}>
                 Sales

@@ -15,6 +15,7 @@ import HeartFilled from '../assets/Icons/heart-filled.svg';
 import { Chip } from '@material-ui/core';
 import { ICategory } from '../../app/models/category';
 import mainStates from '../../app/state/mainStates';
+import { Link } from 'react-router-dom';
 
 interface IProps {
     events: IEvent[];
@@ -53,10 +54,19 @@ const Homepage: React.FC<IProps> = ({ events, categories }) => {
                     {events.map((event, index) => (
                         index < 5 &&
                         <div className='homepagePremiumAdsContainer'>
-                            <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
+                            <Link to={`/events/${event.id}`}>
+                                <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
+                            </Link>
                             <div className='cardContent'>
-                                <h3 className='cardContentTitle'>{event.title}</h3>
-                                {[...categories.filter(a => a.id === event.categoryId)][0] != undefined && <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />}
+                                <Link to={`/events/${event.id}`}>
+                                    <h3 className='cardContentTitle'>{event.title}</h3>
+                                </Link>
+                                {[...categories.filter(a => a.id === event.categoryId)][0] != undefined
+                                    &&
+                                    <Link to={`/categories/${[...categories.filter(a => a.id === event.categoryId)][0].title}`} className='homeCategoryLink'>
+                                        <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />
+                                    </Link>
+                                }
                                 <div className='cardContentBottom'>
                                     <span className='cardDateContent'>{event.dateOfEvent}</span>
                                     <span className='cardIconContent'>

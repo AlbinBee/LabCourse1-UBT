@@ -216,11 +216,35 @@
   }
 }
 @media (max-width: 1025px) {
+  .dashboardSidebar {
+    width: 20%;
+    height: 100%;
+    overflow: scroll;
+  }
   .dashboardPostsContent {
     display: block;
     margin: 0 auto;
     margin-top: 20px;
     width: 80%;
+  }
+  .dashboardLinkName,
+  .sidebarUserEmail,
+  .dashboardLogoContainer > span {
+    display: none;
+  }
+  .dashboardLink {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+  }
+  .dashboardUserContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .dashboardLogoContainer, .userAccountImg, .dashboardUserDetails {
+    display: flex;
+    justify-content: center;
   }
   .postsInfoCard {
     width: 100% !important;
