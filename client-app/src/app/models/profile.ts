@@ -4,7 +4,6 @@ export interface IProfile {
     bio: string,
     image: string,
     photos: IPhoto[]
-
 }
 export interface IPhoto {
     id: string,

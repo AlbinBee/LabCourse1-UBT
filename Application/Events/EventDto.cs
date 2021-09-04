@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Application.User;
 using Domain;
 
 namespace Application.Events
@@ -28,5 +29,6 @@ namespace Application.Events
         public string Extra3 { get; set; }
         public string Extra4 { get; set; }
         public string Status { get; set; }
+        public AppUserDto Author { get; set; }
     }
 }

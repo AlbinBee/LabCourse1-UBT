@@ -10,6 +10,7 @@ import { v4 as uuid } from 'uuid';
 import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
 import { ICategory } from '../../../app/models/category';
+import mainStates from '../../../app/state/mainStates';
 
 interface IProps {
     events: IEvent[];
@@ -18,6 +19,7 @@ interface IProps {
 
 const CreatePostEvent: React.FC<IProps> = (props) => {
     const [events, setEvents] = useState<IEvent[]>(props.events);
+    const currentUser = mainStates.user;
     const currDate = new Date();
     const currYear = currDate.getFullYear();
     let currMonth: any = currDate.getMonth() + 1;
@@ -54,7 +56,8 @@ const CreatePostEvent: React.FC<IProps> = (props) => {
         extra2: '',
         extra3: '',
         extra4: '',
-        status: 'pending'
+        status: 'pending',
+        author: currentUser
     });
     const handleInputEvChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.currentTarget;

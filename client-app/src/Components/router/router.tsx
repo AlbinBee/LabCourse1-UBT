@@ -145,7 +145,7 @@ const Router = () => {
                 )} />
 
                 <Route path='/profile/:username' exact >
-                    <ProfilePage />
+                    <ProfilePage events={events} />
                 </Route>
 
                 <Route path='/explore' exact render={() => (

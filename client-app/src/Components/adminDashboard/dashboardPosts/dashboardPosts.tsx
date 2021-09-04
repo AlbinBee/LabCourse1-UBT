@@ -88,6 +88,15 @@ const DashboardPosts = () => {
             )
         },
         { field: 'views', headerName: 'Views', width: 110 },
+        {
+            field: 'author', headerName: 'Author', width: 130, renderCell: (params: any) => (
+                <Tooltip title={params.value.displayName} placement='top' className='descriptionTooltip' arrow={true}>
+                    <Link to={`/profile/${params.value.displayName}`}>
+                        {params.value.displayName}
+                    </Link>
+                </Tooltip>
+            ),
+        },
         { field: 'dateCreated', headerName: 'Date Created', width: 160 },
         {
             field: 'edit', headerName: 'Action', width: 160, renderCell: (params: any) => (
@@ -108,6 +117,7 @@ const DashboardPosts = () => {
                 setEvents([...events.filter(e => e.id !== id)])
                 toast.success('Successfully deleted post!');
                 setTotalPosts(totalPosts - 1);
+                window.location.reload();
             }).then(() => setLoading(false));
         } catch (error) {
             console.log(error);

@@ -13,7 +13,7 @@ const MainButtonIcon = (props: any) => {
 }
 const MainButton = (props: any) => {
     return (
-        <Button variant="contained" {...props} color="primary" className='mainButton' >
+        <Button variant="contained" {...props} color="primary" className={`mainButton ${props.className}`} >
             <span className='mainButtonTitle'>{props.title}</span>
         </Button>
 
