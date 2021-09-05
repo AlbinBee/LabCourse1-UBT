@@ -17,11 +17,24 @@
   opacity: 0.7;
   cursor: pointer;
 }
+@keyframes slideInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .homepageSliderImg {
-  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 40em;
   max-height: 40em;
   border-radius: 10px;
   object-fit: cover;
+  animation: 1s ease-out 0s 1 slideInDown;
 }
 .homepageSliderContent {
   width: 100%;

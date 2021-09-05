@@ -1,10 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Container, Dropdown, Menu } from 'semantic-ui-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { history } from '../..';
 import './style/style.css';
 import { IUser } from '../../app/models/user';
 import Avatar from '../assets/Icons/avatar.svg';
+import Hamburger from '../assets/Icons/hamburger.svg';
+import HamburgerClose from '../assets/Icons/hamburger-close.svg';
 import Dashboard from '../assets/Icons/dashboard-active.svg';
 import User from '../assets/Icons/users-active.svg';
 import Logout from '../assets/Icons/logout-active.svg';
@@ -50,34 +52,44 @@ const Navbar = () => {
             <Menu fixed='top' inverted>
                 <Container className="navContainer">
                     <div className="navContent">
-                        <div>
-                            <Link to='/'>
-                                <Menu.Item
-                                    className="navItem"
-                                    name='Home'
-                                />
-                            </Link>
-                            <Link to='/activities'>
-                                <Menu.Item
-                                    className="navItem"
-                                    name='Activities'
-                                />
-                            </Link>
-                            <Link to='/explore'>
-                                <Menu.Item
-                                    className="navItem"
-                                    name='Explore'
-                                />
-                            </Link>
+                        <div className='navContentLinks'>
+                            <div className="navItem">
+                                <NavLink exact to='/' activeClassName="activeLink">
+                                    Home
+                                </NavLink>
+                            </div>
+                            <div className="navItem">
+                                <NavLink exact to='/categories' activeClassName="activeLink">
+                                    Categories
+                                </NavLink>
+                            </div>
+                            <div className="navItem">
+                                <NavLink exact to='/events' activeClassName="activeLink">
+                                    Events
+                                </NavLink>
+                            </div>
+                            <div className="navItem">
+                                <NavLink exact to='/activities' activeClassName="activeLink">
+                                    Activities
+                                </NavLink>
+                            </div>
+                            <div className="navItem">
+                                <NavLink exact to='/explore' activeClassName="activeLink">
+                                    Explore
+                                </NavLink>
+                            </div>
                         </div>
-                        <div>
+                        <div className='navContentLogo'>
                             <Link to='/'>
                                 <Menu.Item header>
                                     <img src="/assets/Logo_Text.svg" id="navbar-logo" alt="logo" />
                                 </Menu.Item>
                             </Link>
                         </div>
-                        <div>
+                        <div className='navContentHamburger'>
+                            <img src={Hamburger} alt="Hamburger" />
+                        </div>
+                        <div className='navContentSearch'>
                             <img src={Search3D} alt='search' onClick={handleOpenSearch} className='searchIconNavbar' />
                             {user !== null ?
                                 <Fragment>
