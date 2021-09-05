@@ -61,15 +61,19 @@ const DashboardPosts = () => {
         {
             field: 'title', headerName: 'Title', width: 130, renderCell: (params: any) => (
                 <Tooltip title={params.value} placement='top' className='descriptionTooltip' arrow={true}>
-                    <span className="table-cell-truncate">{params.value}</span>
+                    <Link to={`/events/${params.id}`}>
+                        <span className="table-cell-truncate">{params.value}</span>
+                    </Link>
                 </Tooltip>
             ),
         },
         {
             field: 'categoryId', headerName: 'Category', width: 150, renderCell: (params: any) => (
-                <div>
-                    {[...categories.filter(a => a.id === params.row.categoryId)][0] != undefined && <span className='categoryChip'>{[...categories.filter(a => a.id === params.row.categoryId)][0].title}</span>}
-                </div>
+                <Link to={`/categories/${[...categories.filter(a => a.id === params.row.categoryId)][0] != undefined && [...categories.filter(a => a.id === params.row.categoryId)][0].title}`}>
+                    <div>
+                        {[...categories.filter(a => a.id === params.row.categoryId)][0] != undefined && <span className='categoryChip'>{[...categories.filter(a => a.id === params.row.categoryId)][0].title}</span>}
+                    </div>
+                </Link>
             )
         },
 

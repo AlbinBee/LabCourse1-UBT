@@ -3,6 +3,12 @@
   justify-content: space-between;
   box-shadow: 0 -20px 60px 0 rgba(0, 0, 0, 0.2);
 }
+.activeLink {
+  color: #0288d1 !important;
+  border-bottom: 3px solid #0288d1;
+  border-radius: 1px;
+  padding-bottom: 5px;
+}
 .ui.container.navContainer {
   width: 100%;
 }
@@ -23,16 +29,21 @@
   width: 5em !important;
 }
 .navItem {
+  margin-left: 20px;
   font-family: "Montserrat";
   font-weight: 600 !important;
   text-transform: uppercase !important;
   font-size: 1rem;
   color: #a2deff !important;
-  transition: color 0.1s ease-in !important;
+  transition: all 0.2s ease-in !important;
+}
+.navItem > a {
+  color: #a2deff;
+  transition: all 0.2s ease-in !important;
 }
 .navItem:hover {
-  color: #0288d1 !important;
-  transition: color 0.1s ease-in !important;
+  opacity: 0.8;
+  transition: color 0.2s ease-in !important;
 }
 .navItem:active {
   color: #0288d1 !important;
@@ -127,4 +138,22 @@
 }
 .navbarDropdownMenuLink {
   color: #0288d1 !important;
+}
+.navContentHamburger {
+  display: none;
+}
+@media (max-width: 1025px) {
+  .navContentLinks,
+  .navContentSearch {
+    display: none !important;
+  }
+  .navContent {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5em;
+  }
+  .navContentHamburger {
+    display: flex !important;
+    min-width: 2.5em;
+  }
 }

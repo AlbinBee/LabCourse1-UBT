@@ -20,4 +20,4 @@ const MainButton = (props: any) => {
     )
 }
 
-export {MainButtonIcon, MainButton}
+export { MainButtonIcon, MainButton }

@@ -17,6 +17,10 @@ import { toast } from 'react-toastify';
 import ProfilePage from '../profiles/profilePage';
 import { IEvent } from '../../app/models/event';
 import { ICategory } from '../../app/models/category';
+import EventPage from '../eventPage/eventPage';
+import CategoryPage from '../categoryPage/categoryPage';
+import CategoriesPage from '../categoryPage/categoriesPage';
+import EventsPage from '../eventPage/eventsPage';
 
 const Router = () => {
     const [activities, setActivities] = useState<IActivity[]>([]);
@@ -171,6 +175,29 @@ const Router = () => {
                         </Container>
                     )} />
                 ))}
+                {events.map((event) => (
+                    <Route path={`/events/${event.id}`} key={event.id} render={() => (
+                        <EventPage key={event.id} event={event} events={events} />
+                    )} />
+                ))}
+                <Route
+                    path="/events"
+                    render={() => (
+                        <EventsPage categories={categories} events={events} />
+                    )}
+                />
+                {categories.map((category) => (
+                    <Route path={`/categories/${category.title}`} key={category.id} render={() => (
+                        <CategoryPage key={category.id} category={category} categories={categories} events={events} />
+                    )} />
+                ))}
+                <Route
+                    path="/categories"
+                    render={() => (
+                        <CategoriesPage categories={categories} events={events} />
+                    )}
+                />
+
                 <Route component={NotFound} />
             </Switch>
 

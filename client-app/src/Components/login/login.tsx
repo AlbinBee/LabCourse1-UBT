@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import agent from '../../app/api/agent';
 import { IUser, IUserFormValues } from '../../app/models/user';
 import TextField from '@material-ui/core/TextField';
@@ -85,6 +85,9 @@ const Login = () => {
             ));
         }
     }
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className='loginContainer'>

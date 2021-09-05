@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import agent from '../../app/api/agent';
 import { IUser, IUserFormValues } from '../../app/models/user';
 import TextField from '@material-ui/core/TextField';
@@ -64,9 +64,6 @@ const Register = () => {
             }, 1000);
         } catch (error) {
             toast.error('Could not register!');
-            Object.values(error.data.errors).flat().map((err:any, i) => (
-                toast.error(err)
-            ));
         }
     }
 
@@ -91,10 +88,14 @@ const Register = () => {
             setHasPasswordError(false);
             userDetails.username = userDetails.username?.toLowerCase();
             register(userDetails).catch(error => (
-                toast.error('There was a problem registering you!')
+                toast.error('There was a problem registering you!'),
+                toast.error(error.data.errors.User)
             ));
         }
     }
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className='registerContainer'>

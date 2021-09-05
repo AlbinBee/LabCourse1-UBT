@@ -1,0 +1,57 @@
+.categoryPageContainer {
+  margin-top: 7.2em;
+}
+.categoriesBGContainer {
+  display: flex;
+  justify-content: center;
+}
+.categoriesBG {
+  width: 100%;
+  object-fit: contain;
+  max-height: 244px;
+  animation: 1s ease-out 0s 1 slideInDown;
+  z-index: -1;
+}
+.categoryPageDescription {
+  display: flex;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-family: "Montserrat" !important;
+  font-weight: 400;
+  margin-top: 20px;
+  /* color: #fff !important; */
+}
+.categoryPageTitle {
+  background-color: #0288d1;
+  width: 100%;
+  min-height: 8em;
+}
+.categoryPageTitle > h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  height: 2em;
+  font-size: 2.3rem;
+  font-family: "Montserrat" !important;
+  font-weight: 600;
+  color: #fff !important;
+}
+.categoryPageTitle > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat" !important;
+  font-size: 1.1rem;
+  color: #daeffb !important;
+}
+.categoryPageSubTitle {
+  display: flex;
+  justify-content: start;
+  margin-left: 10%;
+  font-family: "Montserrat" !important;
+  color: #0288d1;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: -20px;
+}
