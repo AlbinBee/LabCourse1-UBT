@@ -12,15 +12,12 @@ import financeCategoryImg from '../assets/categories/finance.png';
 import jobsCategoryImg from '../assets/categories/jobs.png';
 import moviesCategoryImg from '../assets/categories/movies.png';
 import techCategoryImg from '../assets/categories/tech.png';
-import noImg from '../assets/ads/noImg.png';
 import { IEvent } from '../../app/models/event';
-import Heart from '../assets/Icons/heart.svg';
-import HeartFilled from '../assets/Icons/heart-filled.svg';
-import { Chip } from '@material-ui/core';
 import { ICategory } from '../../app/models/category';
 import mainStates from '../../app/state/mainStates';
 import { Link } from 'react-router-dom';
 import PremiumAd from '../ads/premiumAd';
+import EventCard from '../eventCard/eventCard';
 
 interface IProps {
     events: IEvent[];
@@ -64,33 +61,7 @@ const Homepage: React.FC<IProps> = ({ events, categories }) => {
                 <div className='homepagePremiumAdsImg'>
                     {events.map((event, index) => (
                         index < 5 &&
-                        <div className='homepagePremiumAdsContainer'>
-                            <Link to={`/events/${event.id}`}>
-                                <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
-                            </Link>
-                            <div className='cardContent'>
-                                <Link to={`/events/${event.id}`}>
-                                    <h3 className='cardContentTitle'>{event.title}</h3>
-                                </Link>
-                                {[...categories.filter(a => a.id === event.categoryId)][0] != undefined
-                                    &&
-                                    <Link to={`/categories/${[...categories.filter(a => a.id === event.categoryId)][0].title}`} className='homeCategoryLink'>
-                                        <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />
-                                    </Link>
-                                }
-                                <div className='cardContentBottom'>
-                                    <span className='cardDateContent'>{event.dateOfEvent}</span>
-                                    <span className='cardIconContent'>
-                                        <img
-                                            src={isFavorite ? Heart : HeartFilled}
-                                            alt="FavoriteEvent"
-                                            className='favoriteCardIcon'
-                                            onClick={() => setIsFavorite(!isFavorite)}
-                                        />
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        <EventCard event={event} categories={categories} />
                     ))}
                 </div>
             </Grid>

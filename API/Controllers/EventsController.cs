@@ -45,5 +45,12 @@ namespace API.Controllers
         {
             return await Mediator.Send(new Delete.Command { Id = id });
         }
+        [AllowAnonymous]
+        [HttpPut("addView/{id}")]
+        public async Task<ActionResult<Unit>> AddViewCount(Guid id)
+        {
+            return await Mediator.Send(new AddViewCount.Command { Id = id });
+        }
+
     }
 }

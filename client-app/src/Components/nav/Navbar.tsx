@@ -68,7 +68,7 @@ const Navbar = () => {
                                     Events
                                 </NavLink>
                             </div>
-                            <div className="navItem">
+                            {/* <div className="navItem">
                                 <NavLink exact to='/activities' activeClassName="activeLink">
                                     Activities
                                 </NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
                                 <NavLink exact to='/explore' activeClassName="activeLink">
                                     Explore
                                 </NavLink>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='navContentLogo'>
                             <Link to='/'>

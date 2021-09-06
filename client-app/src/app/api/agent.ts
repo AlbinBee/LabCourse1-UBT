@@ -78,7 +78,8 @@ const Events = {
     update: (event: IEvent) => requests.put(`/events/${event.id}`, event),
     uploadPhoto: (id: string, photo: Blob): Promise<IPhoto> => requests.postForm(`/photos/addEventPhoto/eventId=${id}`, photo),
     setMainPhoto: (eventId: string, photoId: string) => requests.post(`/photos/setEventMainPhoto/eventId=${eventId}&photoId=${photoId}/setmain`, {}),
-    deletePhoto: (id: string, event: IEvent) => requests.delete(`/photos/deleteEventPhoto/eventId=${event.id}&photoId=${id}`)
+    deletePhoto: (id: string, event: IEvent) => requests.delete(`/photos/deleteEventPhoto/eventId=${event.id}&photoId=${id}`),
+    addView: (id: string, event: IEvent) => requests.put(`/events/addView/${id}`, event),
 }
 
 const Categories = {

@@ -60,7 +60,7 @@ const EditCategories: React.FC<IProps> = ({ category, categories }) => {
                             label="Description"
                             name="description"
                             multiline
-                            rows={3}
+                            rows={7}
                             defaultValue={category.description}
                             variant="outlined"
                             className='editPrimaryInputField'

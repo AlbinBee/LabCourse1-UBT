@@ -1,9 +1,7 @@
-import { Chip } from '@material-ui/core'
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { ICategory } from '../../app/models/category'
 import { IEvent } from '../../app/models/event'
-import noImg from '../assets/ads/noImg.png';
+import EventCard from '../eventCard/eventCard'
 import './styles.css';
 
 interface IProps {
@@ -30,25 +28,7 @@ const CategoryPage: React.FC<IProps> = ({ category, categories, events }) => {
             <div className='homepagePremiumAdsImg'>
                 {events.map((event, index) => (
                     index < 5 && event.categoryId == category.id &&
-                    <div className='homepagePremiumAdsContainer'>
-                        <Link to={`/events/${event.id}`}>
-                            <img src={event.galleryImages!?.length > 0 ? event.galleryImages![0].url : noImg} alt="premiumAdsImg" className='premiumAdsImg' />
-                        </Link>
-                        <div className='cardContent'>
-                            <Link to={`/events/${event.id}`}>
-                                <h3 className='cardContentTitle'>{event.title}</h3>
-                            </Link>
-                            {[...categories.filter(a => a.id === event.categoryId)][0] != undefined
-                                &&
-                                <Link to={`/categories/${[...categories.filter(a => a.id === event.categoryId)][0].title}`} className='homeCategoryLink'>
-                                    <Chip color="primary" label={[...categories.filter(a => a.id === event.categoryId)][0].title} className='categoryChipStatus' />
-                                </Link>
-                            }
-                            <div className='cardContentBottom'>
-                                <span className='cardDateContent'>{event.dateOfEvent}</span>
-                            </div>
-                        </div>
-                    </div>
+                    <EventCard event={event} categories={categories} />
                 ))}
             </div>
         </div>

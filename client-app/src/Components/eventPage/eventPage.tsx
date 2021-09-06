@@ -11,6 +11,8 @@ import sliderImg2 from '../assets/slider2.png';
 import PremiumAd from '../ads/premiumAd';
 import './styles.css';
 import { Link } from 'react-router-dom';
+import agent from '../../app/api/agent';
+import { Visibility } from '@material-ui/icons';
 
 interface IProps {
     event: IEvent;
@@ -23,6 +25,12 @@ const EventPage: React.FC<IProps> = ({ event, events }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        try {
+            agent.Events.addView(event.id, event);
+            event.views = event.views;
+        } catch (error) {
+            console.log(error);
+        }
     }, []);
 
     return (
@@ -62,6 +70,7 @@ const EventPage: React.FC<IProps> = ({ event, events }) => {
                     <div className='eventPageDate'><p>Available Tickets:&nbsp; <b>{event.availableTickets}</b></p></div>
                     <p>Location:&nbsp; <b>{event.city}</b></p>
                     <p>Date of Event:&nbsp; <b>{event.dateOfEvent}</b></p>
+                    <p className='eventPageViews'><Visibility />&nbsp; <b>{event.views}</b></p>
                     {isLoggedIn &&
                         <p>Author:&nbsp;
                             <Link to={`/profile/${event.author.displayName}`}>

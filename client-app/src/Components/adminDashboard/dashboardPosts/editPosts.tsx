@@ -195,7 +195,7 @@ const EditPosts: React.FC<IProps> = ({ event, events }) => {
                             label="Description"
                             name="description"
                             multiline
-                            rows={3}
+                            rows={5}
                             defaultValue={event.description}
                             variant="outlined"
                             className='editPrimaryInputField'

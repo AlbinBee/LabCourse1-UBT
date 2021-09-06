@@ -27,7 +27,7 @@ const CreateCategory: React.FC<IProps> = (props) => {
                 toast.success('Successfully created category!');
                 setCategories([...categories, category])
             })
-        } catch (e) {
+        } catch (e:any) {
             e.preventDefault();
             toast.error('Could not create category!');
             console.error(e);
@@ -59,13 +59,13 @@ const CreateCategory: React.FC<IProps> = (props) => {
                             id="outlined-required"
                             label="Description"
                             name="description"
+                            multiline
+                            rows={7}
                             value={category.description}
                             variant="outlined"
                             className='editPrimaryInputField'
                         />
                     </div>
-                </div>
-                <div className='editingFields'>
                 </div>
                 <div className='submitEditBtn'>
                     <button className='submitEditBtn'><MainButton title='Submit' component='a' /></button>

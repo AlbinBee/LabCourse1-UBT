@@ -12,6 +12,9 @@ import AddIcon from '../../assets/Icons/add.svg';
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { MainButtonIcon } from "../../buttons/mainButton";
+import AreaChart from "../../charts/areaChart";
+import PieChart from "../../charts/pieChart";
+import BarChart from "../../charts/barChart";
 
 const DashboardCategories = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -64,6 +67,7 @@ const DashboardCategories = () => {
         let categories: ICategory[] = [];
         response.forEach((category) => {
           count++;
+          console.log(category.events?.length);
           categories.push(category);
         });
         setCategories(categories);
@@ -83,8 +87,14 @@ const DashboardCategories = () => {
         <InfoCard title="Total Categories" value={totalCategories} />
       </div>
       <div className="dashboardPostsStats">
-        <div className="PostsChart"><h1>Chart</h1></div>
-        <div className="PostsTasks"><h1>Task</h1></div>
+        <div className="PostsChart">
+          <h2># of Categories</h2>
+          <BarChart categories={categories} />
+        </div>
+        <div className="PostsTasks">
+          <h2>Category Events</h2>
+          <PieChart categories={categories} />
+        </div>
       </div>
       <div className="dashboardPostsTable">
         <div className="PostsTableTopbar">
