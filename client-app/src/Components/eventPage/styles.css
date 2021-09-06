@@ -91,3 +91,15 @@
 .eventPageSideAd {
   margin-bottom: 20px;
 }
+.midCardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 5px;
+}
+.eventPageViews {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-right: 10px;
+}

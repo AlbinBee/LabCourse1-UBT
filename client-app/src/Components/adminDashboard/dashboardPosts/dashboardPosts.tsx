@@ -18,6 +18,11 @@ import { ICategory } from '../../../app/models/category';
 import { AvatarGroup } from '@material-ui/lab';
 import { PhotoCamera } from '@material-ui/icons';
 import { Tooltip } from '@material-ui/core';
+import AreaChart from '../../charts/areaChart';
+import BarChart from '../../charts/barChart';
+import PieChart from '../../charts/pieChart';
+import LineChart from '../../charts/lineChart';
+import DoughnutChart from '../../charts/doughnutChart';
 
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
@@ -185,8 +190,18 @@ const DashboardPosts = () => {
                 <InfoCard title="Rejected" value={totalPostsRejected} />
             </div>
             <div className="dashboardPostsStats">
-                <div className="PostsChart"><h1>Chart</h1></div>
-                <div className="PostsTasks"><h1>Task</h1></div>
+                <div className="PostsChart">
+                    <h2>Number of Posts</h2>
+                    <AreaChart categories={categories} events={events} />
+                </div>
+                <div className="PostsTasks">
+                    <h2>Post Statuses</h2>
+                    <DoughnutChart
+                        rejected={totalPostsRejected}
+                        pending={totalPostsPending}
+                        verified={totalPostsVerified}
+                    />
+                </div>
             </div>
             <div className="dashboardPostsTable">
                 <div className="PostsTableTopbar">

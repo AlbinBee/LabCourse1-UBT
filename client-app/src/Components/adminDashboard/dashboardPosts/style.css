@@ -10,6 +10,7 @@
 .dashboardPostsStats {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
 .PostsTableTopbar {
@@ -242,7 +243,9 @@
     justify-content: center;
     flex-direction: column;
   }
-  .dashboardLogoContainer, .userAccountImg, .dashboardUserDetails {
+  .dashboardLogoContainer,
+  .userAccountImg,
+  .dashboardUserDetails {
     display: flex;
     justify-content: center;
   }

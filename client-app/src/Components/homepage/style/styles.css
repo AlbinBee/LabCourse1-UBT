@@ -51,6 +51,8 @@
   font-family: "Montserrat" !important;
   color: #0288d1;
   font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: -10px;
 }
 .homepagePremiumAdsContainer {
   border: 1px solid #0288d1;
@@ -93,13 +95,14 @@
 .cardContentTitle {
   font-size: 20px;
   font-family: "Montserrat";
-  color: #0288d1;
-  font-weight: 600;
+  color: #334d6e;
+  font-weight: 500;
 }
 .cardContentBottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 10px;
 }
 .cardDateContent {
   font-size: 15px;
