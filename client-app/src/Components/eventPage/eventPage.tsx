@@ -46,7 +46,7 @@ const EventPage: React.FC<IProps> = ({ event, events }) => {
                 </div>
                 <div className='eventPageContent'>
                     <div><h2>{event.title}</h2></div>
-                    <div className='eventPageDescription'><p>{event.description}</p></div>
+                    <div className='eventPageDescription'><p dangerouslySetInnerHTML={{ __html: event.description }}></p></div>
                     <div className='eventPageDate'><h5>{event.dateOfEvent}</h5></div>
                     {isLoggedIn ?
                         <div className='eventPageButton'><MainButton title='Buy Ticket' /></div>
@@ -60,8 +60,9 @@ const EventPage: React.FC<IProps> = ({ event, events }) => {
             <div className='eventPageBottomContent'>
                 <div className='eventPageContent'>
                     <div><h1>{event.title}</h1></div>
+                    <h5>About this event</h5>
                     <div className='eventPageDescription'>
-                        <p>{event.description}</p>
+                        <p dangerouslySetInnerHTML={{ __html: event.description }}></p>
                         {event.extra1 && <p>-{event.extra1}</p>}
                         {event.extra2 && <p>-{event.extra2}</p>}
                         {event.extra3 && <p>-{event.extra3}</p>}

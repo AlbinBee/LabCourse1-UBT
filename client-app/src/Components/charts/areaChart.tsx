@@ -9,12 +9,35 @@ interface IProps {
 }
 //Make these charts dynamically later...
 const AreaChart: React.FC<IProps> = ({ categories, events }) => {
-    let noEventsFebruary = 0;
-    let noEventsMarch = 1;
-    let noEventsJune = 2;
-    let noEventsJuly = 1;
-    let noEventsAugust = 1;
+    let noEventsMay = 0;
+    let noEventsJune = 0;
+    let noEventsJuly = 0;
+    let noEventsAugust = 0;
     let noEventsSeptember = 0;
+    let noEventsOctober = 0;
+    for (let i = 0; i < events.length; i++) {
+        const correctDate = events[i].dateCreated.split('-');
+        if (correctDate[0] == '2021') {
+            if (correctDate[1] == '05') {
+                noEventsMay++;
+            }
+            if (correctDate[1] == '06') {
+                noEventsJune++;
+            }
+            if (correctDate[1] == '07') {
+                noEventsJuly++;
+            }
+            if (correctDate[1] == '08') {
+                noEventsAugust++;
+            }
+            if (correctDate[1] == '09') {
+                noEventsSeptember++;
+            }
+            if (correctDate[1] == '10') {
+                noEventsOctober++;
+            }
+        }
+    }
 
     const options = {
         ticks: {
@@ -29,11 +52,11 @@ const AreaChart: React.FC<IProps> = ({ categories, events }) => {
         fill: 'start'
     }
     const data = {
-        labels: ['February', 'March', 'June', 'July', 'August', 'September'],
+        labels: ['May', 'June', 'July', 'August', 'September', 'October'],
         datasets: [
             {
                 label: '# of Posts Monthly',
-                data: [noEventsFebruary, noEventsMarch, noEventsJune, noEventsJuly, noEventsAugust, noEventsSeptember],
+                data: [noEventsMay, noEventsJune, noEventsJuly, noEventsAugust, noEventsSeptember, noEventsOctober],
                 backgroundColor: [
                     'rgb(16,156,241, 0.15)',
                     'rgba(255, 206, 86, 0.2)',

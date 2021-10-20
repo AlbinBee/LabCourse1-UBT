@@ -14,6 +14,7 @@ import ArrowDown from '../assets/Icons/arrow-down.svg';
 import Search3D from '../assets/Icons/search-3d.svg';
 import { toast } from 'react-toastify';
 import mainStates from '../../app/state/mainStates';
+import { MainButton } from '../buttons/mainButton';
 
 const Navbar = () => {
     const [user, setUser] = useState<IUser | null>();
@@ -137,6 +138,9 @@ const Navbar = () => {
                         {openSearch &&
                             <div className='searchInputField'>
                                 <input type="text" placeholder='Search' />
+                                <Link to='/search'>
+                                    <MainButton title='Search' className='searchNavBtn' />
+                                </Link>
                             </div>
                         }
                     </div>

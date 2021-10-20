@@ -18,6 +18,7 @@ import mainStates from '../../app/state/mainStates';
 import { Link } from 'react-router-dom';
 import PremiumAd from '../ads/premiumAd';
 import EventCard from '../eventCard/eventCard';
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 interface IProps {
     events: IEvent[];
@@ -25,8 +26,12 @@ interface IProps {
 }
 
 const Homepage: React.FC<IProps> = ({ events, categories }) => {
-    const [isFavorite, setIsFavorite] = useState(false);
     const [imgNo, setImgNo] = useState(0);
+    const [filter, setFilter] = useState<string | unknown>('dateCreated');
+
+    const handleFilterChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setFilter(event.target.value!);
+    };
 
     const user = mainStates.user;
 
@@ -77,6 +82,55 @@ const Homepage: React.FC<IProps> = ({ events, categories }) => {
             <Link to='/explore' >
                 <Button content='Explore Activities' color='blue' />
             </Link> */}
+            <Grid className='homepagePremiumAds'>
+                <div className='homepagePremiumAdsTitle'>
+                    <h2>All Events</h2>
+                    <FormControl className='filterSelectionHomepage'>
+                        <InputLabel id="demo-simple-select-autowidth-label" className='filterSelectionHomepageTitle'>Sort By</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-autowidth-label"
+                            id="demo-simple-select-autowidth"
+                            name="categoryId"
+                            value={filter}
+                            onChange={handleFilterChange}
+                            autoWidth
+                            className='editInputField'
+                        >
+                            <MenuItem value='title'>Title</MenuItem>
+                            <MenuItem value='dateCreatead'>Date Created</MenuItem>
+                            <MenuItem value='dateOfEvent'>Date Of Event</MenuItem>
+                            <MenuItem value='views'>Views</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className='homepagePremiumAdsImg'>
+                    {
+                        (filter == 'views')
+                            ? events.sort(({ views: aViews }, { views: bViews }) => bViews - aViews)
+                                .map((event) => (
+                                    event.status == 'verified' &&
+                                    <EventCard event={event} categories={categories} />
+                                ))
+                            : (filter == 'title')
+                                ? events.sort((a, b) => a.title.localeCompare(b.title))
+                                    .map((event) => (
+                                        event.status == 'verified' &&
+                                        <EventCard event={event} categories={categories} />
+                                    ))
+                                : (filter == 'dateOfEvent')
+                                    ? events.sort((a, b) => a.dateOfEvent.localeCompare(b.dateOfEvent))
+                                        .map((event) => (
+                                            event.status == 'verified' &&
+                                            <EventCard event={event} categories={categories} />
+                                        ))
+                                    : events.sort((a, b) => a.dateCreated.localeCompare(b.dateCreated))
+                                        .map((event) => (
+                                            event.status == 'verified' &&
+                                            <EventCard event={event} categories={categories} />
+                                        ))
+                    }
+                </div>
+            </Grid>
         </Container>
     );
 }

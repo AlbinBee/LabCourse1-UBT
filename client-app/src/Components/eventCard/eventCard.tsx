@@ -40,7 +40,7 @@ const EventCard: React.FC<IProps> = ({ event, categories }) => {
                     {isLoggedIn &&
                         <span className='cardIconContent'>
                             <img
-                                src={isFavorite ? Heart : HeartFilled}
+                                src={isFavorite ? HeartFilled : Heart}
                                 alt="FavoriteEvent"
                                 className='favoriteCardIcon'
                                 onClick={() => setIsFavorite(!isFavorite)}

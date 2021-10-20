@@ -16,6 +16,9 @@ import AreaChart from "../../charts/areaChart";
 import PieChart from "../../charts/pieChart";
 import BarChart from "../../charts/barChart";
 
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+
+
 const DashboardCategories = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [totalCategories, setTotalCategories] = useState(0);
@@ -84,7 +87,7 @@ const DashboardCategories = () => {
         <DashboardTopbar title="Categories" />
       </div>
       <div className="dashboardPostsContent">
-        <InfoCard title="Total Categories" value={totalCategories} />
+        <InfoCard title="Total Categories" value={totalCategories} icon={<FolderOpenIcon className='infoCardIcon' />} />
       </div>
       <div className="dashboardPostsStats">
         <div className="PostsChart">

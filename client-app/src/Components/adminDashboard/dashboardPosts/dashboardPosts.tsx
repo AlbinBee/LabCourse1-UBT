@@ -24,6 +24,11 @@ import PieChart from '../../charts/pieChart';
 import LineChart from '../../charts/lineChart';
 import DoughnutChart from '../../charts/doughnutChart';
 
+import ViewAgendaOutlinedIcon from '@material-ui/icons/ViewAgendaOutlined';
+import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
+import WarningAmberIcon from '@material-ui/icons/ReportProblemOutlined';
+import HighlightOffOutlinedIcon from '@material-ui/icons/HighlightOffOutlined';
+
 const DashboardPosts = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
     const [totalPosts, setTotalPosts] = useState(0);
@@ -167,7 +172,8 @@ const DashboardPosts = () => {
                         countRejected++;
                     }
                 })
-                setEvents(events)
+                setEvents(events);
+                events.sort((b, a) => a.dateCreated.localeCompare(b.dateCreated));
                 setTotalPosts(count);
                 setTotalPostsVerified(countVerified);
                 setTotalPostsPending(countPending);
@@ -184,10 +190,10 @@ const DashboardPosts = () => {
                 <DashboardTopbar title="Posts" />
             </div>
             <div className="dashboardPostsContent">
-                <InfoCard title="Total Posts" value={totalPosts} />
-                <InfoCard title="Verified" value={totalPostsVerified} />
-                <InfoCard title="Pending" value={totalPostsPending} />
-                <InfoCard title="Rejected" value={totalPostsRejected} />
+                <InfoCard title="Total Posts" value={totalPosts} icon={<ViewAgendaOutlinedIcon className='infoCardIcon infoCardIconPurple' />} />
+                <InfoCard title="Verified" value={totalPostsVerified} icon={<VerifiedUserOutlinedIcon className='infoCardIcon infoCardIconGreen' />} />
+                <InfoCard title="Pending" value={totalPostsPending} icon={<WarningAmberIcon className='infoCardIcon infoCardIconYellow' />} />
+                <InfoCard title="Rejected" value={totalPostsRejected} icon={<HighlightOffOutlinedIcon className='infoCardIcon infoCardIconRed' />} />
             </div>
             <div className="dashboardPostsStats">
                 <div className="PostsChart">

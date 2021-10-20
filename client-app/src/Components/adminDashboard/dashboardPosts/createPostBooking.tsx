@@ -10,6 +10,8 @@ import agent from '../../../app/api/agent';
 import { toast } from 'react-toastify';
 import { ICategory } from '../../../app/models/category';
 import mainStates from '../../../app/state/mainStates';
+import { history } from '../../..';
+
 
 interface IProps {
     events: IEvent[];
@@ -43,7 +45,7 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
         dateOfEvent: '',
         city: '',
         mainImage: 'ImagePath',
-        galleryImages: undefined,
+        galleryImages: [],
         isBookable: true,
         hasTickets: false,
         availableTickets: 0,
@@ -63,7 +65,11 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
         try {
             agent.Events.create(post).then(() => {
                 toast.success('Successfully created post!');
-                setEvents([...events, post])
+                setEvents([...events, post]);
+                setTimeout(function () {
+                    history.push('/dashboard/posts');
+                    window.location.reload();
+                }, 500);
             })
         } catch (e) {
             toast.error('Could not create post!');
@@ -71,7 +77,7 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
         }
     }
     const handleSubmit = (e: any) => {
-        // e.preventDefault();
+        e.preventDefault();
         let newEvent = {
             ...post,
             id: uuid()
@@ -100,7 +106,7 @@ const CreatePostBooking: React.FC<IProps> = (props) => {
                             id="outlined-required"
                             label="Category"
                             name="category"
-                            value={category.title}
+                            value={category.title !== undefined && category.title}
                             disabled
                             variant="outlined"
                             className='editPrimaryInputField'
