@@ -20,29 +20,30 @@ const CategoriesPage: React.FC<IProps> = ({ categories, events }) => {
 
     return (
         <div className='categoryPageContainer'>
-            {categories.map((category) => (
-                <Fragment>
-                    <Link to={`/categories/${category.title}`}>
-                        <div className='categoryPageTitle'>
-                            <h1>Category: {category.title}</h1>
-                            <p>{category.description}</p>
-                        </div>
-                    </Link>
-                    <Link to={`/categories/${category.title}`}>
-                        <div className='categoriesBGContainer'>
-                            <img src={`${process.env.PUBLIC_URL}/assets/categories-bg/${category.title}.png`} alt="categoriesBG" className='categoriesBG' />
-                        </div>
-                    </Link>
-                    <h2 className='categoryPageSubTitle'>{category.title} Posts: </h2>
-                    <div className='homepagePremiumAdsImg'>
+            {categories.sort((a, b) => a.title.localeCompare(b.title))
+                .map((category) => (
+                    <Fragment>
+                        <Link to={`/categories/${category.title}`}>
+                            <div className='categoryPageTitle'>
+                                <h1>Category: {category.title}</h1>
+                                <p>{category.description}</p>
+                            </div>
+                        </Link>
+                        <Link to={`/categories/${category.title}`}>
+                            <div className='categoriesBGContainer'>
+                                <img src={`${process.env.PUBLIC_URL}/assets/categories-bg/${category.title}.png`} alt="categoriesBG" className='categoriesBG' />
+                            </div>
+                        </Link>
+                        <h2 className='categoryPageSubTitle'>{category.title} Posts: </h2>
+                        <div className='homepagePremiumAdsImg'>
 
-                        {events.map((event, index) => (
-                            index < 5 && event.categoryId == category.id &&
-                            <EventCard event={event} categories={categories} />
-                        ))}
-                    </div>
-                </Fragment>
-            ))}
+                            {events.map((event) => (
+                                event.categoryId == category.id &&
+                                <EventCard event={event} categories={categories} />
+                            ))}
+                        </div>
+                    </Fragment>
+                ))}
 
         </div>
     )

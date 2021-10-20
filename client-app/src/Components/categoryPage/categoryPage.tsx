@@ -26,8 +26,8 @@ const CategoryPage: React.FC<IProps> = ({ category, categories, events }) => {
             </div>
             <h2 className='categoryPageSubTitle'>{category.title} Posts: </h2>
             <div className='homepagePremiumAdsImg'>
-                {events.map((event, index) => (
-                    index < 5 && event.categoryId == category.id &&
+                {events.map((event) => (
+                    event.categoryId == category.id &&
                     <EventCard event={event} categories={categories} />
                 ))}
             </div>

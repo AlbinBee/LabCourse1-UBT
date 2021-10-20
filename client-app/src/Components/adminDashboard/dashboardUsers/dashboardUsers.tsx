@@ -12,6 +12,10 @@ import './style.css'
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import AddIcon from '@material-ui/icons/AddCircle';
+import BlockIcon from '@material-ui/icons/Block';
+import PeopleAltIcon from '@material-ui/icons/PeopleAltOutlined';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@material-ui/icons/VisibilityOffOutlined';
 
 const DashboardUsers = () => {
   const [users, setUsers] = useState<IListUser[]>([]);
@@ -134,6 +138,20 @@ const DashboardUsers = () => {
       )
     },
     {
+      field: 'status1', headerName: 'Action', width: 130, renderCell: (params: any) => (
+        <div>
+          {params.row.status === 'blocked'
+            ? <Tooltip title='Unblock' placement='top' className='descriptionTooltip' arrow={true}>
+              <Chip color="primary" label='Unblock' className='verifiedChipStatus unBlockIconUser' />
+            </Tooltip>
+            : <Tooltip title='Block' placement='top' className='descriptionTooltip' arrow={true}>
+              <Chip color="secondary" label={<BlockIcon />} className='rejectedChipStatus blockIconUser' />
+            </Tooltip>
+          }
+        </div>
+      )
+    },
+    {
       field: 'roles', headerName: 'Roles', width: 600, renderCell: (params: any) => (
         <div>
           {availableRoles.map((role: any) => (
@@ -156,10 +174,10 @@ const DashboardUsers = () => {
         <DashboardTopbar title="Users" />
       </div>
       <div className="dashboardPostsContent">
-        <InfoCard title="Total Users" value={totalUsers} />
-        <InfoCard title="Active" value={totalUsersActive} />
-        <InfoCard title="InActive" value={totalUsersInActive} />
-        <InfoCard title="Blocked" value={totalUsersBlocked} />
+        <InfoCard title="Total Users" value={totalUsers} icon={<PeopleAltIcon className='infoCardIcon' />} />
+        <InfoCard title="Active" value={totalUsersActive} icon={<VisibilityOutlinedIcon className='infoCardIcon' />} />
+        <InfoCard title="InActive" value={totalUsersInActive} icon={<VisibilityOffOutlinedIcon className='infoCardIcon' />} />
+        <InfoCard title="Blocked" value={totalUsersBlocked} icon={<BlockIcon className='infoCardIcon' />} />
       </div>
       <div className="dashboardPostsStats">
         <div className="PostsChart"><h1>Chart</h1></div>

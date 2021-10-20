@@ -14,7 +14,7 @@ const MainDashboard = () => {
             <div className="dashboardPostsContent">
                 <InfoCard title="Open Sessions" value={20} />
                 <InfoCard title="Users" value={5} />
-                <InfoCard title="Categories" value={6} />
+                <InfoCard title="Categories" value={8} />
                 <InfoCard title="Posts" value={10} />
             </div>
             <div className='mainDashboardContent'>
